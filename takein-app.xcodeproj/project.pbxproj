@@ -16,6 +16,7 @@
 		381F485727E158550028CF12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 381F485527E158550028CF12 /* LaunchScreen.storyboard */; };
 		381F485F27E1625A0028CF12 /* SignUpPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381F485E27E1625A0028CF12 /* SignUpPage.swift */; };
 		381F486127E164FA0028CF12 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381F486027E164FA0028CF12 /* LoginPage.swift */; };
+		38A3875027E25A980073F56A /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A3874F27E25A980073F56A /* SettingsPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		381F485827E158550028CF12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		381F485E27E1625A0028CF12 /* SignUpPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPage.swift; sourceTree = "<group>"; };
 		381F486027E164FA0028CF12 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
+		38A3874F27E25A980073F56A /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				381F484B27E158540028CF12 /* HomePage.swift */,
 				381F485E27E1625A0028CF12 /* SignUpPage.swift */,
 				381F486027E164FA0028CF12 /* LoginPage.swift */,
+				38A3874F27E25A980073F56A /* SettingsPage.swift */,
 				381F484D27E158540028CF12 /* Main.storyboard */,
 				381F485327E158550028CF12 /* Assets.xcassets */,
 				381F485527E158550028CF12 /* LaunchScreen.storyboard */,
@@ -152,6 +155,7 @@
 				381F484827E158540028CF12 /* AppDelegate.swift in Sources */,
 				381F484A27E158540028CF12 /* SceneDelegate.swift in Sources */,
 				381F486127E164FA0028CF12 /* LoginPage.swift in Sources */,
+				38A3875027E25A980073F56A /* SettingsPage.swift in Sources */,
 				381F485227E158540028CF12 /* takein_app.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
