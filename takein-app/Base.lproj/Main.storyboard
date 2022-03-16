@@ -60,11 +60,11 @@
             </objects>
             <point key="canvasLocation" x="1049" y="-127"/>
         </scene>
-        <!--View Controller-->
+        <!--Login Page-->
         <scene sceneID="Hxh-V4-apK">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cSZ-tC-VBk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController id="xoR-Rg-WB2" sceneMemberID="viewController">
+                <viewController id="xoR-Rg-WB2" customClass="LoginPage" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UWe-0m-Gap">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
