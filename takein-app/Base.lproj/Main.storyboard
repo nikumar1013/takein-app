@@ -63,7 +63,6 @@
         <!--Login Page-->
         <scene sceneID="Hxh-V4-apK">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cSZ-tC-VBk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="xoR-Rg-WB2" customClass="LoginPage" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UWe-0m-Gap">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -110,6 +109,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Vm0-AS-dkY"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cSZ-tC-VBk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1922" y="214"/>
         </scene>
@@ -196,7 +196,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F0F-5l-XpA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="114.50892857142857"/>
+            <point key="canvasLocation" x="123" y="-127"/>
         </scene>
     </scenes>
     <resources>
