@@ -1,6 +1,6 @@
-#Todo Section
+# Todo Section
 
-##Feature List:
+## Feature List:
 
 - Loading Screen – A loading screen while app functionality registers
 - Home page – A page that displays a users feed and allows navigation to other pages
