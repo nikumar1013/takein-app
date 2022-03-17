@@ -17,8 +17,6 @@ class SettingsPage: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
-        
-
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -26,13 +24,21 @@ class SettingsPage: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") as! UITableViewCell
-        
-        cell.textLabel?.text = settings[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath)
+        let row = indexPath.row
+    
+        cell.textLabel?.text = settings[row]
         
         let switchView = UISwitch(frame: .zero)
-        switchView.setOn(false, animated: true)
-        switchView.tag = indexPath.row
+        
+        if cell.textLabel?.text == "Dark Mode" {
+            switchView.setOn(false, animated: true)
+        }
+        else {
+            switchView.setOn(true, animated: true)
+        }
+        
+        switchView.tag = row
         
         cell.accessoryView = switchView
         
