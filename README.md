@@ -37,4 +37,7 @@
 #### 16th Aim to be halfway to the alpha
 - View controllers with segues for every page, no skeleton code, 
 - Get at least some decent form of UI for every page
+##### Questions for potential Alpha Goals
+- Do we want to add constraints in currently for all of the UI layout? If not thats fine, but I think it shouldn't go later than the beta - Nick
+- How much stylization and colorscheming do we want to do? - Nick
 
