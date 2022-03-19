@@ -7,23 +7,39 @@
 
 import UIKit
 
-class GuestListPage: UIViewController {
+class GuestListViewCell: UITableViewCell {
+ 
+    @IBOutlet weak var guest_profile_picture: UIImageView!
+    @IBOutlet weak var remove_button: UIButton!
+    
+    @IBOutlet weak var guest_name: UIButton!
+    @IBOutlet weak var guest_number: UILabel!
+    
+    
+}
+
+class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+    @IBOutlet weak var guestTableView: UITableView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        guestTableView.delegate = self
+        guestTableView.dataSource = self
+        guestTableView.rowHeight = 125
 
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return 2
     }
-    */
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "guestCellIdentifier", for: indexPath) as! GuestListViewCell
+
+            return cell
+    }
 
 }
