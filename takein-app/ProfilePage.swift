@@ -21,7 +21,9 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         super.viewDidLoad()
         upcomingEventsTable.delegate = self
         upcomingEventsTable.dataSource = self
-        upcomingEventsTable.rowHeight = 150
+//        upcomingEventsTable.rowHeight = 300
+        upcomingEventsTable.rowHeight = UITableView.automaticDimension
+        upcomingEventsTable.estimatedRowHeight = 600
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,7 +40,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

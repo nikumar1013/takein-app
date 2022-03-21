@@ -27,7 +27,9 @@ class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegat
         super.viewDidLoad()
         guestTableView.delegate = self
         guestTableView.dataSource = self
-        guestTableView.rowHeight = 125
+//        guestTableView.rowHeight = 125
+        guestTableView.rowHeight = UITableView.automaticDimension
+        guestTableView.estimatedRowHeight = 300
 
         // Do any additional setup after loading the view.
     }
