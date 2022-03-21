@@ -308,7 +308,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xW5-fX-Avp">
-                                <rect key="frame" x="20" y="88" width="388" height="421"/>
+                                <rect key="frame" x="20" y="124" width="388" height="421"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahO-l6-KZt">
@@ -329,11 +329,24 @@
                                     <segue destination="gHa-cZ-tou" kind="show" id="0hv-mV-Yu9"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BtL-2o-AVj">
+                                <rect key="frame" x="20" y="80" width="388" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="E89-cp-onx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="oPk-Pv-WRt"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="oPk-Pv-WRt">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="line.3.horizontal.decrease" catalog="system" id="GYh-v6-zKe">
+                            <connections>
+                                <action selector="filterButtonPressed:" destination="Pg3-Nt-dYI" id="Bzg-ED-FoJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="explorePageMap" destination="xW5-fX-Avp" id="M8A-xd-hf1"/>
                     </connections>
@@ -1383,6 +1396,7 @@
         <image name="calendar" width="19" height="21"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="line.3.horizontal.decrease" catalog="system" width="128" height="73"/>
         <image name="location" width="14" height="19"/>
         <image name="pencil.circle.fill" catalog="system" width="128" height="121"/>
         <image name="person" catalog="system" width="128" height="117"/>

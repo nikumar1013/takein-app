@@ -17,7 +17,18 @@ class ExplorePage: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func filterButtonPressed(_ sender: Any) {
+        let controller = UIAlertController(
+            title: "Filters",
+            message: "Select from the filters below",
+            preferredStyle: .actionSheet)
+        
+        let radius = UIAlertAction(title: "Radius", style: .default, handler: nil)
+        controller.addAction(radius)
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
