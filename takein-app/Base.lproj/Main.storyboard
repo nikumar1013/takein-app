@@ -329,7 +329,7 @@
                                     <segue destination="gHa-cZ-tou" kind="show" id="0hv-mV-Yu9"/>
                                 </connections>
                             </button>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BtL-2o-AVj">
+                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="BtL-2o-AVj">
                                 <rect key="frame" x="20" y="80" width="388" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -349,6 +349,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="explorePageMap" destination="xW5-fX-Avp" id="M8A-xd-hf1"/>
+                        <outlet property="searchBar" destination="BtL-2o-AVj" id="wcw-iv-odb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FSx-oJ-2l3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

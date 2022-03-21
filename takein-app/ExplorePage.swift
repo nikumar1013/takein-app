@@ -8,14 +8,17 @@
 import UIKit
 import MapKit
 
-class ExplorePage: UIViewController {
+class ExplorePage: UIViewController, UISearchBarDelegate {
 
     @IBOutlet weak var explorePageMap: MKMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
 
         // Do any additional setup after loading the view.
     }
+    @IBOutlet weak var searchBar: UISearchBar!
     
     @IBAction func filterButtonPressed(_ sender: Any) {
         let controller = UIAlertController(
@@ -27,6 +30,9 @@ class ExplorePage: UIViewController {
         controller.addAction(radius)
         
         present(controller, animated: true, completion: nil)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     }
     
     /*
