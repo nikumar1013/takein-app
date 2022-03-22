@@ -27,7 +27,10 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
 
         eventTableView.delegate = self
         eventTableView.dataSource = self
-        eventTableView.rowHeight = 250
+        eventTableView.layer.cornerRadius=10
+//        eventTableView.rowHeight = 250
+        eventTableView.rowHeight = UITableView.automaticDimension
+        eventTableView.estimatedRowHeight = 300
 
         // Do any additional setup after loading the view.
     }

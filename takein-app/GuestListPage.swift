@@ -30,6 +30,7 @@ class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegat
 //        guestTableView.rowHeight = 125
         guestTableView.rowHeight = UITableView.automaticDimension
         guestTableView.estimatedRowHeight = 300
+        guestTableView.layer.cornerRadius = 10
 
         // Do any additional setup after loading the view.
     }

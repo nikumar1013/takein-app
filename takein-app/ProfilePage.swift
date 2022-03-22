@@ -25,8 +25,9 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         upcomingEventsTableView.delegate = self
         upcomingEventsTableView.dataSource = self
 //        upcomingEventsTableView.rowHeight = 300
-                upcomingEventsTableView.rowHeight = UITableView.automaticDimension
-                upcomingEventsTableView.estimatedRowHeight = 600
+        upcomingEventsTableView.rowHeight = UITableView.automaticDimension
+        upcomingEventsTableView.estimatedRowHeight = 600
+        upcomingEventsTableView.layer.cornerRadius=10
 
     }
     

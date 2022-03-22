@@ -24,6 +24,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         searchBar.delegate = self
         eventTable.delegate = self
         eventTable.dataSource = self
+        eventTable.layer.cornerRadius=10
         // row height is constant in this case (no variable length contents in the cells)
         eventTable.rowHeight = 125
     }
