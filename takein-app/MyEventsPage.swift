@@ -18,9 +18,6 @@ class EventsTableViewCell: UITableViewCell {
 
 
 class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
-    
-
     @IBOutlet weak var eventTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +25,8 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
         eventTableView.delegate = self
         eventTableView.dataSource = self
         eventTableView.layer.cornerRadius=10
-//        eventTableView.rowHeight = 250
         eventTableView.rowHeight = UITableView.automaticDimension
         eventTableView.estimatedRowHeight = 300
-
-        // Do any additional setup after loading the view.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,7 +35,6 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
-
             return cell
     }
 

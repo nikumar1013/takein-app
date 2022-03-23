@@ -10,7 +10,6 @@ import UIKit
 class SettingsPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var settingsTableView: UITableView!
-    
     let settings = ["Dark Mode", "Notifications", "Search Radius"]
     var delegate: UIViewController?
     
@@ -20,16 +19,8 @@ class SettingsPage: UIViewController, UITableViewDelegate, UITableViewDataSource
         settingsTableView.dataSource = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        //Temp back button
-      /*  let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
-        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = backButton
-        self.navigationItem.title = "TESTING"
-        self.navigationItem.setHidesBackButton(false, animated: false) */
-        //self.navigationController?.navigationItem.setHidesBackButton(false, animated: false)
-        //self.navigationController?.navigationItem.setHidesBackButton(false, animated: false)
-    }
+    //Useful function for later
+    override func viewWillAppear(_ animated: Bool) {}
     
     func returnToPrevViewController() {
         
@@ -42,9 +33,7 @@ class SettingsPage: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath)
         let row = indexPath.row
-    
         cell.textLabel?.text = settings[row]
-        
         let switchView = UISwitch(frame: .zero)
         
         if cell.textLabel?.text == "Dark Mode" {
@@ -55,7 +44,6 @@ class SettingsPage: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         
         switchView.tag = row
-        
         cell.accessoryView = switchView
         
         return cell

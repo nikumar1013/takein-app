@@ -8,11 +8,9 @@
 import UIKit
 
 class ReviewTableViewCell: UITableViewCell {
-//    @IBOutlet weak var profile_picture: UIImageView!
     @IBOutlet weak var rating: UIImageView!
     @IBOutlet weak var review_content: UILabel!
     @IBOutlet weak var author_profile: UIButton!
-    
     @IBOutlet weak var author_profile_picture: UIImageView!
     
 }
@@ -27,13 +25,10 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         reviewsTableView.delegate = self
         reviewsTableView.dataSource = self
         reviewsTableView.rowHeight = 150
-
-        // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-      //  self.navigationController?.navigationBar.set
-    }
+    //Useful function for later
+    override func viewWillAppear(_ animated: Bool) {}
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
@@ -44,7 +39,7 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         cell.review_content?.text = "This is the temporary review placeholder"
         cell.author_profile.setTitle("Bob", for: .normal)
 
-            return cell
+        return cell
     }
 
 }

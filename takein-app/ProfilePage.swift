@@ -18,13 +18,10 @@ class upcomingEventCell: UITableViewCell {
 class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var upcomingEventsTableView: UITableView!
-    
-//    @IBOutlet weak var upcomingEventsTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         upcomingEventsTableView.delegate = self
         upcomingEventsTableView.dataSource = self
-//        upcomingEventsTableView.rowHeight = 300
         upcomingEventsTableView.rowHeight = UITableView.automaticDimension
         upcomingEventsTableView.estimatedRowHeight = 600
         upcomingEventsTableView.layer.cornerRadius=10
@@ -33,10 +30,6 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       // self.tabBarController?.navigationItem.hidesBackButton = true
-//        upcomingEventsTableView.rowHeight = UITableView.automaticDimension
-//        upcomingEventsTableView.estimatedRowHeight = 600
-
     }
     
     
@@ -45,15 +38,13 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
             nextVC.delegate = self
         }
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingCell", for: indexPath) as! upcomingEventCell
-
             return cell
     }
-
-
 }

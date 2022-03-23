@@ -25,7 +25,6 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         eventTable.delegate = self
         eventTable.dataSource = self
         eventTable.layer.cornerRadius=10
-        // row height is constant in this case (no variable length contents in the cells)
         eventTable.rowHeight = 125
     }
     @IBOutlet weak var searchBar: UISearchBar!
@@ -35,10 +34,8 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
             title: "Filters",
             message: "Select from the filters below",
             preferredStyle: .actionSheet)
-        
         let radius = UIAlertAction(title: "Radius", style: .default, handler: nil)
         controller.addAction(radius)
-        
         present(controller, animated: true, completion: nil)
     }
     
@@ -51,7 +48,6 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "exploreCell", for: indexPath) as! ExploreViewCell
-
             return cell
     }
 
