@@ -75,13 +75,15 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                            self.performImageUpload(userText: userText, emailText: emailText)
                            print("PRE HERE \(emailText)")
                            let ref = self.database.reference(withPath: "users")
+                           let eRef = self.database.reference(withPath: "emails")
                            let newEmailItem = ["email" : emailText]
                            let newUserNameItem = ["userName" : userText]
                            //print(userRef)
-                          // let emailRef = ref.child(emailText).childByAutoId()
+                           let parsedEmail = emailText.split(separator: ".")
+                           let emailRef = eRef.child(String(parsedEmail[0]))
                            let userRef = ref.child("\(userText)")
                            userRef.setValue(newEmailItem)
-                          // emailRef.setValue(newUserNameItem)
+                           emailRef.setValue(newUserNameItem)
                            print("In here, login success")
                            //self.performSegue(withIdentifier: "loginSegue", sender: self.self)
                        } else {
