@@ -1018,6 +1018,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title=" add profile photo" buttonSize="large">
                                     <imageReference key="image" image="camera.fill" catalog="system" symbolScale="default"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="addPhotoPressed:" destination="S8U-Lv-Znb" eventType="touchUpInside" id="MhB-Kc-TNz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXb-1O-JBK">
                                 <rect key="frame" x="45" y="542" width="338" height="31"/>
@@ -1031,11 +1034,29 @@
                                     <segue destination="jps-S6-rYJ" kind="presentation" customClass="SuccessLoginSegue" customModule="takein_app" customModuleProvider="target" modalPresentationStyle="currentContext" id="Kre-UN-tI5"/>
                                 </connections>
                             </button>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xxg-dZ-V3u">
+                                <rect key="frame" x="94" y="632" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="GZp-xe-Trw"/>
+                                    <constraint firstAttribute="width" constant="240" id="VOA-29-Uzw"/>
+                                </constraints>
+                            </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image Preview" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5d-Fa-fgz">
+                                <rect key="frame" x="94" y="778" width="240" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="LjB-1h-9OQ"/>
+                                    <constraint firstAttribute="height" constant="21" id="f72-pO-Lfa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EhD-Q6-eeZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="w3b-N4-59t" firstAttribute="leading" secondItem="EhD-Q6-eeZ" secondAttribute="leading" constant="27" id="27Y-x6-QgD"/>
+                            <constraint firstItem="EhD-Q6-eeZ" firstAttribute="bottom" secondItem="p5d-Fa-fgz" secondAttribute="bottom" constant="93" id="2v6-Os-Xhg"/>
                             <constraint firstItem="rXb-1O-JBK" firstAttribute="leading" secondItem="EhD-Q6-eeZ" secondAttribute="leading" constant="45" id="5DC-Cj-CFB"/>
                             <constraint firstItem="7sP-o0-7Ea" firstAttribute="leading" secondItem="EhD-Q6-eeZ" secondAttribute="leading" constant="27" id="5jH-pF-lJA"/>
                             <constraint firstItem="8WP-1W-HtZ" firstAttribute="top" secondItem="EhD-Q6-eeZ" secondAttribute="top" constant="77" id="Au7-uj-0mr"/>
@@ -1043,7 +1064,10 @@
                             <constraint firstItem="YVh-ld-SDj" firstAttribute="top" secondItem="7QP-S2-Bun" secondAttribute="bottom" constant="8" symbolic="YES" id="Fyu-NL-tOv"/>
                             <constraint firstItem="nFs-9q-scz" firstAttribute="top" secondItem="gXj-Nb-mg6" secondAttribute="bottom" constant="36" id="HFs-Dy-xnd"/>
                             <constraint firstItem="gXj-Nb-mg6" firstAttribute="top" secondItem="8WP-1W-HtZ" secondAttribute="bottom" constant="8" id="KP0-Ag-dLf"/>
+                            <constraint firstItem="p5d-Fa-fgz" firstAttribute="top" secondItem="xxg-dZ-V3u" secondAttribute="bottom" constant="18" id="MGV-i8-8wW"/>
                             <constraint firstItem="EhD-Q6-eeZ" firstAttribute="trailing" secondItem="rXb-1O-JBK" secondAttribute="trailing" constant="45" id="MLH-2a-pL6"/>
+                            <constraint firstItem="EhD-Q6-eeZ" firstAttribute="trailing" secondItem="p5d-Fa-fgz" secondAttribute="trailing" constant="94" id="NfE-YP-h9H"/>
+                            <constraint firstItem="p5d-Fa-fgz" firstAttribute="leading" secondItem="EhD-Q6-eeZ" secondAttribute="leading" constant="94" id="P50-qg-rIv"/>
                             <constraint firstItem="EhD-Q6-eeZ" firstAttribute="trailing" secondItem="8WP-1W-HtZ" secondAttribute="trailing" constant="27" id="PFx-fB-lAt"/>
                             <constraint firstItem="EhD-Q6-eeZ" firstAttribute="bottom" secondItem="rXb-1O-JBK" secondAttribute="bottom" constant="319" id="Qm8-jC-0RA"/>
                             <constraint firstItem="7QP-S2-Bun" firstAttribute="leading" secondItem="EhD-Q6-eeZ" secondAttribute="leading" constant="27" id="ThE-G9-Sdm"/>
@@ -1054,20 +1078,27 @@
                             <constraint firstItem="gXj-Nb-mg6" firstAttribute="leading" secondItem="EhD-Q6-eeZ" secondAttribute="leading" constant="111" id="ZHR-E1-h62"/>
                             <constraint firstItem="EhD-Q6-eeZ" firstAttribute="trailing" secondItem="7QP-S2-Bun" secondAttribute="trailing" constant="27" id="ZtK-Ll-UgG"/>
                             <constraint firstItem="EhD-Q6-eeZ" firstAttribute="trailing" secondItem="7sP-o0-7Ea" secondAttribute="trailing" constant="27" id="b7b-Jm-0pW"/>
+                            <constraint firstItem="xxg-dZ-V3u" firstAttribute="top" secondItem="rXb-1O-JBK" secondAttribute="bottom" constant="59" id="fky-co-bZL"/>
                             <constraint firstItem="EhD-Q6-eeZ" firstAttribute="trailing" secondItem="w3b-N4-59t" secondAttribute="trailing" constant="27" id="heY-Ur-KsM"/>
                             <constraint firstItem="7sP-o0-7Ea" firstAttribute="top" secondItem="w3b-N4-59t" secondAttribute="bottom" constant="20" id="kKl-XC-vVT"/>
                             <constraint firstItem="EhD-Q6-eeZ" firstAttribute="trailing" secondItem="gXj-Nb-mg6" secondAttribute="trailing" constant="111" id="lT2-rP-dLl"/>
                             <constraint firstItem="EhD-Q6-eeZ" firstAttribute="trailing" secondItem="nFs-9q-scz" secondAttribute="trailing" constant="27" id="p1E-W8-Pcp"/>
                             <constraint firstItem="8WP-1W-HtZ" firstAttribute="leading" secondItem="EhD-Q6-eeZ" secondAttribute="leading" constant="27" id="qdR-Ri-PBe"/>
+                            <constraint firstItem="EhD-Q6-eeZ" firstAttribute="trailing" secondItem="xxg-dZ-V3u" secondAttribute="trailing" constant="94" id="vhK-Ue-ymo"/>
+                            <constraint firstItem="xxg-dZ-V3u" firstAttribute="leading" secondItem="EhD-Q6-eeZ" secondAttribute="leading" constant="94" id="wHC-nW-yCi"/>
                             <constraint firstItem="rXb-1O-JBK" firstAttribute="top" secondItem="YVh-ld-SDj" secondAttribute="bottom" constant="25" id="xsN-Vs-r36"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gDg-rh-Cqs"/>
                     <connections>
+                        <outlet property="addProfileButton" destination="YVh-ld-SDj" id="aev-cQ-B93"/>
                         <outlet property="confirmPasswordTextField" destination="7QP-S2-Bun" id="I1Y-Fa-2gm"/>
                         <outlet property="createAccountButton" destination="rXb-1O-JBK" id="oq6-MG-30U"/>
                         <outlet property="emailTextField" destination="w3b-N4-59t" id="CLN-sK-Nl1"/>
+                        <outlet property="imageField" destination="xxg-dZ-V3u" id="xLe-zk-ZzG"/>
+                        <outlet property="imageLabel" destination="p5d-Fa-fgz" id="A3P-HE-2qU"/>
                         <outlet property="passwordTextField" destination="7sP-o0-7Ea" id="BnW-O2-SEz"/>
+                        <outlet property="signUpStatus" destination="gXj-Nb-mg6" id="tOv-R3-D3T"/>
                         <outlet property="userNameField" destination="nFs-9q-scz" id="KeL-Ci-TcO"/>
                     </connections>
                 </viewController>

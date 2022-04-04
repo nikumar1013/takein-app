@@ -20,6 +20,8 @@ class upcomingEventCell: UITableViewCell {
 class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var upcomingEventsTableView: UITableView!
+    var userName: String?
+    var emailName: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         upcomingEventsTableView.delegate = self
