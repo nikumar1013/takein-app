@@ -12,4 +12,8 @@ class EventSearchPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    func switchToDarkMode() {}
 }
+
+

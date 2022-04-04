@@ -13,6 +13,8 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet weak var author_profile: UIButton!
     @IBOutlet weak var author_profile_picture: UIImageView!
     
+    func switchToDarkMode() {}
+    
 }
 
 class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -33,6 +35,8 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
+    
+    func switchToDarkMode() {}
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! ReviewTableViewCell

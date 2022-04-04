@@ -14,4 +14,6 @@ class SearchPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    func switchToDarkMode() {}
 }

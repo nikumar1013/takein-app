@@ -13,6 +13,8 @@ class upcomingEventCell: UITableViewCell {
     @IBOutlet weak var event_description: UILabel!
     @IBOutlet weak var event_timing: UILabel!
     @IBOutlet weak var event_picture: UIImageView!
+    
+    func switchToDarkMode() {}
 }
 
 class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -32,6 +34,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         super.viewWillAppear(animated)
     }
     
+    func switchToDarkMode() {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nextVC = segue.destination as? SettingsPage {

@@ -13,6 +13,8 @@ class ExploreViewCell: UITableViewCell {
     @IBOutlet weak var event_distance: UILabel!
     @IBOutlet weak var event_date: UILabel!
     @IBOutlet weak var event_image: UIImageView!
+    
+    func switchToDarkMode() {}
 }
 
 class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
@@ -38,6 +40,8 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         controller.addAction(radius)
         present(controller, animated: true, completion: nil)
     }
+    
+    func switchToDarkMode() {}
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     }

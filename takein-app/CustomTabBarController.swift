@@ -15,11 +15,18 @@ class CustomTabBarController: UITabBarController {
         var counter: Int = 0
         for tabItem in self.tabBar.items! {
             tabItem.isEnabled = true
+            if(counter == 0) {
+                tabItem.image = UIImage(systemName: "person.circle")
+            } else {
+                tabItem.image = UIImage(systemName: "map.circle")
+            }
             tabItem.title = TAB_NAMES[counter]
             counter += 1
         }
         // Do any additional setup after loading the view.
     }
+    
+    func switchToDarkMode() {}
     
 
     /*

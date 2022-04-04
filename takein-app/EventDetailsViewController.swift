@@ -7,9 +7,7 @@
 
 import UIKit
 
-class EventDetailsViewController:
-    
-    UIViewController {
+class EventDetailsViewController: UIViewController {
 
 //    @IBOutlet weak var eventTableView: ContentSizedTableView!
     @IBOutlet weak var descriptionLabel: UILabel!

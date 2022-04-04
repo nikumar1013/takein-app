@@ -22,6 +22,8 @@ class SettingsPage: UIViewController, UITableViewDelegate, UITableViewDataSource
     //Useful function for later
     override func viewWillAppear(_ animated: Bool) {}
     
+    func switchToDarkMode() {}
+    
     func returnToPrevViewController() {
         
     }

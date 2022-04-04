@@ -14,6 +14,8 @@ class GuestListViewCell: UITableViewCell {
     @IBOutlet weak var guest_name: UIButton!
     @IBOutlet weak var guest_number: UILabel!
     
+    func switchToDarkMode() {}
+    
     
 }
 
@@ -29,6 +31,8 @@ class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegat
         guestTableView.estimatedRowHeight = 300
         guestTableView.layer.cornerRadius = 10
     }
+    
+    func switchToDarkMode() {}
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return 6

@@ -29,6 +29,8 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
         eventTableView.estimatedRowHeight = 300
     }
     
+    func switchToDarkMode() {}
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
