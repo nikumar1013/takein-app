@@ -13,6 +13,7 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     private let storage = Storage.storage().reference()
     private let database = Database.database()
+    
     @IBOutlet weak var signUpStatus: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var userNameField: UITextField!
@@ -22,7 +23,9 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     @IBOutlet weak var imageField: UIImageView!
     @IBOutlet weak var imageLabel: UILabel!
     @IBOutlet weak var createAccountButton: UIButton!
+    
     var imagePicked: Data?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
