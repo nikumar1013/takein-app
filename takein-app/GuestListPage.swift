@@ -30,6 +30,11 @@ class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegat
         guestTableView.rowHeight = UITableView.automaticDimension
         guestTableView.estimatedRowHeight = 300
         guestTableView.layer.cornerRadius = 10
+        
+        // light mode
+        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
+        guestTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
+        
     }
     
     func switchToDarkMode() {}
@@ -40,6 +45,7 @@ class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "guestCellIdentifier", for: indexPath) as! GuestListViewCell
+        cell.contentView.backgroundColor = UIColor(rgb: 0xE7E0B8)
             return cell
     }
 }

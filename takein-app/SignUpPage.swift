@@ -8,12 +8,16 @@
 import UIKit
 import CryptoKit
 import Firebase
+import CoreData
+
+
 
 class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     private let storage = Storage.storage().reference()
     private let database = Database.database()
     
+    @IBOutlet weak var startedLabel: UILabel!
     @IBOutlet weak var signUpStatus: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var userNameField: UITextField!
@@ -28,6 +32,38 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addProfileButton.layer.cornerRadius = 10.0
+        let fetchedResults = retrieveDarkMode()
+        if fetchedResults.count > 0 {
+            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
+                if darkmode == true {
+                        // for darkMode
+                       self.view.backgroundColor = UIColor(rgb: 0x424841)
+                       createAccountButton.backgroundColor = UIColor(rgb:  0xB9451D)
+                       startedLabel.textColor = UIColor(rgb: 0xFFFFFF)
+//                       login.backgroundColor = UIColor(rgb: 0xB9451D)
+//                       signUp.backgroundColor = UIColor(rgb: 0xB9451D)
+//                        welcomeLabel.textColor = UIColor(rgb: 0xFFFFFF)
+                        
+                    } else {
+                        // for light mode
+                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
+                        createAccountButton.backgroundColor = UIColor(rgb: 0xFF7738)
+                        startedLabel.textColor = UIColor(rgb: 0x000000)
+//                        // change button text color
+//                        createAccountButton.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
+//                        addProfileButton.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
+                        
+
+                    }
+            }
+            
+            
+        }
+
+        
+
     }
     
     @IBAction func addPhotoPressed(_ sender: Any) {
@@ -87,8 +123,18 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                            let userRef = ref.child("\(userText)")
                            userRef.setValue(newEmailItem)
                            emailRef.setValue(newUserNameItem)
-                           print("In here, login success")
+                           print("\n\n In here, login success")
                            //self.performSegue(withIdentifier: "loginSegue", sender: self.self)
+                           
+                           // currently initalize a darkMode setting preference after signing up (so it only happens once)
+                           // we probably want to store darkmode preference in db, so it is associated w/ profile and not phone
+                           let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                           let context = appDelegate.persistentContainer.viewContext
+                           let DarkMode = NSEntityDescription.insertNewObject(
+                               forEntityName: "DarkMode", into: context)
+                           
+                           // Set the attribute values
+                           DarkMode.setValue(false, forKey: "isDarkMode")
                        } else {
                            print("Signup failed")
                        }

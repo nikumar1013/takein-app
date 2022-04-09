@@ -23,11 +23,18 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         searchBar.delegate = self
         eventTable.delegate = self
         eventTable.dataSource = self
         eventTable.layer.cornerRadius=10
         eventTable.rowHeight = 125
+        eventTable.backgroundColor = UIColor(rgb: 0xE7E0B8)
+        
+        
+        // light mode
+        let background_color = UIColor(rgb: 0xFFFBD4)
+        self.view.backgroundColor = background_color
     }
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -52,6 +59,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "exploreCell", for: indexPath) as! ExploreViewCell
+            cell.contentView.backgroundColor = UIColor(rgb: 0xE7E0B8) 
             return cell
     }
 

@@ -18,6 +18,10 @@ class EventsTableViewCell: UITableViewCell {
 
 
 class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    
+    
+    
     @IBOutlet weak var eventTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +31,11 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
         eventTableView.layer.cornerRadius=10
         eventTableView.rowHeight = UITableView.automaticDimension
         eventTableView.estimatedRowHeight = 300
+        
+        // light mode
+        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
+        eventTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
+        
     }
     
     func switchToDarkMode() {}
@@ -37,6 +46,7 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
+            cell.contentView.backgroundColor = UIColor(rgb: 0xE7E0B8)
             return cell
     }
 
