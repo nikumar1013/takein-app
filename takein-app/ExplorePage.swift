@@ -32,9 +32,43 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         eventTable.backgroundColor = UIColor(rgb: 0xE7E0B8)
         
         
-        // light mode
-        let background_color = UIColor(rgb: 0xFFFBD4)
-        self.view.backgroundColor = background_color
+        let fetchedResults = retrieveDarkMode()
+        if fetchedResults.count > 0 {
+            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
+                if darkmode == true {
+                        // for darkMode
+                        self.view.backgroundColor = UIColor(rgb: 0x424841)
+                        eventTable.backgroundColor = UIColor(rgb: 0x5D665C)
+                        
+                    } else {
+                        // for light mode
+                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
+                        eventTable.backgroundColor = UIColor(rgb: 0xE7E0B8)
+
+                    }
+            }
+        }
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        let fetchedResults = retrieveDarkMode()
+        if fetchedResults.count > 0 {
+            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
+                if darkmode == true {
+                        // for darkMode
+                        self.view.backgroundColor = UIColor(rgb: 0x424841)
+                        eventTable.backgroundColor = UIColor(rgb: 0x5D665C)
+                        
+                    } else {
+                        // for light mode
+                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
+                        eventTable.backgroundColor = UIColor(rgb: 0xE7E0B8)
+
+                    }
+            }
+        }
     }
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -59,7 +93,16 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "exploreCell", for: indexPath) as! ExploreViewCell
-            cell.contentView.backgroundColor = UIColor(rgb: 0xE7E0B8) 
+        let fetchedResults = retrieveDarkMode()
+        if fetchedResults.count > 0 {
+            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
+                if darkmode {
+                    cell.contentView.backgroundColor = UIColor(rgb: 0x5D665C)
+                } else {
+                    cell.contentView.backgroundColor = UIColor(rgb: 0xE7E0B8)
+                }
+            }
+        }
             return cell
     }
 

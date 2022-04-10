@@ -42,11 +42,12 @@ class SettingsPage: UIViewController {
     
     //Useful function for later
     override func viewWillAppear(_ animated: Bool) {
+        super.viewDidLoad()
         // need to have the switches set to the correct values
         let fetchedResults = retrieveDarkMode()
         if fetchedResults.count > 0 {
             if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode {
+                if darkmode == true  {
                         // for darkMode
                         self.view.backgroundColor =  UIColor(rgb: 0x565754)
                         darkModeSwitch.setOn(true, animated: true)

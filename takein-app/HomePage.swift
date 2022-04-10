@@ -63,6 +63,7 @@ class HomePage: UIViewController {
         let fetchedResults = retrieveDarkMode()
         if fetchedResults.count > 0 {
             if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
+                print("This is the darkmode value \(darkmode)")
                 if darkmode == true {
                         // for darkMode
                     print("get into home page")
@@ -84,6 +85,7 @@ class HomePage: UIViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewDidLoad()
         login.layer.cornerRadius = 10.0
         signUp.layer.cornerRadius = 10.0
         let fetchedResults = retrieveDarkMode()

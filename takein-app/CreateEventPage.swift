@@ -19,15 +19,51 @@ class CreateEventPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // light mode
-        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-        addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
+        let fetchedResults = retrieveDarkMode()
+        if fetchedResults.count > 0 {
+            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
+                if darkmode == true {
+                    // for darkMode
+                    self.view.backgroundColor = UIColor(rgb: 0x424841)
+                    addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
+                    createEvent.backgroundColor = UIColor(rgb: 0xB9451D)
+                    } else {
+                        // light mode
+                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
+                        addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
+                        createEvent.backgroundColor = UIColor(rgb: 0xFF7738)
+                    }
+            }
+        }
         createEvent.layer.cornerRadius = 10.0
-        createEvent.backgroundColor = UIColor(rgb: 0xFF7738)
-        // change button text color
         createEvent.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
         addGalleryPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
         addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        let fetchedResults = retrieveDarkMode()
+        if fetchedResults.count > 0 {
+            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
+                if darkmode == true {
+                    // for darkMode
+                    self.view.backgroundColor = UIColor(rgb: 0x424841)
+                    addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
+                    createEvent.backgroundColor = UIColor(rgb: 0xB9451D)
+                    } else {
+                        // light mode
+                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
+                        addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
+                        createEvent.backgroundColor = UIColor(rgb: 0xFF7738)
+                    }
+            }
+        }
+        createEvent.layer.cornerRadius = 10.0
+        createEvent.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
+        addGalleryPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
+        addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
+
     }
     
     func switchToDarkMode() {}
