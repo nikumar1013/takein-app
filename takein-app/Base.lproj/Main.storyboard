@@ -323,7 +323,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4uJ-V2-Yf9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4950" y="2525"/>
+            <point key="canvasLocation" x="6101" y="2581"/>
         </scene>
         <!--Explore-->
         <scene sceneID="ETI-Sj-kxt">
@@ -666,7 +666,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o75-Ha-q7n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6589" y="1746"/>
+            <point key="canvasLocation" x="4776" y="2581"/>
         </scene>
         <!--Login Page-->
         <scene sceneID="Hxh-V4-apK">
