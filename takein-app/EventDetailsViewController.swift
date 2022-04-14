@@ -48,6 +48,17 @@ class EventDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func reserveButtonPressed(_ sender: Any) {
+        let controller = UIAlertController(
+            title: "Confirm Reservation",
+            message: "Do you want to reserve your seat for \(eventTitle.text!)?",
+            preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+        controller.addAction(UIAlertAction(title: "No", style: .cancel))
+        present(controller, animated: true, completion: nil)
+    }
+    
+    
 
 
 }

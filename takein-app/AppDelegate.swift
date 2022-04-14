@@ -17,6 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        UNUserNotificationCenter.current().requestAuthorization(options:[.alert], completionHandler: {
+        (success, error) in
+            if success {
+                print( "Permission granted")
+            } else {
+                print("There was an issue")
+            }
+        })
+        
         return true
     }
 

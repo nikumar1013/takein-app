@@ -155,6 +155,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         dateFormat.timeStyle = .none
         dateField.text = dateFormat.string(from: datePicker.date)
         self.view.endEditing(true)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -217,9 +218,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         present(vc, animated: true)
     }
     
-    
-    @IBAction func createEvent(_ sender: Any) {
-        //error checking
+    func checkNecessaryFields() -> Bool {
         var errors = false
         print("clicked button")
         for field in necessaryFields {
@@ -238,42 +237,95 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
                 preferredStyle: .alert)
             controller.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             present(controller, animated: true, completion: nil)
+            return false
         }
+        return true
+    }
+    
+    
+    @IBAction func createEvent(_ sender: Any) {
+        //error checking
+        if checkNecessaryFields() {
         
-        //pack everything into an object
-        
-        //upload to db
-//        if(self.imagePicked != nil) {
-//            let hashName = SHA256.hash(data: self.imagePicked!)
-//            var hashString = hashName.compactMap { String(format: "%02x", $0) }.joined()
-//            hashString = hashString + "\(Date().hashValue)"
-//            storage.child("profileImages/\(hashString)").putData(self.imagePicked!, metadata: nil, completion: {_, error in
-//                guard error == nil else {
-//                    print("Upload failure")
-//                    return
-//                }
-//
-//                let ref = self.database.reference(withPath: "pictureIds")
-//                //let emailRef = ref.child("\(emailText)")
-//                let userRef = ref.child("\(userText)")
-//                let pictureNameItem = ["profilePictureId" : "\(hashString)"]
-//                //emailRef.setValue(pictureNameItem)
-//                userRef.setValue(pictureNameItem)
-//
-//                self.storage.child("profileImages/\(hashString)").downloadURL(completion: {_, error in
-//                    guard error == nil else {
-//                        print(" Download URL Failed")
-//                        return
-//                    }
-//                    print("Download URL Success")
-//                })
-//            })
-//        }
-        
-        
-        //upon success, add to an [] of this user's current event urls or something (would this be to the db)
-        
-        //
+            //pack everything into an object, template code is here, we are still working on the DB structure in storing an event, so it will be ready by the final.
+            
+            //upload to db
+    //        if(self.imagePicked != nil) {
+    //            let hashName = SHA256.hash(data: self.imagePicked!)
+    //            var hashString = hashName.compactMap { String(format: "%02x", $0) }.joined()
+    //            hashString = hashString + "\(Date().hashValue)"
+    //            storage.child("eventImages/\(hashString)").putData(self.imagePicked!, metadata: nil, completion: {_, error in
+    //                guard error == nil else {
+    //                    print("Upload failure")
+    //                    return
+    //                }
+    //
+    //                let ref = self.database.reference(withPath: "pictureIds")
+    //                //let emailRef = ref.child("\(emailText)")
+    //                let userRef = ref.child("\(userText)")
+    //                let pictureNameItem = ["profilePictureId" : "\(hashString)"]
+    //                //emailRef.setValue(pictureNameItem)
+    //                userRef.setValue(pictureNameItem)
+    //
+    //                self.storage.child("profileImages/\(hashString)").downloadURL(completion: {_, error in
+    //                    guard error == nil else {
+    //                        print(" Download URL Failed")
+    //                        return
+    //                    }
+    //                    print("Download URL Success")
+    //                })
+    //            })
+    //        }
+            //upon success, add to an [] of this user's current event urls or something (would this be to the db)
+            
+            //set notification to get notice an hour before you host the event.
+            
+            let notification = UNMutableNotificationContent()
+            notification.title = "Upcoming Hosting Event"
+            notification.subtitle = ""
+            notification.body = "Your event, \(String(describing: titleField.text)), will begin shortly."
+            
+            //parse date, year, month, time, and  from the respective fields
+            let notificationDate = datePicker.date
+            let calendar = Calendar.current
+            var components = calendar.dateComponents([.year], from: notificationDate)
+            let year = components.year
+            components = calendar.dateComponents([.month], from: notificationDate)
+            let month = components.month
+            components = calendar.dateComponents([.day], from: notificationDate)
+            let day = components.day
+            
+            let notificationTime = startTimePicker.date
+            var timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "H"
+            let hour = Int(timeFormatter.string(from: notificationTime))
+            
+            timeFormatter.dateFormat = "m"
+            let minute = Int(timeFormatter.string(from: notificationTime))
+            
+            // set up the notification trigger
+            var notificationDateSetup = DateComponents()
+            notificationDateSetup.calendar = Calendar.current
+            notificationDateSetup.hour = hour!
+            notificationDateSetup.minute = minute!
+            notificationDateSetup.day = day!
+            notificationDateSetup.month = month!
+            notificationDateSetup.year = year!
+            
+            let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: notificationDateSetup, repeats: false)
+            let notificationIdentifier = UUID().uuidString
+            
+            let request = UNNotificationRequest(
+                identifier:  notificationIdentifier,
+                content: notification,
+                trigger: calendarTrigger)
+
+            // submit the request to iOS
+            UNUserNotificationCenter.current().add(request) {
+                (error) in
+                print("Request error: ", error as Any)
+            }
+        }
     }
     
     
