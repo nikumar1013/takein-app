@@ -7,6 +7,12 @@
 
 import UIKit
 import CoreData
+import Firebase
+
+
+enum UserNameError: Error {
+    case runtimeError(String)
+}
 
 class upcomingEventCell: UITableViewCell {
    
@@ -24,8 +30,14 @@ class upcomingEventCell: UITableViewCell {
 
 class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var myEvents: UIButton!
-    
+    private let storage = Storage.storage().reference()
+    private let database = Database.database()
     @IBOutlet weak var upcomingEventsTableView: UITableView!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     var userName: String?
     var emailName: String?
     override func viewDidLoad() {
@@ -95,13 +107,50 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         upcomingEventsTableView.rowHeight = UITableView.automaticDimension
         upcomingEventsTableView.estimatedRowHeight = 600
         upcomingEventsTableView.layer.cornerRadius = 10
-        
-
-
+        retrieveUserdata()
     }
     
-    func switchToDarkMode() {}
+    func retrieveUserdata() {
+        setUserName()
+       // sleep(1)
+        print("\(self.userName!) HERE HERE HERE  HERE HERE HERE")
+        let profileImageRef = self.database.reference(withPath: "pictureIds").child("\(self.userName!)")
+        profileImageRef.observeSingleEvent(of: .value, with: { snapshot in
+            let profPicId = snapshot.childSnapshot(forPath: "profilePictureId").value
+            //let tempUserName = snapshot.value(forKey: "userName")
+            print(profPicId as! String)
+            print("In other from firebase")
+            let folderReference = Storage.storage().reference(withPath: "profileImages/\(profPicId!)")
+            folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
+                if(error != nil) {
+                    print(error)
+                    print("FAILURE")
+                } else {
+                    let profilePic: UIImage = UIImage(data: data!)!
+                    self.profileImage.image = profilePic
+                }
+                
+            }
+        })
+        //gs://take-in-d0e08.appspot.com/profileImages
+        
+    }
     
+    func setUserName() {
+        print("in set username")
+        let fetchedResults: [NSManagedObject] = retrieveUserName()
+      /*  if(fetchedResults.count < 1) {
+            throw UserNameError.runtimeError("Fetched results has no results")
+        } */
+        if(fetchedResults.count < 1) {
+            print("Issue fetching username")
+            return
+        }
+        if let fetchedUserName = fetchedResults[0].value(forKey: "userName") as? String {
+            print("No failure casting result username to string")
+            self.userName = fetchedUserName
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return 2

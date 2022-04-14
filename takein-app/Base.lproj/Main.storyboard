@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1201,22 +1201,7 @@
                                     <constraint firstAttribute="width" constant="180" id="RhK-un-lhs"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyO-FP-tsl">
-                                <rect key="frame" x="186" y="328" width="56" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.1671859282" green="0.71100136449999995" blue="0.68016980719999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33m-W2-soB">
-                                <rect key="frame" x="113" y="351" width="202" height="20.333333333333314"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="78" id="MJ1-iF-4Fk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaC-Lr-qVE">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaC-Lr-qVE">
                                 <rect key="frame" x="104" y="392.33333333333331" width="220" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="My Events">
@@ -1227,7 +1212,7 @@
                                     <segue destination="jBp-d7-5Af" kind="show" id="u6f-5m-eiw"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fBe-SC-bec">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fBe-SC-bec">
                                 <rect key="frame" x="20" y="493" width="388" height="350"/>
                                 <color key="backgroundColor" red="0.90588235294117647" green="0.8784313725490196" blue="0.72156862745098038" alpha="0.90449959899999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" systemColor="secondaryLabelColor"/>
@@ -1316,8 +1301,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming Events" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqt-Tr-VhB">
-                                <rect key="frame" x="22" y="453.33333333333331" width="205" height="32.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Upcoming Events" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqt-Tr-VhB">
+                                <rect key="frame" x="22" y="453.33333333333337" width="205" height="32.333333333333314"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="205" id="neX-Rp-tPC"/>
                                 </constraints>
@@ -1329,27 +1314,18 @@
                         <viewLayoutGuide key="safeArea" id="0PS-aU-dhs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="33m-W2-soB" firstAttribute="leading" secondItem="0PS-aU-dhs" secondAttribute="leading" constant="113" id="1ry-Zh-HT0"/>
                             <constraint firstItem="0PS-aU-dhs" firstAttribute="trailing" secondItem="143-ae-7ri" secondAttribute="trailing" constant="121" id="2lb-JO-Wyp"/>
-                            <constraint firstItem="WaC-Lr-qVE" firstAttribute="top" secondItem="33m-W2-soB" secondAttribute="bottom" constant="21" id="3D1-AB-boc"/>
                             <constraint firstItem="0PS-aU-dhs" firstAttribute="trailing" secondItem="bqt-Tr-VhB" secondAttribute="trailing" constant="201" id="9fM-dG-sHO"/>
-                            <constraint firstItem="33m-W2-soB" firstAttribute="top" secondItem="uyO-FP-tsl" secondAttribute="bottom" constant="6" id="AEJ-YX-Pu5"/>
                             <constraint firstItem="0PS-aU-dhs" firstAttribute="trailing" secondItem="WaC-Lr-qVE" secondAttribute="trailing" constant="104" id="FEh-P0-Hsh"/>
                             <constraint firstItem="fBe-SC-bec" firstAttribute="leading" secondItem="0PS-aU-dhs" secondAttribute="leading" constant="20" id="JDK-8S-6Nf"/>
                             <constraint firstItem="saz-kI-tCh" firstAttribute="leading" secondItem="0PS-aU-dhs" secondAttribute="leading" constant="130" id="KdQ-Qj-wU2"/>
                             <constraint firstItem="bqt-Tr-VhB" firstAttribute="top" secondItem="WaC-Lr-qVE" secondAttribute="bottom" constant="30" id="LJE-VD-IlU"/>
                             <constraint firstItem="143-ae-7ri" firstAttribute="top" secondItem="saz-kI-tCh" secondAttribute="bottom" constant="28.329999999999998" id="M7H-3R-U5T"/>
-                            <constraint firstItem="uyO-FP-tsl" firstAttribute="top" secondItem="143-ae-7ri" secondAttribute="bottom" constant="8" id="PjY-c6-hcl"/>
-                            <constraint firstItem="0PS-aU-dhs" firstAttribute="trailing" secondItem="uyO-FP-tsl" secondAttribute="trailing" constant="186" id="VkO-rk-NX7"/>
                             <constraint firstItem="fBe-SC-bec" firstAttribute="top" secondItem="bqt-Tr-VhB" secondAttribute="bottom" constant="7.3300000000000001" id="XNo-xf-UqL"/>
-                            <constraint firstItem="WaC-Lr-qVE" firstAttribute="top" secondItem="33m-W2-soB" secondAttribute="bottom" constant="21" id="Yew-R0-zl4"/>
                             <constraint firstItem="saz-kI-tCh" firstAttribute="top" secondItem="0PS-aU-dhs" secondAttribute="top" id="Yrc-gE-JFQ"/>
                             <constraint firstItem="fBe-SC-bec" firstAttribute="bottom" secondItem="0PS-aU-dhs" secondAttribute="bottom" id="avl-k7-IPB"/>
                             <constraint firstItem="143-ae-7ri" firstAttribute="leading" secondItem="0PS-aU-dhs" secondAttribute="leading" constant="122" id="bQa-40-C6N"/>
-                            <constraint firstItem="0PS-aU-dhs" firstAttribute="trailing" secondItem="33m-W2-soB" secondAttribute="trailing" constant="113" id="eEc-dF-HJJ"/>
                             <constraint firstItem="WaC-Lr-qVE" firstAttribute="leading" secondItem="0PS-aU-dhs" secondAttribute="leading" constant="104" id="fQA-ql-dVs"/>
-                            <constraint firstItem="uyO-FP-tsl" firstAttribute="leading" secondItem="0PS-aU-dhs" secondAttribute="leading" constant="186" id="guF-Xb-Yzt"/>
-                            <constraint firstItem="33m-W2-soB" firstAttribute="top" secondItem="uyO-FP-tsl" secondAttribute="bottom" constant="6" id="hc0-xB-sE0"/>
                             <constraint firstItem="0PS-aU-dhs" firstAttribute="trailing" secondItem="fBe-SC-bec" secondAttribute="trailing" constant="20" id="koo-rh-alZ"/>
                         </constraints>
                     </view>
@@ -1367,6 +1343,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="myEvents" destination="WaC-Lr-qVE" id="S9t-dk-PW8"/>
+                        <outlet property="nameLabel" destination="143-ae-7ri" id="MYC-VR-afN"/>
+                        <outlet property="profileImage" destination="saz-kI-tCh" id="AyX-r8-aWA"/>
                         <outlet property="upcomingEventsTableView" destination="fBe-SC-bec" id="dCp-BZ-Lld"/>
                     </connections>
                 </viewController>
@@ -1653,7 +1631,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="dek-s6-VrF"/>
+        <segue reference="j86-zE-FEO"/>
         <segue reference="Kre-UN-tI5"/>
     </inferredMetricsTieBreakers>
     <resources>

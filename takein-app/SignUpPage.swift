@@ -132,7 +132,9 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                            let context = appDelegate.persistentContainer.viewContext
                            let DarkMode = NSEntityDescription.insertNewObject(
                                forEntityName: "DarkMode", into: context)
+                           let curUserName = NSEntityDescription.insertNewObject(forEntityName: "CurrentUser", into: context)
                            
+                           curUserName.setValue(userText, forKey: "userName")
                            // Set the attribute values
                            DarkMode.setValue(false, forKey: "isDarkMode")
                        } else {

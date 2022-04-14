@@ -11,6 +11,10 @@ import CoreData
 
 class LoginPage: UIViewController {
 
+    
+    private let storage = Storage.storage().reference()
+    private let database = Database.database()
+    
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -56,10 +60,33 @@ class LoginPage: UIViewController {
                 let context = appDelegate.persistentContainer.viewContext
                 let DarkMode = NSEntityDescription.insertNewObject(
                     forEntityName: "DarkMode", into: context)
-                
+                let curUserName = NSEntityDescription.insertNewObject(forEntityName: "CurrentUser", into: context)
+               // let eRef = self.database.reference(withPath: "emails")
+                let parsedEmail = self.usernameField.text!.split(separator: ".")
+                let emailRef = self.database.reference(withPath: "emails").child(String(parsedEmail[0]))
+                var usernameVal:String = ""
+                //emailRef
+                print("pre")
+                emailRef.observeSingleEvent(of: .value, with: { snapshot in
+                    print("In the fetching closure her ehere")
+                    let tempUserName = snapshot.childSnapshot(forPath: "userName").value
+                    //let tempUserName = snapshot.value(forKey: "userName")
+                    print(tempUserName as! String)
+                    print("In fetch from firebase")
+                    usernameVal = tempUserName as! String
+                    curUserName.setValue(usernameVal, forKey: "userName")
+                    self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                })
+              //  let usernameVal: String = emailRef.child("userName")
+                print("Retrieved above username ")
+                /*while(usernameVal == "") {
+                    usleep(20)
+                } */
+                print(usernameVal)
+                print("Retrieved above username ")
+              //  curUserName.setValue(usernameVal, forKey: "userName")
                 // Set the attribute values
                 DarkMode.setValue(false, forKey: "isDarkMode")
-                self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }
     }

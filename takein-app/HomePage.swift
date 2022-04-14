@@ -26,8 +26,28 @@ func retrieveDarkMode() -> [NSManagedObject] {
     }
     
     return(fetchedResults)!
-    
 }
+
+func retrieveUserName() -> [NSManagedObject] {
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let context = appDelegate.persistentContainer.viewContext
+    
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName:"CurrentUser")
+    var fetchedResults:[NSManagedObject]? = nil
+    
+    
+    do {
+        try fetchedResults = context.fetch(request) as? [NSManagedObject]
+    } catch {
+        // If an error occurs
+        let nserror = error as NSError
+        NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+        abort()
+    }
+    
+    return(fetchedResults)!
+}
+
 // method to get the correct color based on RBG value
 extension UIColor {
    convenience init(red: Int, green: Int, blue: Int) {
