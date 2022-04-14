@@ -34,8 +34,6 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     private let database = Database.database()
     @IBOutlet weak var upcomingEventsTableView: UITableView!
     
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     var userName: String?
@@ -112,14 +110,10 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
     func retrieveUserdata() {
         setUserName()
-       // sleep(1)
-        print("\(self.userName!) HERE HERE HERE  HERE HERE HERE")
         let profileImageRef = self.database.reference(withPath: "pictureIds").child("\(self.userName!)")
+        nameLabel.text = self.userName!
         profileImageRef.observeSingleEvent(of: .value, with: { snapshot in
             let profPicId = snapshot.childSnapshot(forPath: "profilePictureId").value
-            //let tempUserName = snapshot.value(forKey: "userName")
-            print(profPicId as! String)
-            print("In other from firebase")
             let folderReference = Storage.storage().reference(withPath: "profileImages/\(profPicId!)")
             folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
                 if(error != nil) {
@@ -132,8 +126,13 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                 
             }
         })
-        //gs://take-in-d0e08.appspot.com/profileImages
         
+        populateEventTable()
+    }
+    
+    func populateEventTable() {
+        let eventRef = self.database.reference(withPath: "events").child("\(self.userName!)")
+
     }
     
     func setUserName() {

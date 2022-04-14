@@ -112,7 +112,6 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                                withEmail: userText,
                                password: passText)
                            self.performImageUpload(userText: userText, emailText: emailText)
-                           print("PRE HERE \(emailText)")
                            let ref = self.database.reference(withPath: "users")
                            let eRef = self.database.reference(withPath: "emails")
                            let newEmailItem = ["email" : emailText]
@@ -123,11 +122,6 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                            let userRef = ref.child("\(userText)")
                            userRef.setValue(newEmailItem)
                            emailRef.setValue(newUserNameItem)
-                           print("\n\n In here, login success")
-                           //self.performSegue(withIdentifier: "loginSegue", sender: self.self)
-                           
-                           // currently initalize a darkMode setting preference after signing up (so it only happens once)
-                           // we probably want to store darkmode preference in db, so it is associated w/ profile and not phone
                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
                            let context = appDelegate.persistentContainer.viewContext
                            let DarkMode = NSEntityDescription.insertNewObject(
