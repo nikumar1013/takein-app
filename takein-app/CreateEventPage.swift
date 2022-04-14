@@ -220,7 +220,6 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     func checkNecessaryFields() -> Bool {
         var errors = false
-        print("clicked button")
         for field in necessaryFields {
             if(!field.hasText) {
                 field.layer.borderColor = UIColor.red.cgColor
@@ -280,10 +279,12 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             
             //set notification to get notice an hour before you host the event.
             
+            let eventTitle = titleField.text!
+            
             let notification = UNMutableNotificationContent()
             notification.title = "Upcoming Hosting Event"
             notification.subtitle = ""
-            notification.body = "Your event, \(String(describing: titleField.text)), will begin shortly."
+            notification.body = "Your event, \(eventTitle), will begin shortly."
             
             //parse date, year, month, time, and  from the respective fields
             let notificationDate = datePicker.date
