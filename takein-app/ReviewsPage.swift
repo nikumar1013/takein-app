@@ -22,22 +22,11 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true {
-                        // for darkMode
-                        self.view.backgroundColor = UIColor(rgb: 0x424841)
-                        reviewsTableView.backgroundColor = UIColor(rgb: 0x5D665C)
-                        
-                    } else {
-                        // for light mode
-                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-                        reviewsTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
 
-                    }
-            }
-        }
+        
+        reviewsTableView.backgroundColor =  UIColor(named: "tableViewColor")
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+        
         reviewsTableView.delegate = self
         reviewsTableView.dataSource = self
         reviewsTableView.rowHeight = 150
@@ -46,21 +35,9 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     //Useful function for later
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true {
-                        // for darkMode
-                        self.view.backgroundColor = UIColor(rgb: 0x424841)
-                        reviewsTableView.backgroundColor = UIColor(rgb: 0x5D665C)
-                    } else {
-                        // for light mode
-                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-                        reviewsTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
-                    }
-            }
-        }
-        
+
+        reviewsTableView.backgroundColor =  UIColor(named: "tableViewColor")
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,16 +50,17 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! ReviewTableViewCell
         cell.review_content?.text = "This is the temporary review placeholder"
         cell.author_profile.setTitle("Bob", for: .normal)
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode {
-                    cell.contentView.backgroundColor = UIColor(rgb: 0x5D665C)
-                } else {
-                    cell.contentView.backgroundColor = UIColor(rgb: 0xE7E0B8)
-                }
-            }
-        }
+//        let fetchedResults = retrieveDarkMode()
+//        if fetchedResults.count > 0 {
+//            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
+//                if darkmode {
+//                    cell.contentView.backgroundColor =  UIColor(named: "tableViewColor")
+//                } else {
+//                    cell.contentView.backgroundColor = UIColor(rgb: 0xE7E0B8)
+//                }
+//            }
+//        }
+        cell.contentView.backgroundColor =  UIColor(named: "tableViewColor")
         return cell
     }
 

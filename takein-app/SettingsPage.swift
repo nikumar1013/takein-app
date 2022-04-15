@@ -9,6 +9,8 @@ import UIKit
 import CoreData
 
 
+
+
 class SettingsPage: UIViewController {
 
 
@@ -22,41 +24,16 @@ class SettingsPage: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true {
-                        // for darkMode
-                        self.view.backgroundColor =  UIColor(rgb: 0x565754)
-                        darkModeSwitch.setOn(true, animated: true)
-                    } else {
-                        // for light mode
-                        self.view.backgroundColor =  UIColor(rgb: 0xFFFBD4)
-                        darkModeSwitch.setOn(false, animated: true)
-                    }
-            }
-        }
+
+        
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
     }
     
     //Useful function for later
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-        // need to have the switches set to the correct values
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true  {
-                        // for darkMode
-                        self.view.backgroundColor =  UIColor(rgb: 0x565754)
-                        darkModeSwitch.setOn(true, animated: true)
-                    } else {
-                        // for light mode
-                        self.view.backgroundColor =  UIColor(rgb: 0xFFFBD4)
-                        darkModeSwitch.setOn(false, animated: true)
-                        print("got in this view appear 2")
-                    }
-            }
-        }
+        
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
     }
     
     func switchToDarkMode() {}
@@ -75,6 +52,9 @@ class SettingsPage: UIViewController {
             if fetchedResults.count > 0 {
                 var managedObject = fetchedResults[0]
                 managedObject.setValue(true, forKey: "isDarkMode")
+                overrideUserInterfaceStyle = .dark
+//                UIWindow().overrideUserInterfaceStyle = UIUserInterfaceStyle.dark
+                navigationController!.overrideUserInterfaceStyle = .dark
             }
             // Commit the changes
             do {
@@ -96,6 +76,9 @@ class SettingsPage: UIViewController {
             if fetchedResults.count > 0 {
                 var managedObject = fetchedResults[0]
                 managedObject.setValue(false, forKey: "isDarkMode")
+                overrideUserInterfaceStyle = .light
+//                UIWindow().overrideUserInterfaceStyle = UIUserInterfaceStyle.light
+                navigationController!.overrideUserInterfaceStyle = .light
             }
             // Commit the changes
             do {

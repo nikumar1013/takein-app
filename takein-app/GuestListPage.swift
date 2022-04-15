@@ -30,40 +30,31 @@ class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegat
         guestTableView.rowHeight = UITableView.automaticDimension
         guestTableView.estimatedRowHeight = 300
         guestTableView.layer.cornerRadius = 10
-        
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true {
-                        // for darkMode
-                        self.view.backgroundColor = UIColor(rgb: 0x424841)
-                    guestTableView.backgroundColor = UIColor(rgb: 0x5D665C)
-                        
-                    } else {
-                        // for light mode
-                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-                        guestTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
-
-                    }
-            }
-        }
+//
+//        let fetchedResults = retrieveDarkMode()
+//        if fetchedResults.count > 0 {
+//            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
+//                if darkmode == true {
+//                        // for darkMode
+//                        self.view.backgroundColor = UIColor(rgb: 0x424841)
+//                    guestTableView.backgroundColor = UIColor(rgb: 0x5D665C)
+//
+//                    } else {
+//                        // for light mode
+//                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
+//                        guestTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
+//
+//                    }
+//            }
+//        }
+        guestTableView.backgroundColor =  UIColor(named: "tableViewColor")
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true {
-                        // for darkMode
-                        self.view.backgroundColor = UIColor(rgb: 0x424841)
-                    guestTableView.backgroundColor = UIColor(rgb: 0x5D665C)
-                    } else {
-                        // for light mode
-                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-                        guestTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
-                    }
-            }
-        }
+
+        guestTableView.backgroundColor =  UIColor(named: "tableViewColor")
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         
     }
     
@@ -75,16 +66,8 @@ class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "guestCellIdentifier", for: indexPath) as! GuestListViewCell
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode {
-                    cell.contentView.backgroundColor = UIColor(rgb: 0x5D665C)
-                } else {
-                    cell.contentView.backgroundColor = UIColor(rgb: 0xE7E0B8)
-                }
-            }
-        }
+
+           cell.contentView.backgroundColor = UIColor(named: "tableViewColor")
             return cell
     }
 }

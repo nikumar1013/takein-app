@@ -34,40 +34,18 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         super.viewDidLoad()
         
         addProfileButton.layer.cornerRadius = 10.0
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true {
-                        // for darkMode
-                       self.view.backgroundColor = UIColor(rgb: 0x424841)
-                       createAccountButton.backgroundColor = UIColor(rgb:  0xB9451D)
-                       startedLabel.textColor = UIColor(rgb: 0xFFFFFF)
-//                       login.backgroundColor = UIColor(rgb: 0xB9451D)
-//                       signUp.backgroundColor = UIColor(rgb: 0xB9451D)
-//                        welcomeLabel.textColor = UIColor(rgb: 0xFFFFFF)
-                        
-                    } else {
-                        // for light mode
-                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-                        createAccountButton.backgroundColor = UIColor(rgb: 0xFF7738)
-                        startedLabel.textColor = UIColor(rgb: 0x000000)
-//                        // change button text color
-//                        createAccountButton.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
-//                        addProfileButton.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
-                    }
-            }
-            
-            // gets the keyboard to work correctly
-            emailTextField.delegate = self
-            userNameField.delegate = self
-            passwordTextField.delegate = self
-            confirmPasswordTextField.delegate = self
-            
-            
-        }
 
         
+        // gets the keyboard to work correctly
+        emailTextField.delegate = self
+        userNameField.delegate = self
+        passwordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
 
+        
+        startedLabel.textColor = UIColor(named: "standardFontColor")
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+        createAccountButton.backgroundColor = UIColor(named: "ButtonColor")
     }
     
     // Calls when user clicks return on the keyboard

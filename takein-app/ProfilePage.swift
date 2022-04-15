@@ -40,29 +40,34 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         super.viewDidLoad()
         myEvents.layer.cornerRadius = 10.0
         
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true {
-                        // for darkMode
-                        self.view.backgroundColor =  UIColor(rgb: 0x565754)
-                        myEvents.backgroundColor = UIColor(rgb: 0xB9451D)
-                        // change button text color
-                        myEvents.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
-                        upcomingEventsTableView.backgroundColor = UIColor(rgb: 0x5D665C)
-                        
-                    } else {
-                        // for light mode
-                        self.view.backgroundColor =  UIColor(rgb: 0xFFFBD4)
-                        myEvents.backgroundColor = UIColor(rgb: 0xFF7738)
-                        // change button text color
-                        myEvents.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
-                        upcomingEventsTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
-
-                    }
-            }
-        }
-
+//        let fetchedResults = retrieveDarkMode()
+//        if fetchedResults.count > 0 {
+//            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
+//                if darkmode == true {
+//                        // for darkMode
+//                        self.view.backgroundColor =  UIColor(rgb: 0x565754)
+//                        myEvents.backgroundColor = UIColor(rgb: 0xB9451D)
+//                        // change button text color
+//                        myEvents.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
+//                        upcomingEventsTableView.backgroundColor = UIColor(rgb: 0x5D665C)
+//                        
+//                    } else {
+//                        // for light mode
+//                        self.view.backgroundColor =  UIColor(rgb: 0xFFFBD4)
+//                        myEvents.backgroundColor = UIColor(rgb: 0xFF7738)
+//                        // change button text color
+//                        myEvents.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
+//                        upcomingEventsTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
+//
+//                    }
+//            }
+//        }
+       
+        upcomingEventsTableView.backgroundColor =  UIColor(named: "tableViewColor")
+        myEvents.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+        myEvents.backgroundColor = UIColor(named: "ButtonColor")
+        
         upcomingEventsTableView.reloadData()
         upcomingEventsTableView.delegate = self
         upcomingEventsTableView.dataSource = self
@@ -76,25 +81,12 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         myEvents.layer.cornerRadius = 10.0
         
         let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true {
-                    // for darkMode
-                    self.view.backgroundColor =  UIColor(rgb: 0x565754)
-                    myEvents.backgroundColor = UIColor(rgb: 0xB9451D)
-                    myEvents.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
-                    upcomingEventsTableView.backgroundColor = UIColor(rgb: 0x5D665C)
-                        
-                    } else {
-                        // for light mode
-                        self.view.backgroundColor =  UIColor(rgb: 0xFFFBD4)
-                        myEvents.backgroundColor = UIColor(rgb: 0xFF7738)
-                        myEvents.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
-                        upcomingEventsTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
 
-                    }
-            }
-        }
+        upcomingEventsTableView.backgroundColor =  UIColor(named: "tableViewColor")
+        myEvents.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+        myEvents.backgroundColor = UIColor(named: "ButtonColor")
+        
         upcomingEventsTableView.reloadData()
         upcomingEventsTableView.rowHeight = UITableView.automaticDimension
         upcomingEventsTableView.estimatedRowHeight = 600
@@ -147,17 +139,8 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingCell", for: indexPath) as! upcomingEventCell
             // for light mode
-        
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode {
-                    cell.contentView.backgroundColor = UIColor(rgb: 0x5D665C)
-                } else {
-                    cell.contentView.backgroundColor = UIColor(rgb: 0xE7E0B8)
-                }
-            }
-        }
+
+            cell.contentView.backgroundColor = UIColor(named: "tableViewColor")
             return cell
     }
 }

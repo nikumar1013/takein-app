@@ -70,22 +70,27 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         super.viewDidLoad()
         
         let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true {
-                    // for darkMode
-                    self.view.backgroundColor = UIColor(rgb: 0x424841)
-                    createEvent.backgroundColor = UIColor(rgb: 0xB9451D)
-                    } else {
-                        // light mode
-                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-                        createEvent.backgroundColor = UIColor(rgb: 0xFF7738)
-                    }
-            }
-        }
+//        if fetchedResults.count > 0 {
+//            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
+//                if darkmode == true {
+//                    // for darkMode
+//                    self.view.backgroundColor = UIColor(rgb: 0x424841)
+//                    createEvent.backgroundColor = UIColor(rgb: 0xB9451D)
+//                    } else {
+//                        // light mode
+//                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
+//                        createEvent.backgroundColor = UIColor(rgb: 0xFF7738)
+//                    }
+//            }
+//        }
+        
+        createEvent.backgroundColor = UIColor(named: "ButtonColor")
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+        createEvent.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
+        addGalleryPhoto.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
+        
         createEvent.layer.cornerRadius = 10.0
-        createEvent.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
-        addGalleryPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
+        
         
         imagePreview.contentMode = .scaleAspectFit
         self.necessaryFields = [titleField, locationField, dateField, startTimeField, endTimeField, capacityField]
@@ -181,23 +186,13 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true {
-                    // for darkMode
-                    self.view.backgroundColor = UIColor(rgb: 0x424841)
-                    createEvent.backgroundColor = UIColor(rgb: 0xB9451D)
-                    } else {
-                        // light mode
-                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-                        createEvent.backgroundColor = UIColor(rgb: 0xFF7738)
-                    }
-            }
-        }
+
         createEvent.layer.cornerRadius = 10.0
-        createEvent.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
-        addGalleryPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
+        
+        createEvent.backgroundColor = UIColor(named: "ButtonColor")
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+        createEvent.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
+        addGalleryPhoto.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
 
     }
     

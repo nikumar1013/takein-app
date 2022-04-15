@@ -42,9 +42,9 @@ class EventDetailsViewController: UIViewController {
         eventTitle.text = "Outdoor Fall Bonfire"
         
         // light mode
-        var background_color = UIColor(rgb: 0xFFFBD4)
-        self.view.backgroundColor = background_color
-        
+//        var background_color = UIColor(rgb: 0xFFFBD4)
+//        self.view.backgroundColor = background_color
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         // Do any additional setup after loading the view.
     }
     

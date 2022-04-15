@@ -74,55 +74,24 @@ class HomePage: UIViewController {
         login.layer.cornerRadius = 10.0
         signUp.layer.cornerRadius = 10.0
         
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                print("This is the darkmode value \(darkmode)")
-                if darkmode == true {
-                        // for darkMode
-                    print("get into home page")
-                       self.view.backgroundColor = UIColor(rgb: 0x424841)
-                    self.login.backgroundColor = UIColor(rgb: 0xB9451D)
-                    self.signUp.backgroundColor = UIColor(rgb: 0xB9451D)
-                    self.welcomeLabel.textColor = UIColor(rgb: 0xFFFFFF)
-                        
-                    } else {
-                        // for light mode
-                       self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-                        self.login.backgroundColor = UIColor(rgb: 0xFF7738)
-                        self.signUp.backgroundColor = UIColor(rgb: 0xFF7738)
-                        self.welcomeLabel.textColor = UIColor(rgb: 0x000000)
-                    }
-            }
-        }
+        welcomeLabel.textColor = UIColor(named: "standardFontColor")
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+        login.backgroundColor = UIColor(named: "ButtonColor")
+        signUp.backgroundColor = UIColor(named: "ButtonColor")
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
         login.layer.cornerRadius = 10.0
         signUp.layer.cornerRadius = 10.0
-        let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true {
-                        // for darkMode
-                       self.view.backgroundColor = UIColor(rgb: 0x424841)
-                       login.backgroundColor = UIColor(rgb: 0xB9451D)
-                       signUp.backgroundColor = UIColor(rgb: 0xB9451D)
-                        welcomeLabel.textColor = UIColor(rgb: 0xFFFFFF)
-                    } else {
-                        // for light mode
-                       self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-                        self.login.backgroundColor = UIColor(rgb: 0xFF7738)
-                        self.signUp.backgroundColor = UIColor(rgb: 0xFF7738)
-                        self.welcomeLabel.textColor = UIColor(rgb: 0x000000)
 
-                    }
-            }
-            
-            
-        }
+        welcomeLabel.textColor = UIColor(named: "standardFontColor")
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+        login.backgroundColor = UIColor(named: "ButtonColor")
+        signUp.backgroundColor = UIColor(named: "ButtonColor")
     }
+    
     
     func switchToDarkMode() {}
 }

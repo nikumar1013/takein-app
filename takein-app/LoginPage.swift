@@ -25,23 +25,11 @@ class LoginPage: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         loginButton.layer.cornerRadius = 10.0
         let fetchedResults = retrieveDarkMode()
-        if fetchedResults.count > 0 {
-            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-                if darkmode == true {
-                        // for darkMode
-                        self.view.backgroundColor = UIColor(rgb: 0x424841)
-                        loginButton.backgroundColor = UIColor(rgb: 0xFF7738)
-                        // change button text color
-                        loginButton.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
-                    } else {
-                        // for light mode
-                        self.view.backgroundColor =  UIColor(rgb: 0xFFFBD4)
-                        loginButton.backgroundColor = UIColor(rgb: 0xFF7738)
-                        // change button text color
-                        loginButton.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
-                    }
-            }
-        }
+        
+        loginButton.setTitleColor(UIColor(named: "standardFontColor") , for: .normal)
+        self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+        loginButton.backgroundColor = UIColor(named: "ButtonColor")
+        
         usernameField.delegate = self
         passwordField.delegate = self
     }
