@@ -37,7 +37,7 @@ class Event {
     }
 }
 
-class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var createEvent: UIButton!
     @IBOutlet weak var addGalleryPhoto: UIButton!
@@ -94,6 +94,32 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         imagePreview.contentMode = .scaleAspectFit
         self.necessaryFields = [titleField, locationField, dateField, startTimeField, endTimeField, capacityField]
         createDatePicker()
+        
+        titleField.delegate = self
+        locationField.delegate = self
+        dateField.delegate = self
+        startTimeField.delegate = self
+        endTimeField.delegate = self
+        capacityField.delegate = self
+        drinksField.delegate = self
+        appetizersField.delegate = self
+        entreeField.delegate = self
+        dessertsField.delegate = self
+
+        
+    }
+    
+    
+    // Calls when user clicks return on the keyboard
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Called when the user clicks on the view outside of the UITextField
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     func createDatePicker() {

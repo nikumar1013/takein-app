@@ -12,7 +12,7 @@ import CoreData
 
 
 
-class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
     
     private let storage = Storage.storage().reference()
     private let database = Database.database()
@@ -54,16 +54,32 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
 //                        // change button text color
 //                        createAccountButton.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
 //                        addProfileButton.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
-                        
-
                     }
             }
+            
+            // gets the keyboard to work correctly
+            emailTextField.delegate = self
+            userNameField.delegate = self
+            passwordTextField.delegate = self
+            confirmPasswordTextField.delegate = self
             
             
         }
 
         
 
+    }
+    
+    // Calls when user clicks return on the keyboard
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Called when the user clicks on the view outside of the UITextField
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     @IBAction func addPhotoPressed(_ sender: Any) {

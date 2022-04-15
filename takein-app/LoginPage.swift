@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import CoreData
 
-class LoginPage: UIViewController {
+class LoginPage: UIViewController, UITextFieldDelegate {
 
     
     private let storage = Storage.storage().reference()
@@ -45,8 +45,23 @@ class LoginPage: UIViewController {
                     }
             }
         }
-
+        
+        usernameField.delegate = self
+        passwordField.delegate = self
     }
+    
+    // Calls when user clicks return on the keyboard
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Called when the user clicks on the view outside of the UITextField
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         Auth.auth().signIn(withEmail: usernameField.text!, password: passwordField.text!) {
