@@ -41,7 +41,6 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
 
     @IBOutlet weak var createEvent: UIButton!
     @IBOutlet weak var addGalleryPhoto: UIButton!
-    @IBOutlet weak var addPhoto: UIButton!
     @IBOutlet weak var imagePreview: UIImageView!
     
     //for the choosers in the date/time fields
@@ -76,12 +75,10 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
                 if darkmode == true {
                     // for darkMode
                     self.view.backgroundColor = UIColor(rgb: 0x424841)
-                    addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
                     createEvent.backgroundColor = UIColor(rgb: 0xB9451D)
                     } else {
                         // light mode
                         self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-                        addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
                         createEvent.backgroundColor = UIColor(rgb: 0xFF7738)
                     }
             }
@@ -89,7 +86,6 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         createEvent.layer.cornerRadius = 10.0
         createEvent.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
         addGalleryPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
-        addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
         
         imagePreview.contentMode = .scaleAspectFit
         self.necessaryFields = [titleField, locationField, dateField, startTimeField, endTimeField, capacityField]
@@ -191,12 +187,10 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
                 if darkmode == true {
                     // for darkMode
                     self.view.backgroundColor = UIColor(rgb: 0x424841)
-                    addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
                     createEvent.backgroundColor = UIColor(rgb: 0xB9451D)
                     } else {
                         // light mode
                         self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-                        addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
                         createEvent.backgroundColor = UIColor(rgb: 0xFF7738)
                     }
             }
@@ -204,7 +198,6 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         createEvent.layer.cornerRadius = 10.0
         createEvent.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
         addGalleryPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
-        addPhoto.setTitleColor(UIColor(rgb: 0x2BB5AD), for: .normal)
 
     }
     
@@ -233,14 +226,6 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func cameraController(_ sender: Any) {
-        let vc = UIImagePickerController()
-        vc.sourceType = .camera
-        vc.allowsEditing = true
-        vc.delegate = self
-        present(vc, animated: true)
     }
     
     func checkNecessaryFields() -> Bool {
