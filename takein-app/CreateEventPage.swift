@@ -331,6 +331,8 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
                 (error) in
                 print("Request error: ", error as Any)
             }
+
+            _ = navigationController?.popViewController(animated: true)
         }
     }
     
