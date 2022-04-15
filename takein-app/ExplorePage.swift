@@ -31,7 +31,6 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         eventTable.rowHeight = 125
         eventTable.backgroundColor = UIColor(rgb: 0xE7E0B8)
         
-        
         let fetchedResults = retrieveDarkMode()
         if fetchedResults.count > 0 {
             if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
@@ -39,12 +38,10 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
                         // for darkMode
                         self.view.backgroundColor = UIColor(rgb: 0x424841)
                         eventTable.backgroundColor = UIColor(rgb: 0x5D665C)
-                        
                     } else {
                         // for light mode
                         self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
                         eventTable.backgroundColor = UIColor(rgb: 0xE7E0B8)
-
                     }
             }
         }
@@ -60,12 +57,10 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
                         // for darkMode
                         self.view.backgroundColor = UIColor(rgb: 0x424841)
                         eventTable.backgroundColor = UIColor(rgb: 0x5D665C)
-                        
                     } else {
                         // for light mode
                         self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
                         eventTable.backgroundColor = UIColor(rgb: 0xE7E0B8)
-
                     }
             }
         }

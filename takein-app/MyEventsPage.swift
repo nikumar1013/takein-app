@@ -38,12 +38,10 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
                         // for darkMode
                         self.view.backgroundColor = UIColor(rgb: 0x424841)
                     eventTableView.backgroundColor = UIColor(rgb: 0x5D665C)
-                        
                     } else {
                         // for light mode
                         self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
                         eventTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
-
                     }
             }
         }
@@ -58,12 +56,10 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
                         // for darkMode
                         self.view.backgroundColor = UIColor(rgb: 0x424841)
                     eventTableView.backgroundColor = UIColor(rgb: 0x5D665C)
-                        
                     } else {
                         // for light mode
                         self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
                         eventTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
-
                     }
             }
         }

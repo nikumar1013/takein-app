@@ -21,8 +21,6 @@ class upcomingEventCell: UITableViewCell {
     @IBOutlet weak var event_description: UILabel!
     @IBOutlet weak var event_timing: UILabel!
     
-    
-    
     @IBOutlet weak var event_picture: UIImageView!
     
     func switchToDarkMode() {}
@@ -63,8 +61,6 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
 
                     }
             }
-            
-            
         }
 
         upcomingEventsTableView.reloadData()
@@ -73,7 +69,6 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         upcomingEventsTableView.rowHeight = UITableView.automaticDimension
         upcomingEventsTableView.estimatedRowHeight = 600
         upcomingEventsTableView.layer.cornerRadius = 10
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,7 +95,6 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                     }
             }
         }
-        
         upcomingEventsTableView.reloadData()
         upcomingEventsTableView.rowHeight = UITableView.automaticDimension
         upcomingEventsTableView.estimatedRowHeight = 600
@@ -123,7 +117,6 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                     let profilePic: UIImage = UIImage(data: data!)!
                     self.profileImage.image = profilePic
                 }
-                
             }
         })
         
@@ -132,15 +125,11 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
     func populateEventTable() {
         let eventRef = self.database.reference(withPath: "events").child("\(self.userName!)")
-
     }
     
     func setUserName() {
         print("in set username")
         let fetchedResults: [NSManagedObject] = retrieveUserName()
-      /*  if(fetchedResults.count < 1) {
-            throw UserNameError.runtimeError("Fetched results has no results")
-        } */
         if(fetchedResults.count < 1) {
             print("Issue fetching username")
             return
@@ -169,7 +158,6 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                 }
             }
         }
-
             return cell
     }
 }

@@ -36,8 +36,6 @@ class SettingsPage: UIViewController {
                     }
             }
         }
-
-        
     }
     
     //Useful function for later
@@ -51,13 +49,11 @@ class SettingsPage: UIViewController {
                         // for darkMode
                         self.view.backgroundColor =  UIColor(rgb: 0x565754)
                         darkModeSwitch.setOn(true, animated: true)
-                        
                     } else {
                         // for light mode
                         self.view.backgroundColor =  UIColor(rgb: 0xFFFBD4)
                         darkModeSwitch.setOn(false, animated: true)
                         print("got in this view appear 2")
-
                     }
             }
         }
@@ -80,7 +76,6 @@ class SettingsPage: UIViewController {
                 var managedObject = fetchedResults[0]
                 managedObject.setValue(true, forKey: "isDarkMode")
             }
-            
             // Commit the changes
             do {
                 try context.save()
@@ -102,7 +97,6 @@ class SettingsPage: UIViewController {
                 var managedObject = fetchedResults[0]
                 managedObject.setValue(false, forKey: "isDarkMode")
             }
-            
             // Commit the changes
             do {
                 try context.save()
@@ -120,27 +114,5 @@ class SettingsPage: UIViewController {
     
     @IBAction func notificationSwitch(_ sender: Any) {
     }
-    //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return settings.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath)
-//        let row = indexPath.row
-//        cell.textLabel?.text = settings[row]
-//        let switchView = UISwitch(frame: .zero)
-//
-//        if cell.textLabel?.text == "Dark Mode" {
-//            switchView.setOn(false, animated: true) // need some way of remembering this
-//        }
-//        else {
-//            switchView.setOn(true, animated: true)
-//
-//        }
-//
-//        switchView.tag = row
-//        cell.accessoryView = switchView
-//
-//        return cell
-//    }
+
 }

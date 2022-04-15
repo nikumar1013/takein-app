@@ -105,7 +105,6 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         appetizersField.delegate = self
         entreeField.delegate = self
         dessertsField.delegate = self
-
         
     }
     

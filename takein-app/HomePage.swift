@@ -15,7 +15,6 @@ func retrieveDarkMode() -> [NSManagedObject] {
     let request = NSFetchRequest<NSFetchRequestResult>(entityName:"DarkMode")
     var fetchedResults:[NSManagedObject]? = nil
     
-    
     do {
         try fetchedResults = context.fetch(request) as? [NSManagedObject]
     } catch {
@@ -24,7 +23,6 @@ func retrieveDarkMode() -> [NSManagedObject] {
         NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
         abort()
     }
-    
     return(fetchedResults)!
 }
 
@@ -35,7 +33,6 @@ func retrieveUserName() -> [NSManagedObject] {
     let request = NSFetchRequest<NSFetchRequestResult>(entityName:"CurrentUser")
     var fetchedResults:[NSManagedObject]? = nil
     
-    
     do {
         try fetchedResults = context.fetch(request) as? [NSManagedObject]
     } catch {
@@ -44,7 +41,6 @@ func retrieveUserName() -> [NSManagedObject] {
         NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
         abort()
     }
-    
     return(fetchedResults)!
 }
 
@@ -54,7 +50,6 @@ extension UIColor {
        assert(red >= 0 && red <= 255, "Invalid red component")
        assert(green >= 0 && green <= 255, "Invalid green component")
        assert(blue >= 0 && blue <= 255, "Invalid blue component")
-
        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
    }
 
@@ -76,7 +71,6 @@ class HomePage: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         login.layer.cornerRadius = 10.0
         signUp.layer.cornerRadius = 10.0
         
@@ -98,7 +92,6 @@ class HomePage: UIViewController {
                         self.login.backgroundColor = UIColor(rgb: 0xFF7738)
                         self.signUp.backgroundColor = UIColor(rgb: 0xFF7738)
                         self.welcomeLabel.textColor = UIColor(rgb: 0x000000)
-
                     }
             }
         }
@@ -117,7 +110,6 @@ class HomePage: UIViewController {
                        login.backgroundColor = UIColor(rgb: 0xB9451D)
                        signUp.backgroundColor = UIColor(rgb: 0xB9451D)
                         welcomeLabel.textColor = UIColor(rgb: 0xFFFFFF)
-                        
                     } else {
                         // for light mode
                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)

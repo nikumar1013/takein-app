@@ -23,7 +23,6 @@ class LoginPage: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loginButton.layer.cornerRadius = 10.0
         let fetchedResults = retrieveDarkMode()
         if fetchedResults.count > 0 {
@@ -34,18 +33,15 @@ class LoginPage: UIViewController, UITextFieldDelegate {
                         loginButton.backgroundColor = UIColor(rgb: 0xFF7738)
                         // change button text color
                         loginButton.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
-                        
                     } else {
                         // for light mode
                         self.view.backgroundColor =  UIColor(rgb: 0xFFFBD4)
                         loginButton.backgroundColor = UIColor(rgb: 0xFF7738)
                         // change button text color
                         loginButton.setTitleColor(UIColor(rgb: 0xFFFFFF), for: .normal)
-
                     }
             }
         }
-        
         usernameField.delegate = self
         passwordField.delegate = self
     }
@@ -79,7 +75,6 @@ class LoginPage: UIViewController, UITextFieldDelegate {
                 let parsedEmail = self.usernameField.text!.split(separator: ".")
                 let emailRef = self.database.reference(withPath: "emails").child(String(parsedEmail[0]))
                 var usernameVal:String = ""
-                
                 //reads the value of the username associated with the email used to sign in, stores that in coredata
                 //and then performs the segue
                 emailRef.observeSingleEvent(of: .value, with: { snapshot in

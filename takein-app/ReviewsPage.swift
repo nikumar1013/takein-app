@@ -14,12 +14,9 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet weak var author_profile_picture: UIImageView!
     
     func switchToDarkMode() {}
-    
 }
 
 class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
-    
 
     @IBOutlet weak var reviewsTableView: UITableView!
     override func viewDidLoad() {
@@ -41,9 +38,6 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                     }
             }
         }
-
-
-        
         reviewsTableView.delegate = self
         reviewsTableView.dataSource = self
         reviewsTableView.rowHeight = 150
@@ -59,12 +53,10 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                         // for darkMode
                         self.view.backgroundColor = UIColor(rgb: 0x424841)
                         reviewsTableView.backgroundColor = UIColor(rgb: 0x5D665C)
-                        
                     } else {
                         // for light mode
                         self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
                         reviewsTableView.backgroundColor = UIColor(rgb: 0xE7E0B8)
-
                     }
             }
         }
@@ -91,7 +83,6 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                 }
             }
         }
-
         return cell
     }
 
