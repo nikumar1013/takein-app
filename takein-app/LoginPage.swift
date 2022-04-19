@@ -49,6 +49,16 @@ class LoginPage: UIViewController, UITextFieldDelegate {
         Auth.auth().signIn(withEmail: usernameField.text!, password: passwordField.text!) {
             authResult, error in
             if error != nil {
+                if(!self.usernameField.hasText || !self.passwordField.hasText) {
+                    if (!self.usernameField.hasText){
+                        self.usernameField.shake()
+                    } else {
+                        self.passwordField.shake()
+                    }
+                }else{
+                    self.usernameField.shake()
+                    self.passwordField.shake()
+                }
                 self.statusLabel.text = "Sign In Failed"
             } else {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
