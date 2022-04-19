@@ -68,26 +68,12 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
-        let fetchedResults = retrieveDarkMode()
-//        if fetchedResults.count > 0 {
-//            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-//                if darkmode == true {
-//                    // for darkMode
-//                    self.view.backgroundColor = UIColor(rgb: 0x424841)
-//                    createEvent.backgroundColor = UIColor(rgb: 0xB9451D)
-//                    } else {
-//                        // light mode
-//                        self.view.backgroundColor = UIColor(rgb: 0xFFFBD4)
-//                        createEvent.backgroundColor = UIColor(rgb: 0xFF7738)
-//                    }
-//            }
-//        }
-        
-        createEvent.backgroundColor = UIColor(named: "ButtonColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         createEvent.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
         addGalleryPhoto.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
+        createEvent.backgroundColor = UIColor(named: "ButtonColor")
         
         createEvent.layer.cornerRadius = 10.0
         

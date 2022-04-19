@@ -46,6 +46,7 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         startedLabel.textColor = UIColor(named: "standardFontColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         createAccountButton.backgroundColor = UIColor(named: "ButtonColor")
+        createAccountButton.tintColor = UIColor(named: "ButtonColor")
     }
     
     // Calls when user clicks return on the keyboard
@@ -118,13 +119,10 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                            emailRef.setValue(newUserNameItem)
                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
                            let context = appDelegate.persistentContainer.viewContext
-                           let DarkMode = NSEntityDescription.insertNewObject(
-                               forEntityName: "DarkMode", into: context)
+                          
                            let curUserName = NSEntityDescription.insertNewObject(forEntityName: "CurrentUser", into: context)
                            
                            curUserName.setValue(userText, forKey: "userName")
-                           // Set the attribute values
-                           DarkMode.setValue(false, forKey: "isDarkMode")
                        } else {
                            print("Signup failed")
                        }

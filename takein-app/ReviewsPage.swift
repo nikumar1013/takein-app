@@ -22,8 +22,6 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
         reviewsTableView.backgroundColor =  UIColor(named: "tableViewColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         
@@ -50,16 +48,6 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! ReviewTableViewCell
         cell.review_content?.text = "This is the temporary review placeholder"
         cell.author_profile.setTitle("Bob", for: .normal)
-//        let fetchedResults = retrieveDarkMode()
-//        if fetchedResults.count > 0 {
-//            if let darkmode = fetchedResults[0].value(forKey:"isDarkMode") as? Bool{
-//                if darkmode {
-//                    cell.contentView.backgroundColor =  UIColor(named: "tableViewColor")
-//                } else {
-//                    cell.contentView.backgroundColor = UIColor(rgb: 0xE7E0B8)
-//                }
-//            }
-//        }
         cell.contentView.backgroundColor =  UIColor(named: "tableViewColor")
         return cell
     }

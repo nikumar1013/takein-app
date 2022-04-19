@@ -40,12 +40,35 @@ class EventDetailsViewController: UIViewController {
         detailsBox.layer.masksToBounds = true;
         
         eventTitle.text = "Outdoor Fall Bonfire"
-        
-        // light mode
-//        var background_color = UIColor(rgb: 0xFFFBD4)
-//        self.view.backgroundColor = background_color
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+        
+        // sets the color mode to what the user settings currently are
+        if isLight == nil{
+            if self.traitCollection.userInterfaceStyle == .dark {
+                overrideUserInterfaceStyle = .dark
+                isLight = false
+            } else {
+                overrideUserInterfaceStyle = .light
+                isLight = true
+            }
+        }else{
+            if (isLight == true) {
+                overrideUserInterfaceStyle = .light
+            } else {
+                overrideUserInterfaceStyle = .dark
+            }
+        }
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        // sets the switch to what the user settings currently are
+        if (isLight == true) {
+            overrideUserInterfaceStyle = .light
+        } else {
+            overrideUserInterfaceStyle = .dark
+        }
     }
     
     @IBAction func reserveButtonPressed(_ sender: Any) {

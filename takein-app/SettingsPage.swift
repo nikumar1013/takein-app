@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 
-
+var isLight: Bool?
 
 class SettingsPage: UIViewController {
 
@@ -25,6 +25,17 @@ class SettingsPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // sets the switch to what the user settings currently are
+        if self.traitCollection.userInterfaceStyle == .dark {
+            darkModeSwitch.setOn(true, animated:true)
+            isLight = false
+        } else {
+            darkModeSwitch.setOn(false, animated:true)
+            isLight = true
+        }
+        
+        // want this enabled to false first
+        notificationSwitch.setOn(false, animated:true)
         
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
     }
@@ -32,7 +43,7 @@ class SettingsPage: UIViewController {
     //Useful function for later
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-        
+
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
     }
     
@@ -43,53 +54,17 @@ class SettingsPage: UIViewController {
     }
 
     @IBAction func darkModeSwitching(_ sender: Any) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
         if (darkModeSwitch.isOn)
         {
-            // retrieve dark mode value from core data and update it
-            let fetchedResults = retrieveDarkMode()
-            if fetchedResults.count > 0 {
-                var managedObject = fetchedResults[0]
-                managedObject.setValue(true, forKey: "isDarkMode")
-                overrideUserInterfaceStyle = .dark
-//                UIWindow().overrideUserInterfaceStyle = UIUserInterfaceStyle.dark
-                navigationController!.overrideUserInterfaceStyle = .dark
-            }
-            // Commit the changes
-            do {
-                try context.save()
-            } catch {
-                // If an error occurs
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                print("This ain't working")
-                abort()
-            }
+            navigationController!.overrideUserInterfaceStyle = .dark
+            isLight = false
             print("dark mode activiated")
 
         }
         else
         {
-            // retrieve dark mode value from core data and update it
-            let fetchedResults = retrieveDarkMode()
-            if fetchedResults.count > 0 {
-                var managedObject = fetchedResults[0]
-                managedObject.setValue(false, forKey: "isDarkMode")
-                overrideUserInterfaceStyle = .light
-//                UIWindow().overrideUserInterfaceStyle = UIUserInterfaceStyle.light
-                navigationController!.overrideUserInterfaceStyle = .light
-            }
-            // Commit the changes
-            do {
-                try context.save()
-            } catch {
-                // If an error occurs
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                print("This ain't working")
-                abort()
-            }
+            navigationController!.overrideUserInterfaceStyle = .light
+            isLight = true
             print("dark mode deactiviated")
 
         }

@@ -27,20 +27,42 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         searchBar.delegate = self
         eventTable.delegate = self
         eventTable.dataSource = self
-        eventTable.layer.cornerRadius=10
+        eventTable.layer.cornerRadius = 10
         eventTable.rowHeight = 125
-        eventTable.backgroundColor = UIColor(rgb: 0xE7E0B8)
+        
+        // sets the switch to what the user settings currently are
+        if isLight == nil{
+            if self.traitCollection.userInterfaceStyle == .dark {
+                overrideUserInterfaceStyle = .dark
+                isLight = false
+            } else {
+                overrideUserInterfaceStyle = .light
+                isLight = true
+            }
+        }else{
+            if (isLight == true) {
+                overrideUserInterfaceStyle = .light
+            } else {
+                overrideUserInterfaceStyle = .dark
+            }
+        }
 
+        
         eventTable.backgroundColor =  UIColor(named: "tableViewColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-
+        if (isLight == true) {
+            overrideUserInterfaceStyle = .light
+        } else {
+            overrideUserInterfaceStyle = .dark
+        }
         eventTable.backgroundColor =  UIColor(named: "tableViewColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+        
+
     }
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -65,7 +87,6 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "exploreCell", for: indexPath) as! ExploreViewCell
-
          cell.contentView.backgroundColor = UIColor(named: "tableViewColor")
             return cell
     }

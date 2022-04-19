@@ -21,7 +21,6 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     
     
-    
     @IBOutlet weak var eventTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()

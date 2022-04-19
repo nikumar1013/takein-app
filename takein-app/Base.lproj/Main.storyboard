@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
@@ -29,9 +30,10 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="BNi-zu-n6O"/>
                                 </constraints>
+                                <color key="tintColor" name="ButtonColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Sign Up">
-                                    <color key="baseBackgroundColor" red="1" green="0.46850165259999998" blue="0.22042700009999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="baseBackgroundColor" name="ButtonColor"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <segue destination="S8U-Lv-Znb" kind="presentation" modalPresentationStyle="currentContext" id="Qsn-sF-DLK"/>
@@ -42,9 +44,10 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="sme-Ro-yB9"/>
                                 </constraints>
+                                <color key="tintColor" name="ButtonColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Login">
-                                    <color key="baseBackgroundColor" red="1" green="0.46666666666666667" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="baseBackgroundColor" name="ButtonColor"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <segue destination="xoR-Rg-WB2" kind="presentation" identifier="" modalPresentationStyle="currentContext" id="NdN-dO-Xex"/>
@@ -91,7 +94,7 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="jBp-d7-5Af" customClass="MyEventsPage" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zSL-66-yPw">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pPn-oY-qgA">
@@ -129,6 +132,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="lS7-ah-dEG"/>
                                                         <constraint firstAttribute="width" constant="30" id="nRJ-pQ-ybW"/>
                                                     </constraints>
+                                                    <color key="tintColor" red="0.15686274510000001" green="0.66666666669999997" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <menu key="menu" title="Options" id="Nxw-c2-DIG">
                                                         <children>
                                                             <command title="edit" id="Wav-hl-F7m"/>
@@ -166,11 +170,12 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qkJ-yy-iVc">
-                                                    <rect key="frame" x="-9" y="163" width="125" height="31"/>
+                                                    <rect key="frame" x="-9" y="163" width="150" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="1MJ-ZN-MMv"/>
-                                                        <constraint firstAttribute="width" constant="125" id="zMG-8l-12K"/>
+                                                        <constraint firstAttribute="width" constant="150" id="zMG-8l-12K"/>
                                                     </constraints>
+                                                    <color key="tintColor" red="0.15686274510000001" green="0.66666666669999997" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="View Guest List"/>
                                                     <connections>
@@ -218,6 +223,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="My Events" id="gbT-JA-55d">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="cFN-WA-oZk">
+                            <color key="tintColor" red="0.15686274510000001" green="0.66666666669999997" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="kSO-on-5d9" kind="show" id="jq8-9p-Wwv"/>
                             </connections>
@@ -236,11 +242,11 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="SQ3-bc-1En" customClass="GuestListPage" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FWx-O8-qnC">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gXX-n5-gl4">
-                                <rect key="frame" x="20" y="98" width="388" height="764"/>
+                                <rect key="frame" x="20" y="66" width="388" height="776"/>
                                 <color key="backgroundColor" red="1" green="0.98733938759999995" blue="0.86259642759999999" alpha="0.90449959899999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="guestCellIdentifier" editingAccessoryType="disclosureIndicator" rowHeight="129" id="XR7-26-HUC" customClass="GuestListViewCell" customModule="takein_app" customModuleProvider="target">
@@ -272,14 +278,16 @@
                                                         <constraint firstAttribute="width" constant="141" id="gKb-lK-bWX"/>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="Guest Name" titleAlignment="automatic"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Guest Name" titleAlignment="automatic">
+                                                        <color key="baseForegroundColor" red="0.15616673640000001" green="0.66655528630000005" blue="0.64158305110000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </buttonConfiguration>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAt-5s-ZP7">
                                                     <rect key="frame" x="281" y="59" width="90" height="37"/>
-                                                    <color key="backgroundColor" red="0.1671859282" green="0.71100136449999995" blue="0.68016980719999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" name="ButtonColor"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Remove">
-                                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </buttonConfiguration>
                                                 </button>
                                             </subviews>
@@ -421,11 +429,11 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="kSO-on-5d9" customClass="CreateEventPage" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6TG-F4-ebj">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VW0-Ko-aDu">
-                                <rect key="frame" x="0.0" y="122" width="428" height="770"/>
+                                <rect key="frame" x="0.0" y="90" width="428" height="782"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="428" placeholderIntrinsicHeight="1000" translatesAutoresizingMaskIntoConstraints="NO" id="mQM-Jz-VwL">
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="1000"/>
@@ -610,7 +618,7 @@
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tTV-iR-sG4">
                                                         <rect key="frame" x="140.66666666666666" y="852" width="107" height="31"/>
-                                                        <color key="backgroundColor" red="1" green="0.46850165259999998" blue="0.22042700009999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="ButtonColor"/>
                                                         <color key="tintColor" systemColor="labelColor"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Create Event">
@@ -717,7 +725,7 @@
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Login">
-                                    <color key="baseBackgroundColor" red="1" green="0.46850165259999998" blue="0.22042700009999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="baseBackgroundColor" name="ButtonColor"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="xoR-Rg-WB2" eventType="touchUpInside" id="ckJ-Kg-2PN"/>
@@ -771,7 +779,7 @@
             <objects>
                 <viewController id="Dvr-Tq-eop" customClass="ReviewsPage" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cQ0-AU-IwV">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Sow-K7-ZnQ">
@@ -1115,7 +1123,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="vBs-vg-O2w" customClass="SettingsPage" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1mP-4q-NWB">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eu7-x5-Yfb">
@@ -1169,7 +1177,7 @@
             <objects>
                 <viewController storyboardIdentifier="ProfilePage" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zZk-0P-Lr2" customClass="ProfilePage" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="raD-CQ-Fc8">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="squareshape.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ogQ-ya-QnD">
@@ -1177,7 +1185,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="saz-kI-tCh">
-                                <rect key="frame" x="130" y="89.666666666666686" width="180" height="174"/>
+                                <rect key="frame" x="130" y="57.666666666666657" width="180" height="174"/>
                                 <color key="tintColor" systemColor="systemGray5Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="176.66999999999999" id="52L-iD-ZBW"/>
@@ -1185,18 +1193,18 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaC-Lr-qVE">
-                                <rect key="frame" x="104" y="392.33333333333331" width="220" height="31"/>
+                                <rect key="frame" x="104" y="360.33333333333331" width="220" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="My Events">
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="baseBackgroundColor" red="1" green="0.46850165259999998" blue="0.22042700009999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="baseBackgroundColor" name="ButtonColor"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <segue destination="jBp-d7-5Af" kind="show" id="u6f-5m-eiw"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fBe-SC-bec">
-                                <rect key="frame" x="20" y="493" width="388" height="350"/>
+                                <rect key="frame" x="20" y="461" width="388" height="382"/>
                                 <color key="backgroundColor" red="0.90588235294117647" green="0.8784313725490196" blue="0.72156862745098038" alpha="0.90449959899999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" systemColor="secondaryLabelColor"/>
                                 <prototypes>
@@ -1279,13 +1287,13 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Person Name Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="143-ae-7ri">
-                                <rect key="frame" x="122" y="293" width="185" height="27"/>
+                                <rect key="frame" x="122" y="261" width="185" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming Events" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqt-Tr-VhB">
-                                <rect key="frame" x="22" y="453.33333333333331" width="205" height="32.333333333333314"/>
+                                <rect key="frame" x="22" y="421.33333333333331" width="205" height="32.333333333333314"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="205" id="neX-Rp-tPC"/>
                                 </constraints>
@@ -1343,7 +1351,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="YdH-FC-RwB"/>
                     <navigationItem key="navigationItem" id="qiI-Nw-Ax8"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0B7-Yf-09V">
-                        <rect key="frame" x="0.0" y="44" width="428" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1382,7 +1390,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="3hG-9s-kXC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jjt-WD-G2n">
-                        <rect key="frame" x="0.0" y="44" width="428" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1399,11 +1407,11 @@
             <objects>
                 <viewController id="boQ-bt-Och" customClass="EventDetailsViewController" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xwP-3r-Qln">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGK-Pw-QOL">
-                                <rect key="frame" x="0.0" y="88" width="428" height="755"/>
+                                <rect key="frame" x="0.0" y="56" width="428" height="787"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="428" placeholderIntrinsicHeight="995" translatesAutoresizingMaskIntoConstraints="NO" id="msU-xC-c9Y">
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="1041"/>
@@ -1619,7 +1627,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="dek-s6-VrF"/>
-        <segue reference="Kre-UN-tI5"/>
+        <segue reference="zza-ea-NkY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="button" width="108" height="108"/>
@@ -1641,6 +1649,9 @@
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="venue" width="428" height="347"/>
+        <namedColor name="ButtonColor">
+            <color red="1" green="0.46700000762939453" blue="0.2199999988079071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

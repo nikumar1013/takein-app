@@ -24,8 +24,6 @@ class LoginPage: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         loginButton.layer.cornerRadius = 10.0
-        let fetchedResults = retrieveDarkMode()
-        
         loginButton.setTitleColor(UIColor(named: "standardFontColor") , for: .normal)
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         loginButton.backgroundColor = UIColor(named: "ButtonColor")
@@ -53,12 +51,8 @@ class LoginPage: UIViewController, UITextFieldDelegate {
             if error != nil {
                 self.statusLabel.text = "Sign In Failed"
             } else {
-                // currently initalize a darkMode setting preference after signing up (so it only happens once)
-                // we probably want to store darkmode preference in db, so it is associated w/ profile and not phone
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let context = appDelegate.persistentContainer.viewContext
-                let DarkMode = NSEntityDescription.insertNewObject(
-                    forEntityName: "DarkMode", into: context)
                 let curUserName = NSEntityDescription.insertNewObject(forEntityName: "CurrentUser", into: context)
                 let parsedEmail = self.usernameField.text!.split(separator: ".")
                 let emailRef = self.database.reference(withPath: "emails").child(String(parsedEmail[0]))
@@ -71,7 +65,6 @@ class LoginPage: UIViewController, UITextFieldDelegate {
                     curUserName.setValue(usernameVal, forKey: "userName")
                     self.performSegue(withIdentifier: "loginSegue", sender: nil)
                 })
-                DarkMode.setValue(false, forKey: "isDarkMode")
             }
         }
     }
