@@ -1089,7 +1089,7 @@
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Create Account">
-                                    <color key="baseBackgroundColor" red="1" green="0.46850165259999998" blue="0.22042700009999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="baseBackgroundColor" name="ButtonColor"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="createAccountButton:" destination="S8U-Lv-Znb" eventType="touchUpInside" id="vpa-2T-wRs"/>
