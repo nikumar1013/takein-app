@@ -10,7 +10,17 @@ import CryptoKit
 import Firebase
 import CoreData
 
-
+extension UIView {
+    func shake(){
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 3
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 10, y: self.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 10, y: self.center.y))
+        self.layer.add(animation, forKey: "position")
+    }
+}
 
 class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
     
@@ -123,12 +133,17 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                            let curUserName = NSEntityDescription.insertNewObject(forEntityName: "CurrentUser", into: context)
                            
                            curUserName.setValue(userText, forKey: "userName")
+                           print("got in here")
+                           self.performSegue(withIdentifier: "segueIdentifier", sender: nil)
                        } else {
                            print("Signup failed")
+                           print(error)
                        }
                    }
        } else {
               print("Bad password")
+           self.passwordTextField.shake()
+           self.confirmPasswordTextField.shake()
        }
     }
     

@@ -43,7 +43,6 @@ class SettingsPage: UIViewController {
     //Useful function for later
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
     }
     
@@ -59,14 +58,12 @@ class SettingsPage: UIViewController {
             navigationController!.overrideUserInterfaceStyle = .dark
             isLight = false
             print("dark mode activiated")
-
         }
         else
         {
             navigationController!.overrideUserInterfaceStyle = .light
             isLight = true
             print("dark mode deactiviated")
-
         }
     }
     

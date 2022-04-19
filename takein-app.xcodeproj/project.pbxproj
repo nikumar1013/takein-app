@@ -30,6 +30,7 @@
 		EE7A593A27E3DC85007352B0 /* CreateEventPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7A593927E3DC85007352B0 /* CreateEventPage.swift */; };
 		EE90963727E406C6006805E8 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE90963627E406C6006805E8 /* CustomTabBarController.swift */; };
 		EE90963927E40DEE006805E8 /* SuccessLoginSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE90963827E40DEE006805E8 /* SuccessLoginSegue.swift */; };
+		F237AFBD280E38C0001F62E2 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F237AFBC280E38C0001F62E2 /* FilterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		EE7A593927E3DC85007352B0 /* CreateEventPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventPage.swift; sourceTree = "<group>"; };
 		EE90963627E406C6006805E8 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		EE90963827E40DEE006805E8 /* SuccessLoginSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessLoginSegue.swift; sourceTree = "<group>"; };
+		F237AFBC280E38C0001F62E2 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		FC97FD882AF92E9959D50B42 /* Pods-takein-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-takein-app.release.xcconfig"; path = "Target Support Files/Pods-takein-app/Pods-takein-app.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 				EE7A593727E3DC75007352B0 /* GuestListPage.swift */,
 				EE7A593927E3DC85007352B0 /* CreateEventPage.swift */,
 				381F484D27E158540028CF12 /* Main.storyboard */,
+				F237AFBC280E38C0001F62E2 /* FilterViewController.swift */,
 				BAB0DE3027E8114F00C3C114 /* EventDetailsViewController.swift */,
 				EE90963627E406C6006805E8 /* CustomTabBarController.swift */,
 				381F485327E158550028CF12 /* Assets.xcassets */,
@@ -268,6 +271,7 @@
 				381F484827E158540028CF12 /* AppDelegate.swift in Sources */,
 				381F484A27E158540028CF12 /* SceneDelegate.swift in Sources */,
 				381F486127E164FA0028CF12 /* LoginPage.swift in Sources */,
+				F237AFBD280E38C0001F62E2 /* FilterViewController.swift in Sources */,
 				38A3875027E25A980073F56A /* SettingsPage.swift in Sources */,
 				EE7A592C27E3DBFC007352B0 /* ReviewsPage.swift in Sources */,
 				EE7A593027E3DC20007352B0 /* ExplorePage.swift in Sources */,
