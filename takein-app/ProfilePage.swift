@@ -101,7 +101,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
             print("Issue fetching username")
             return
         }
-        if let fetchedUserName = fetchedResults[0].value(forKey: "userName") as? String {
+        if let fetchedUserName = fetchedResults[fetchedResults.count-1].value(forKey: "userName") as? String {
             print("No failure casting result username to string")
             self.userName = fetchedUserName
         }
