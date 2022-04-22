@@ -65,13 +65,13 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         myEvents.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         myEvents.backgroundColor = UIColor(named: "ButtonColor")
-        
+        self.eventList = []
         upcomingEventsTableView.reloadData()
         upcomingEventsTableView.rowHeight = UITableView.automaticDimension
         upcomingEventsTableView.estimatedRowHeight = 600
         upcomingEventsTableView.layer.cornerRadius = 10
         retrieveUserdata()
-        self.upcomingEventsTableView.reloadData()
+        
     }
     
     func retrieveUserdata() {
@@ -123,12 +123,13 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                         appetizers: eventSnapshot.childSnapshot(forPath: "appetizers").value as! String,
                         entrees: eventSnapshot.childSnapshot(forPath: "entrees").value as! String,
                         desserts: eventSnapshot.childSnapshot(forPath: "desserts").value as! String
+                        
                     )
-                   
                     
                     self.eventList.append(curEvent)
                     print("This is the event list count")
                     print(self.eventList.count)
+                    self.upcomingEventsTableView.reloadData()
                     
                 }
 
