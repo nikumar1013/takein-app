@@ -14,26 +14,40 @@ import CryptoKit
 class Event {
     var title: String
     var location: String
-    var date: Date
+//    var date: Date
+    var date: String
     var startTime: String
     var endTime: String
     var totalCapacity: Int
     var seatsLeft: Int
-    var drinks:[String]?
-    var appetizers:[String]?
-    var entrees:[String]?
-    var desserts:[String]?
+    var host: String
+//    var drinks:[String]?
+//    var appetizers:[String]?
+//    var entrees:[String]?
+//    var desserts:[String]?
+    var drinks:String
+    var appetizers:String
+    var entrees:String
+    var desserts:String
     var photoURL: String //??? is this clean
     
-    init(title: String, location: String, date: Date, startTime: String, endTime: String, totalCapacity: Int, photoURL: String) {
+//    init(title: String, location: String, date: String, startTime: String, endTime: String, totalCapacity: Int, photoURL: String, host:String)
+    
+    init(title: String, location: String, date: String, startTime: String, endTime: String, totalCapacity: String, photoURL: String, host:String,drinks:String,appetizers:String, entrees:String, desserts:String) {
         self.title = title
         self.location = location
-        self.date = date
+//        self.date = date
+        self.date = ""
         self.startTime = startTime
         self.endTime = endTime
-        self.totalCapacity = totalCapacity
-        self.seatsLeft = totalCapacity
+        self.totalCapacity = Int(totalCapacity)!
+        self.seatsLeft = Int(totalCapacity)!
         self.photoURL = photoURL
+        self.host = host
+        self.drinks = drinks
+        self.appetizers = appetizers
+        self.entrees = entrees
+        self.desserts = desserts
     }
 }
 
@@ -266,9 +280,9 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
     //                })
     //            })
     //        }
-            //upon success, add to an [] of this user's current event urls or something (would this be to the db)
+            // upon success, add to an [] of this user's current event urls or something (would this be to the db)
             
-            //set notification to get notice an hour before you host the event.
+            // set notification to get notice an hour before you host the event.
             
             let eventTitle = titleField.text!
             
@@ -320,6 +334,25 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
 
             _ = navigationController?.popViewController(animated: true)
         }
+        
+        
+        // create the event in the database
+        let ref = self.database.reference(withPath: "events")
+        // get username remember to ERROR CHECK
+        let username = getUserName()
+        let refChild = ref.child(username!)
+        let eventID =  UUID().uuidString
+        
+        let userNameFields = ["eventID": eventID]
+        refChild.setValue(userNameFields)
+    
+        
+        let refTwo = self.database.reference(withPath: "eventDetails")
+        let eventRefChild = refTwo.child(eventID)
+        let eventFields = ["eventTitle": titleField.text, "location": locationField.text, "date": dateField.text, "startTime": startTimeField.text, "endTime": endTimeField.text, "capacity": capacityField.text, "drinks": drinksField.text,"appetizers": appetizersField.text, "entrees": entreeField.text, "desserts": dessertsField.text,"host": username ]
+        eventRefChild.setValue(eventFields)
+        
+
     }
     
     

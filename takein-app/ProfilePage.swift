@@ -27,6 +27,8 @@ class upcomingEventCell: UITableViewCell {
 }
 
 class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var eventList:[Event] = []
     @IBOutlet weak var myEvents: UIButton!
     private let storage = Storage.storage().reference()
     private let database = Database.database()
@@ -38,6 +40,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     var emailName: String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         myEvents.layer.cornerRadius = 10.0
 
         upcomingEventsTableView.backgroundColor =  UIColor(named: "tableViewColor")
@@ -51,6 +54,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         upcomingEventsTableView.rowHeight = UITableView.automaticDimension
         upcomingEventsTableView.estimatedRowHeight = 600
         upcomingEventsTableView.layer.cornerRadius = 10
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +71,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         upcomingEventsTableView.estimatedRowHeight = 600
         upcomingEventsTableView.layer.cornerRadius = 10
         retrieveUserdata()
+        self.upcomingEventsTableView.reloadData()
     }
     
     func retrieveUserdata() {
@@ -86,12 +91,53 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                 }
             }
         })
-        
         populateEventTable()
     }
     
     func populateEventTable() {
-        let eventRef = self.database.reference(withPath: "events").child("\(self.userName!)")
+        
+        //create a list of event objects     init(title: String, location: String, date: Date, startTime: String, endTime: String, totalCapacity: Int, photoURL: String)
+        print("GOT IN HERE")
+        let eventIDRef = self.database.reference(withPath: "events").child("\(self.userName!)")
+        eventIDRef.observeSingleEvent(of: .value, with: { snapshot in
+            let eventId = snapshot.childSnapshot(forPath: "eventID").value
+            print("THis worked")
+            // now have to create event objects
+            print(eventId)
+            let eventRef = self.database.reference(withPath: "eventDetails").child("\(eventId!)")
+            eventRef.observeSingleEvent(of: .value, with: { eventSnapshot in
+                if eventSnapshot.exists(){
+                    let eventName = eventSnapshot.childSnapshot(forPath: "eventTitle").value
+                    print(eventName)
+                    let curEvent = Event(
+                        title: eventSnapshot.childSnapshot(forPath: "eventTitle").value as! String,
+                        location: eventSnapshot.childSnapshot(forPath: "location").value as! String ,
+//                        date: eventSnapshot.childSnapshot(forPath: "eventTitle").value as! Date,
+                        date: "",
+                        startTime: eventSnapshot.childSnapshot(forPath: "startTime").value as! String,
+                        endTime: eventSnapshot.childSnapshot(forPath: "endTime").value as! String,
+                        totalCapacity: eventSnapshot.childSnapshot(forPath: "capacity").value as! String,
+                        photoURL: "",
+                        host: eventSnapshot.childSnapshot(forPath: "host").value as! String,
+                        drinks: eventSnapshot.childSnapshot(forPath: "drinks").value as! String,
+                        appetizers: eventSnapshot.childSnapshot(forPath: "appetizers").value as! String,
+                        entrees: eventSnapshot.childSnapshot(forPath: "entrees").value as! String,
+                        desserts: eventSnapshot.childSnapshot(forPath: "desserts").value as! String
+                    )
+                   
+                    
+                    self.eventList.append(curEvent)
+                    print("This is the event list count")
+                    print(self.eventList.count)
+                    
+                }
+
+
+            })
+            
+
+        })
+       
     }
     
     func setUserName() {
@@ -108,13 +154,23 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 2
+        print("The event list count is \(eventList.count)")
+        return eventList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingCell", for: indexPath) as! upcomingEventCell
-            // for color scheme
-            cell.contentView.backgroundColor = UIColor(named: "tableViewColor")
+        // for color scheme
+        cell.contentView.backgroundColor = UIColor(named: "tableViewColor")
+        let row = indexPath.row
+        let curEvent = eventList[row]
+        cell.event_name.text = curEvent.title
+        cell.host_name.text = curEvent.host
+        cell.event_description.text = ""
+        cell.event_timing.text = "\(curEvent.startTime) - \(curEvent.endTime)"
+
+//        @IBOutlet weak var event_picture: UIImageView!
             return cell
     }
 }

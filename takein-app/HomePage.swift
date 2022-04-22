@@ -27,6 +27,20 @@ func retrieveUserName() -> [NSManagedObject] {
     return(fetchedResults)!
 }
 
+func getUserName() -> String?{
+    print("in set username")
+    let fetchedResults: [NSManagedObject] = retrieveUserName()
+    if(fetchedResults.count < 1) {
+        print("Issue fetching username")
+        return nil
+    }
+    if let fetchedUserName = fetchedResults[fetchedResults.count-1].value(forKey: "userName") as? String {
+        print("No failure casting result username to string")
+        return fetchedUserName
+    }
+    return nil
+}
+
 
 class HomePage: UIViewController {
 
