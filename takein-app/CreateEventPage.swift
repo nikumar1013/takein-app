@@ -40,8 +40,8 @@ class Event {
         self.date = ""
         self.startTime = startTime
         self.endTime = endTime
-        self.totalCapacity = Int(totalCapacity)!
-        self.seatsLeft = Int(totalCapacity)!
+        self.totalCapacity = 0//Int(totalCapacity)!
+        self.seatsLeft = 0//Int(totalCapacity)!
         self.photoURL = photoURL
         self.host = host
         self.drinks = drinks
@@ -73,6 +73,8 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
     @IBOutlet weak var appetizersField: UITextField!
     @IBOutlet weak var entreeField: UITextField!
     @IBOutlet weak var dessertsField: UITextField!
+    
+    @IBOutlet weak var descriptionField: UITextField!
     
     var imagePicked: Data?
     var necessaryFields: [UITextField] = []
