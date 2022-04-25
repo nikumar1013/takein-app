@@ -9,6 +9,7 @@ import UIKit
 
 // custom cell for the my events page, must contain the event name,timing, guest number and event description attributes.
 class EventsTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var event_name: UILabel!
     @IBOutlet weak var event_timing: UILabel!
     @IBOutlet weak var guest_number: UILabel!
@@ -19,40 +20,33 @@ class EventsTableViewCell: UITableViewCell {
 
 class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    
-    
     @IBOutlet weak var eventTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         eventTableView.delegate = self
         eventTableView.dataSource = self
         eventTableView.layer.cornerRadius=10
         eventTableView.rowHeight = UITableView.automaticDimension
         eventTableView.estimatedRowHeight = 300
-
-        
         eventTableView.backgroundColor =  UIColor(named: "tableViewColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
         eventTableView.backgroundColor =  UIColor(named: "tableViewColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
     }
-    
-    func switchToDarkMode() {}
-    
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
-
         cell.contentView.backgroundColor = UIColor(named: "tableViewColor")
-            return cell
+        return cell
     }
-
+    
 }

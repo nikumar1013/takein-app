@@ -11,7 +11,8 @@ import Firebase
 import CoreData
 
 extension UIView {
-    func shake(){
+    
+    func shake() {
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.07
         animation.repeatCount = 3
@@ -22,7 +23,7 @@ extension UIView {
     }
 }
 
-class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
+class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     private let storage = Storage.storage().reference()
     private let database = Database.database()
@@ -42,16 +43,13 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addProfileButton.layer.cornerRadius = 10.0
-
         
         // gets the keyboard to work correctly
         emailTextField.delegate = self
         userNameField.delegate = self
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
-
         
         startedLabel.textColor = UIColor(named: "standardFontColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
@@ -66,7 +64,6 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     // Called when the user clicks on the view outside of the UITextField
-
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -101,88 +98,71 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     @IBAction func createAccountButton(_ sender: Any) {
-        if(!userNameField.hasText || !emailTextField.hasText ||  !passwordTextField.hasText) {
-            if (!userNameField.hasText){
+        if !userNameField.hasText || !emailTextField.hasText ||  !passwordTextField.hasText {
+            if !userNameField.hasText {
                 userNameField.shake()
-            } else if (!emailTextField.hasText){
+            } else if !emailTextField.hasText {
                 emailTextField.shake()
-            }else {
+            } else {
                 passwordTextField.shake()
             }
-        }else {
+        } else {
             let userText = userNameField.text!
             let passText = passwordTextField.text!
             let emailText = emailTextField.text!
-            if(passwordTextField.text == confirmPasswordTextField.text) {
-                   Auth.auth().createUser(
-                       withEmail: emailTextField.text!,
-                       password: passwordTextField.text!) { user, error in
-                           if error == nil {
-                               Auth.auth().signIn(
-                                   withEmail: userText,
-                                   password: passText)
-                               self.performImageUpload(userText: userText, emailText: emailText)
-                               let ref = self.database.reference(withPath: "users")
-                               let eRef = self.database.reference(withPath: "emails")
-                               let newEmailItem = ["email" : emailText]
-                               let newUserNameItem = ["userName" : userText]
-                               //print(userRef)
-                               let parsedEmail = emailText.split(separator: ".")
-                               let emailRef = eRef.child(String(parsedEmail[0]))
-                               let userRef = ref.child("\(userText)")
-                               userRef.setValue(newEmailItem)
-                               emailRef.setValue(newUserNameItem)
-                               let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                               let context = appDelegate.persistentContainer.viewContext
-                              
-                               let curUserName = NSEntityDescription.insertNewObject(forEntityName: "CurrentUser", into: context)
-                               
-                               curUserName.setValue(userText, forKey: "userName")
-                               print("got in here")
-                               self.performSegue(withIdentifier: "segueIdentifier", sender: nil)
-                           } else {
-                               print("Signup failed")
-                               print(error)
-                           }
-                       }
-           } else {
-                  print("Bad password")
-               self.passwordTextField.shake()
-               self.confirmPasswordTextField.shake()
-           }
+            if passwordTextField.text == confirmPasswordTextField.text {
+                Auth.auth().createUser(
+                    withEmail: emailTextField.text!,
+                    password: passwordTextField.text!) { user, error in
+                        if error == nil {
+                            Auth.auth().signIn(withEmail: userText, password: passText)
+                            self.performImageUpload(userText: userText, emailText: emailText)
+                            let ref = self.database.reference(withPath: "users")
+                            let eRef = self.database.reference(withPath: "emails")
+                            let newEmailItem = ["email" : emailText]
+                            let newUserNameItem = ["userName" : userText]
+                            let parsedEmail = emailText.split(separator: ".")
+                            let emailRef = eRef.child(String(parsedEmail[0]))
+                            let userRef = ref.child("\(userText)")
+                            userRef.setValue(newEmailItem)
+                            emailRef.setValue(newUserNameItem)
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            let context = appDelegate.persistentContainer.viewContext
+                            let curUserName = NSEntityDescription.insertNewObject(forEntityName: "CurrentUser", into: context)
+                            curUserName.setValue(userText, forKey: "userName")
+                            self.performSegue(withIdentifier: "segueIdentifier", sender: nil)
+                        } else {
+                            print(error)
+                        }
+                    }
+            } else {
+                self.passwordTextField.shake()
+                self.confirmPasswordTextField.shake()
+            }
         }
         
-
+        
     }
     
     func performImageUpload(userText:String, emailText: String) {
-        if(self.imagePicked != nil) {
+        if self.imagePicked != nil {
             let hashName = SHA256.hash(data: self.imagePicked!)
             var hashString = hashName.compactMap { String(format: "%02x", $0) }.joined()
             hashString = hashString + "\(Date().hashValue)"
             storage.child("profileImages/\(hashString)").putData(self.imagePicked!, metadata: nil, completion: {_, error in
                 guard error == nil else {
-                    print("Upload failure")
                     return
                 }
-                
                 let ref = self.database.reference(withPath: "pictureIds")
-                //let emailRef = ref.child("\(emailText)")
                 let userRef = ref.child("\(userText)")
                 let pictureNameItem = ["profilePictureId" : "\(hashString)"]
-                //emailRef.setValue(pictureNameItem)
                 userRef.setValue(pictureNameItem)
-                
                 self.storage.child("profileImages/\(hashString)").downloadURL(completion: {_, error in
                     guard error == nil else {
-                        print(" Download URL Failed")
                         return
                     }
-                    print("Download URL Success")
                 })
             })
         }
     }
-        
-    func switchToDarkMode() {}
 }

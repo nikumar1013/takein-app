@@ -9,39 +9,30 @@ import UIKit
 import FirebaseStorage
 import Firebase
 import CryptoKit
-// method to get the correct color based on RBG value
 
 class Event {
     var title: String
     var location: String
-//    var date: Date
     var date: String
     var startTime: String
     var endTime: String
     var totalCapacity: Int
     var seatsLeft: Int
     var host: String
-//    var drinks:[String]?
-//    var appetizers:[String]?
-//    var entrees:[String]?
-//    var desserts:[String]?
     var drinks:String
     var appetizers:String
     var entrees:String
     var desserts:String
-    var photoURL: String //??? is this clean
-    
-//    init(title: String, location: String, date: String, startTime: String, endTime: String, totalCapacity: Int, photoURL: String, host:String)
+    var photoURL: String
     
     init(title: String, location: String, date: String, startTime: String, endTime: String, totalCapacity: String, photoURL: String, host:String,drinks:String,appetizers:String, entrees:String, desserts:String) {
         self.title = title
         self.location = location
-//        self.date = date
         self.date = ""
         self.startTime = startTime
         self.endTime = endTime
-        self.totalCapacity = 0//Int(totalCapacity)!
-        self.seatsLeft = 0//Int(totalCapacity)!
+        self.totalCapacity = 0
+        self.seatsLeft = 0
         self.photoURL = photoURL
         self.host = host
         self.drinks = drinks
@@ -52,12 +43,12 @@ class Event {
 }
 
 class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-
+    
     @IBOutlet weak var createEvent: UIButton!
     @IBOutlet weak var addGalleryPhoto: UIButton!
     @IBOutlet weak var imagePreview: UIImageView!
     
-    //for the choosers in the date/time fields
+    // For selection in the date + time fields
     let datePicker = UIDatePicker()
     let startTimePicker = UIDatePicker()
     let endTimePicker = UIDatePicker()
@@ -73,7 +64,6 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
     @IBOutlet weak var appetizersField: UITextField!
     @IBOutlet weak var entreeField: UITextField!
     @IBOutlet weak var dessertsField: UITextField!
-    
     @IBOutlet weak var descriptionField: UITextField!
     
     var imagePicked: Data?
@@ -84,20 +74,14 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         createEvent.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
         addGalleryPhoto.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
         createEvent.backgroundColor = UIColor(named: "ButtonColor")
-        
         createEvent.layer.cornerRadius = 10.0
-        
-        
         imagePreview.contentMode = .scaleAspectFit
         self.necessaryFields = [titleField, locationField, dateField, startTimeField, endTimeField, capacityField]
         createDatePicker()
-        
         titleField.delegate = self
         locationField.delegate = self
         dateField.delegate = self
@@ -108,9 +92,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         appetizersField.delegate = self
         entreeField.delegate = self
         dessertsField.delegate = self
-        
     }
-    
     
     // Calls when user clicks return on the keyboard
     func textFieldShouldReturn(_ textField:UITextField) -> Bool {
@@ -119,7 +101,6 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
     }
     
     // Called when the user clicks on the view outside of the UITextField
-
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -134,20 +115,22 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         endTimePicker.preferredDatePickerStyle = .wheels
         endTimePicker.datePickerMode = .time
         
-        //create toolbars to select the date and put it into the fields.
-        
+        // Create toolbars to select the date and put it into the fields.
         let toolbarDate = UIToolbar()
         toolbarDate.sizeToFit()
+        
         let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(setDateValue))
         toolbarDate.setItems([done], animated: true)
         
         let toolbarStartTime = UIToolbar()
         toolbarStartTime.sizeToFit()
+        
         let doneStartTime = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(setStartTimeValue))
         toolbarStartTime.setItems([doneStartTime], animated: true)
         
         let toolbarEndTime = UIToolbar()
         toolbarEndTime.sizeToFit()
+        
         let doneEndTime = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(setEndTimeValue))
         toolbarEndTime.setItems([doneEndTime], animated: true)
         
@@ -183,19 +166,15 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         dateFormat.timeStyle = .none
         dateField.text = dateFormat.string(from: datePicker.date)
         self.view.endEditing(true)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-
         createEvent.layer.cornerRadius = 10.0
-        
         createEvent.backgroundColor = UIColor(named: "ButtonColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         createEvent.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
         addGalleryPhoto.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
-
     }
     
     @IBAction func uploadImagePressed(_ sender: Any) {
@@ -228,7 +207,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
     func checkNecessaryFields() -> Bool {
         var errors = false
         for field in necessaryFields {
-            if(!field.hasText) {
+            if !field.hasText {
                 field.layer.borderColor = UIColor.red.cgColor
                 field.layer.borderWidth = 1.0
                 errors = true
@@ -236,7 +215,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
                 field.layer.borderColor = UIColor.white.cgColor
             }
         }
-        if(errors) {
+        if errors {
             let controller = UIAlertController(
                 title: "Missing Details",
                 message: "Please fill in info for the fields outlined in red, as they are necessary.",
@@ -245,55 +224,22 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             present(controller, animated: true, completion: nil)
             return false
         }
+        
         return true
     }
     
     
     @IBAction func createEvent(_ sender: Any) {
-        //error checking
-        if checkNecessaryFields() {
         
-            //pack everything into an object, template code is here, we are still working on the DB structure in storing an event, so it will be ready by the final.
-            
-            //upload to db
-    //        if(self.imagePicked != nil) {
-    //            let hashName = SHA256.hash(data: self.imagePicked!)
-    //            var hashString = hashName.compactMap { String(format: "%02x", $0) }.joined()
-    //            hashString = hashString + "\(Date().hashValue)"
-    //            storage.child("eventImages/\(hashString)").putData(self.imagePicked!, metadata: nil, completion: {_, error in
-    //                guard error == nil else {
-    //                    print("Upload failure")
-    //                    return
-    //                }
-    //
-    //                let ref = self.database.reference(withPath: "pictureIds")
-    //                //let emailRef = ref.child("\(emailText)")
-    //                let userRef = ref.child("\(userText)")
-    //                let pictureNameItem = ["profilePictureId" : "\(hashString)"]
-    //                //emailRef.setValue(pictureNameItem)
-    //                userRef.setValue(pictureNameItem)
-    //
-    //                self.storage.child("profileImages/\(hashString)").downloadURL(completion: {_, error in
-    //                    guard error == nil else {
-    //                        print(" Download URL Failed")
-    //                        return
-    //                    }
-    //                    print("Download URL Success")
-    //                })
-    //            })
-    //        }
-            // upon success, add to an [] of this user's current event urls or something (would this be to the db)
-            
-            // set notification to get notice an hour before you host the event.
-            
+        // Error checking
+        if checkNecessaryFields() {
             let eventTitle = titleField.text!
-            
             let notification = UNMutableNotificationContent()
             notification.title = "Upcoming Hosting Event"
             notification.subtitle = ""
             notification.body = "Your event, \(eventTitle), will begin shortly."
             
-            //parse date, year, month, time, and  from the respective fields
+            // Parse date, year, month, time, and  from the respective fields
             let notificationDate = datePicker.date
             let calendar = Calendar.current
             var components = calendar.dateComponents([.year], from: notificationDate)
@@ -302,16 +248,14 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             let month = components.month
             components = calendar.dateComponents([.day], from: notificationDate)
             let day = components.day
-            
             let notificationTime = startTimePicker.date
-            var timeFormatter = DateFormatter()
+            let timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "H"
             let hour = Int(timeFormatter.string(from: notificationTime))
-            
             timeFormatter.dateFormat = "m"
             let minute = Int(timeFormatter.string(from: notificationTime))
             
-            // set up the notification trigger
+            // Set up the notification trigger
             var notificationDateSetup = DateComponents()
             notificationDateSetup.calendar = Calendar.current
             notificationDateSetup.hour = hour!
@@ -327,36 +271,31 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
                 identifier:  notificationIdentifier,
                 content: notification,
                 trigger: calendarTrigger)
-
-            // submit the request to iOS
+            
+            // Submit the request to iOS
             UNUserNotificationCenter.current().add(request) {
                 (error) in
                 print("Request error: ", error as Any)
             }
-
             _ = navigationController?.popViewController(animated: true)
         }
         
         
-        // create the event in the database
+        // Create the event in the database
         let ref = self.database.reference(withPath: "events")
-        // get username remember to ERROR CHECK
+        
+        // Get username remember to ERROR CHECK
         let username = getUserName()
         let refChild = ref.child(username!)
         let eventID =  UUID().uuidString
         
         let userNameFields = ["eventID": eventID]
         refChild.setValue(userNameFields)
-    
         
         let refTwo = self.database.reference(withPath: "eventDetails")
         let eventRefChild = refTwo.child(eventID)
         let eventFields = ["eventTitle": titleField.text, "location": locationField.text, "date": dateField.text, "startTime": startTimeField.text, "endTime": endTimeField.text, "capacity": capacityField.text, "drinks": drinksField.text,"appetizers": appetizersField.text, "entrees": entreeField.text, "desserts": dessertsField.text,"host": username ]
         eventRefChild.setValue(eventFields)
-        
-
     }
     
-    
-    func switchToDarkMode() {}
 }
