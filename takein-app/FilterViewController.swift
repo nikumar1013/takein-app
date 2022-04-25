@@ -10,10 +10,11 @@ import UIKit
 class FilterViewController: UIViewController {
     @IBOutlet weak var distance: UITextField!
     
-    @IBOutlet weak var setButton: UIButton!
+
+    var delegate: SearchRadiusAdjustment?
     override func viewDidLoad() {
         super.viewDidLoad()
-        setButton.layer.cornerRadius = 10
+       // setButton.layer.cornerRadius = 10
         // Do any additional setup after loading the view.
     }
     
@@ -27,9 +28,13 @@ class FilterViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-
-    @IBAction func setTheDistance(_ sender: Any) {
+    @IBAction func buttonPressed(_ sender: Any) {
+        if(distance.hasText) {
+            let radius = distance.text!
+            let radiusDoubled = Double(radius)
+            delegate!.changeRadius(newRadius: radiusDoubled!)
+        }
+        self.dismiss(animated: false)
     }
     
 }
