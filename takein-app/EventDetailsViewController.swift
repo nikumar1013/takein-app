@@ -8,12 +8,15 @@
 import UIKit
 
 class EventDetailsViewController: UIViewController {
-    
+
+//    @IBOutlet weak var eventTableView: ContentSizedTableView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var descriptionBox: UIStackView!
+    
     @IBOutlet weak var menuBox: UIStackView!
     @IBOutlet weak var menuLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var detailsBox: UIStackView!
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var hostBox: UIView!
@@ -22,9 +25,11 @@ class EventDetailsViewController: UIViewController {
     
     let menu = "Drinks:\n\t• Black Coffee \n\t• Tea\n\t• Juice\nAppetizers:\n\t• Finger Sandwiches\n\t• Butternut Squash Soup\n\t• Pigs in a Blanket\nEntree:\n\nDessert:\n\t• Pumpkin Spice Cheesecake\n\t• Gingersnap Cookies\n\t• Hazelnut Crepes"
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         descriptionLabel.text = eventDescription
+
         descriptionBox.layer.cornerRadius = 25;
         descriptionBox.layer.masksToBounds = true;
         
@@ -41,8 +46,8 @@ class EventDetailsViewController: UIViewController {
         eventTitle.text = "Outdoor Fall Bonfire"
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         
-        // Sets the color mode to what the user settings currently are
-        if isLight == nil {
+        // sets the color mode to what the user settings currently are
+        if isLight == nil{
             if self.traitCollection.userInterfaceStyle == .dark {
                 overrideUserInterfaceStyle = .dark
                 isLight = false
@@ -50,8 +55,8 @@ class EventDetailsViewController: UIViewController {
                 overrideUserInterfaceStyle = .light
                 isLight = true
             }
-        }else {
-            if isLight == true {
+        }else{
+            if (isLight == true) {
                 overrideUserInterfaceStyle = .light
             } else {
                 overrideUserInterfaceStyle = .dark
@@ -62,9 +67,8 @@ class EventDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-        
-        // Sets the switch to what the user settings currently are
-        if isLight == true {
+        // sets the switch to what the user settings currently are
+        if (isLight == true) {
             overrideUserInterfaceStyle = .light
         } else {
             overrideUserInterfaceStyle = .dark
@@ -81,4 +85,7 @@ class EventDetailsViewController: UIViewController {
         present(controller, animated: true, completion: nil)
     }
     
+    
+
+
 }

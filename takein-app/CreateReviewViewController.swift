@@ -8,7 +8,7 @@
 import UIKit
 
 class CreateReviewViewController: UIViewController {
-    
+
     @IBOutlet weak var oneStar: UIButton!
     @IBOutlet weak var twoStar: UIButton!
     @IBOutlet weak var threeStar: UIButton!
@@ -29,6 +29,8 @@ class CreateReviewViewController: UIViewController {
         self.submitButton.setTitleColor(UIColor(named: "standardFontColor"), for: .normal)
         self.submitButton.backgroundColor = UIColor(named: "ButtonColor")
         self.submitButton.layer.cornerRadius = 10.0
+//        self.textDescriptionBox.layer.placeholder =
+        // Do any additional setup after loading the view.
     }
     
     @IBAction func oneHIt(_ sender: Any) {
@@ -53,12 +55,10 @@ class CreateReviewViewController: UIViewController {
     
     func updateStars(numberFilled: Int) {
         self.starsChosen = numberFilled
-        
         for i in 0 ... numberFilled - 1 {
             star[i].setImage(UIImage(systemName: "star.fill"), for: .normal)
         }
-        
-        if numberFilled < 5 {
+        if(numberFilled < 5) {
             for i in numberFilled ... 4 {
                 star[i].setImage(UIImage(systemName: "star"), for: .normal)
             }
@@ -66,7 +66,7 @@ class CreateReviewViewController: UIViewController {
     }
     
     @IBAction func submitReview(_ sender: Any) {
-        if self.starsChosen == 0 {
+        if(self.starsChosen == 0) {
             let controller = UIAlertController(
                 title: "Missing Details",
                 message: "Please select a star rating",
@@ -75,5 +75,14 @@ class CreateReviewViewController: UIViewController {
             present(controller, animated: true, completion: nil)
         }
     }
-    
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }

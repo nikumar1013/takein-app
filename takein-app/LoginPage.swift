@@ -10,6 +10,7 @@ import Firebase
 import CoreData
 
 class LoginPage: UIViewController, UITextFieldDelegate {
+
     
     private let storage = Storage.storage().reference()
     private let database = Database.database()
@@ -26,6 +27,7 @@ class LoginPage: UIViewController, UITextFieldDelegate {
         loginButton.setTitleColor(UIColor(named: "standardFontColor") , for: .normal)
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         loginButton.backgroundColor = UIColor(named: "ButtonColor")
+        
         usernameField.delegate = self
         passwordField.delegate = self
     }
@@ -37,21 +39,23 @@ class LoginPage: UIViewController, UITextFieldDelegate {
     }
     
     // Called when the user clicks on the view outside of the UITextField
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         Auth.auth().signIn(withEmail: usernameField.text!, password: passwordField.text!) {
             authResult, error in
             if error != nil {
-                if !self.usernameField.hasText || !self.passwordField.hasText {
-                    if !self.usernameField.hasText {
+                if(!self.usernameField.hasText || !self.passwordField.hasText) {
+                    if (!self.usernameField.hasText){
                         self.usernameField.shake()
                     } else {
                         self.passwordField.shake()
                     }
-                } else {
+                }else{
                     self.usernameField.shake()
                     self.passwordField.shake()
                 }
@@ -63,8 +67,8 @@ class LoginPage: UIViewController, UITextFieldDelegate {
                 let parsedEmail = self.usernameField.text!.split(separator: ".")
                 let emailRef = self.database.reference(withPath: "emails").child(String(parsedEmail[0]))
                 var usernameVal:String = ""
-                
-                // Reads the value of the username associated with the email used to sign in, stores that in coredata and then performs the segue
+                //reads the value of the username associated with the email used to sign in, stores that in coredata
+                //and then performs the segue
                 emailRef.observeSingleEvent(of: .value, with: { snapshot in
                     let tempUserName = snapshot.childSnapshot(forPath: "userName").value
                     usernameVal = tempUserName as! String
@@ -74,4 +78,6 @@ class LoginPage: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    func switchToDarkMode() {}
 }

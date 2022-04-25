@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 
+
 var isLight: Bool?
 
 class SettingsPage: UIViewController {
