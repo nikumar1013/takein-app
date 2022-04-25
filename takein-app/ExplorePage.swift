@@ -210,6 +210,11 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
             }
             curEvent.lat = loc.coordinate.latitude
             curEvent.long = loc.coordinate.longitude
+            if let userLocation = self.locationManager?.location?.coordinate {
+                var dist = self.distance(lat1: userLocation.latitude, long1: userLocation.longitude, lat2: curEvent.lat!, long2: curEvent.long!)
+                curEvent.location = "\(dict["location"] as! String) (\(Int(dist!)) meters away)"
+            }
+            
             if(curEvent.long != nil && curEvent.lat != nil) {
                 self.eventList.append(curEvent)
                 print("This is the event list count")
