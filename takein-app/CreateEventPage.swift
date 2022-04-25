@@ -15,7 +15,7 @@ class Event {
     var title: String
     var location: String
 //    var date: Date
-    var date: String
+    var date: Date
     var startTime: String
     var endTime: String
     var totalCapacity: Int
@@ -33,11 +33,11 @@ class Event {
     
 //    init(title: String, location: String, date: String, startTime: String, endTime: String, totalCapacity: Int, photoURL: String, host:String)
     
-    init(title: String, location: String, date: String, startTime: String, endTime: String, totalCapacity: String, photoURL: String, host:String,drinks:String,appetizers:String, entrees:String, desserts:String) {
+    init(title: String, location: String, date: Date, startTime: String, endTime: String, totalCapacity: String, photoURL: String, host:String,drinks:String,appetizers:String, entrees:String, desserts:String) {
         self.title = title
         self.location = location
 //        self.date = date
-        self.date = ""
+        self.date = date
         self.startTime = startTime
         self.endTime = endTime
         self.totalCapacity = 0//Int(totalCapacity)!
@@ -179,7 +179,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     @objc func setDateValue() {
         let dateFormat = DateFormatter()
-        dateFormat.dateStyle = .medium
+        dateFormat.dateStyle = .short
         dateFormat.timeStyle = .none
         dateField.text = dateFormat.string(from: datePicker.date)
         self.view.endEditing(true)
@@ -246,6 +246,38 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             return false
         }
         return true
+    }
+    
+    func createPicture(userText:String) -> String? {
+        var hashString: String?
+
+        if (self.imagePicked != nil) {
+            let hashName = SHA256.hash(data: self.imagePicked!)
+            hashString = hashName.compactMap { String(format: "%02x", $0) }.joined() + "\(Date().hashValue)"
+            storage.child("eventImages/\(hashString!)").putData(self.imagePicked!, metadata: nil, completion: {_, error in
+                guard error == nil else {
+                    print("Upload failure")
+                    return
+                }
+                
+//                let ref = self.database.reference(withPath: "pictureIds")
+//                //let emailRef = ref.child("\(emailText)")
+//                let userRef = ref.child("\(userText)")
+//                let pictureNameItem = ["profilePictureId" : "\(hashString)"]
+//                //emailRef.setValue(pictureNameItem)
+//                userRef.setValue(pictureNameItem)
+                
+                self.storage.child("eventImages/\(hashString!)").downloadURL(completion: {_, error in
+                    guard error == nil else {
+                        print(" Download URL Failed")
+                        return
+                    }
+                    print("Download URL Success")
+                })
+            })
+        }
+        
+        return hashString
     }
     
     
@@ -339,20 +371,39 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         
         
         // create the event in the database
+        
+        
         let ref = self.database.reference(withPath: "events")
         // get username remember to ERROR CHECK
         let username = getUserName()
+        let pictureURL = createPicture(userText: username!)
         let refChild = ref.child(username!)
         let eventID =  UUID().uuidString
+        var eventList = ""
+        let eventIDRef = self.database.reference(withPath: "events").child("\(username!)")
+        eventIDRef.observeSingleEvent(of: .value, with: { snapshot in
+            if snapshot.exists() {
+                eventList = snapshot.childSnapshot(forPath: "eventID").value as! String
+                print("\n\n fetching previous events")
+                print(eventList)
+                print("this is the event list currently")
+                let events =  eventList + eventID + ","
+                print(events)
+            }
+            
+            let userNameFields = ["eventID": eventList + eventID + ","]
+            refChild.setValue(userNameFields)
         
-        let userNameFields = ["eventID": eventID]
-        refChild.setValue(userNameFields)
-    
-        
-        let refTwo = self.database.reference(withPath: "eventDetails")
-        let eventRefChild = refTwo.child(eventID)
-        let eventFields = ["eventTitle": titleField.text, "location": locationField.text, "date": dateField.text, "startTime": startTimeField.text, "endTime": endTimeField.text, "capacity": capacityField.text, "drinks": drinksField.text,"appetizers": appetizersField.text, "entrees": entreeField.text, "desserts": dessertsField.text,"host": username ]
-        eventRefChild.setValue(eventFields)
+            
+            //retrieve exisiting data and update array
+
+            
+            let refTwo = self.database.reference(withPath: "eventDetails")
+            let eventRefChild = refTwo.child(eventID)
+            let eventFields = ["eventTitle": self.titleField.text, "location": self.locationField.text, "date": self.dateField.text, "startTime": self.startTimeField.text, "endTime": self.endTimeField.text, "capacity": self.capacityField.text, "drinks": self.drinksField.text,"appetizers": self.appetizersField.text, "entrees": self.entreeField.text, "desserts": self.dessertsField.text, "host": username, "pictureURL": pictureURL]
+            eventRefChild.setValue(eventFields)
+        })
+
         
 
     }

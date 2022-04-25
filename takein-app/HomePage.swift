@@ -27,7 +27,7 @@ func retrieveUserName() -> [NSManagedObject] {
     return(fetchedResults)!
 }
 
-func getUserName() -> String?{
+func getUserName() -> String? {
     print("in set username")
     let fetchedResults: [NSManagedObject] = retrieveUserName()
     if(fetchedResults.count < 1) {
