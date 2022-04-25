@@ -1013,7 +1013,19 @@
                         <viewLayoutGuide key="safeArea" id="AU1-HT-MVD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="cvm-iK-eVm"/>
+                    <navigationItem key="navigationItem" id="cvm-iK-eVm">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="khO-l7-fLz">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="mln-1a-fVF">
+                                <rect key="frame" x="341" y="12.666666666666664" width="67" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="+"/>
+                                <connections>
+                                    <segue destination="9KW-Jn-EpJ" kind="show" id="htJ-rv-E2g"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="reviewsTableView" destination="hdt-pB-Wyx" id="biX-GF-AL2"/>
                     </connections>
@@ -1621,6 +1633,9 @@
                                                         <rect key="frame" x="146" y="10.666666666666629" width="96" height="31"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Host Name"/>
+                                                        <connections>
+                                                            <segue destination="Dvr-Tq-eop" kind="show" id="AvO-kK-W0f"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1722,10 +1737,135 @@
             </objects>
             <point key="canvasLocation" x="6406.5420560747662" y="970.62634989200876"/>
         </scene>
+        <!--Create Review View Controller-->
+        <scene sceneID="cqz-QE-gfx">
+            <objects>
+                <viewController id="9KW-Jn-EpJ" customClass="CreateReviewViewController" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="icA-Ne-bji">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="r11-Wb-S76">
+                                <rect key="frame" x="20" y="167" width="387" height="30.666666666666657"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHb-Sg-Pxy">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="30.666666666666668"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
+                                        <connections>
+                                            <action selector="oneHIt:" destination="9KW-Jn-EpJ" eventType="touchUpInside" id="HIQ-6o-zha"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ERx-wO-vLL">
+                                        <rect key="frame" x="78" y="0.0" width="75" height="30.666666666666668"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
+                                        <connections>
+                                            <action selector="twoClicked:" destination="9KW-Jn-EpJ" eventType="touchUpInside" id="OV1-mP-fj6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1q7-aC-Z1f">
+                                        <rect key="frame" x="156" y="0.0" width="75" height="30.666666666666668"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
+                                        <connections>
+                                            <action selector="threeClicked:" destination="9KW-Jn-EpJ" eventType="touchUpInside" id="fHs-Po-Ad7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLA-Tj-0AB">
+                                        <rect key="frame" x="234" y="0.0" width="75" height="30.666666666666668"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
+                                        <connections>
+                                            <action selector="fourClicked:" destination="9KW-Jn-EpJ" eventType="touchUpInside" id="waH-SR-cQT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKq-9L-ctZ">
+                                        <rect key="frame" x="312" y="0.0" width="75" height="30.666666666666668"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
+                                        <connections>
+                                            <action selector="fiveClicked:" destination="9KW-Jn-EpJ" eventType="touchUpInside" id="R30-9d-iSd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ah6-R4-4dJ">
+                                <rect key="frame" x="20" y="319" width="388" height="120"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8Z-rm-AiN">
+                                <rect key="frame" x="19" y="294" width="388" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" red="0.1671859282" green="0.71100136449999995" blue="0.68016980719999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Star Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-CJ-5pP">
+                                <rect key="frame" x="20" y="142" width="388" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" red="0.1671859282" green="0.71100136449999995" blue="0.68016980719999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQ3-PT-7tm">
+                                <rect key="frame" x="148" y="675" width="132" height="31"/>
+                                <color key="backgroundColor" name="ButtonColor"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Create Review">
+                                    <color key="baseForegroundColor" red="1" green="0.98733938759999995" blue="0.86259642759999999" alpha="0.90449959899999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="createEvent:" destination="kSO-on-5d9" eventType="touchUpInside" id="2pA-sV-oAd"/>
+                                    <action selector="submitReview:" destination="9KW-Jn-EpJ" eventType="touchUpInside" id="Ttu-t4-QLT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="YHu-V8-zBu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ah6-R4-4dJ" firstAttribute="top" secondItem="i8Z-rm-AiN" secondAttribute="bottom" constant="8" symbolic="YES" id="26M-tm-1wF"/>
+                            <constraint firstItem="5wb-CJ-5pP" firstAttribute="leading" secondItem="YHu-V8-zBu" secondAttribute="leading" constant="20" id="5eo-bj-IeM"/>
+                            <constraint firstItem="YHu-V8-zBu" firstAttribute="trailing" secondItem="r11-Wb-S76" secondAttribute="trailing" constant="21" id="5lg-YV-hcO"/>
+                            <constraint firstItem="Ah6-R4-4dJ" firstAttribute="top" secondItem="YHu-V8-zBu" secondAttribute="top" constant="263" id="9ss-HA-Isb"/>
+                            <constraint firstItem="r11-Wb-S76" firstAttribute="leading" secondItem="YHu-V8-zBu" secondAttribute="leading" constant="20" id="CgX-5q-56q"/>
+                            <constraint firstItem="r11-Wb-S76" firstAttribute="top" secondItem="YHu-V8-zBu" secondAttribute="top" constant="111" id="HoY-Nk-f1z"/>
+                            <constraint firstItem="i8Z-rm-AiN" firstAttribute="top" secondItem="r11-Wb-S76" secondAttribute="bottom" constant="96.329999999999998" id="PbU-Oh-ivX"/>
+                            <constraint firstItem="hQ3-PT-7tm" firstAttribute="top" secondItem="Ah6-R4-4dJ" secondAttribute="bottom" constant="236" id="a0j-Fj-z16"/>
+                            <constraint firstItem="YHu-V8-zBu" firstAttribute="trailing" secondItem="5wb-CJ-5pP" secondAttribute="trailing" constant="20" id="axf-lq-A5Z"/>
+                            <constraint firstItem="YHu-V8-zBu" firstAttribute="trailing" secondItem="i8Z-rm-AiN" secondAttribute="trailing" constant="21" id="beK-YU-nJr"/>
+                            <constraint firstItem="r11-Wb-S76" firstAttribute="top" secondItem="5wb-CJ-5pP" secondAttribute="bottom" constant="8" id="dQZ-1Q-pxU"/>
+                            <constraint firstItem="hQ3-PT-7tm" firstAttribute="centerX" secondItem="icA-Ne-bji" secondAttribute="centerX" id="fJa-eA-KhC"/>
+                            <constraint firstItem="YHu-V8-zBu" firstAttribute="trailing" secondItem="Ah6-R4-4dJ" secondAttribute="trailing" constant="20" id="fNG-lL-r36"/>
+                            <constraint firstItem="YHu-V8-zBu" firstAttribute="bottom" secondItem="hQ3-PT-7tm" secondAttribute="bottom" constant="137" id="g75-4o-d4K"/>
+                            <constraint firstItem="r11-Wb-S76" firstAttribute="centerX" secondItem="icA-Ne-bji" secondAttribute="centerX" id="jpR-ew-cZ2"/>
+                            <constraint firstItem="5wb-CJ-5pP" firstAttribute="top" secondItem="YHu-V8-zBu" secondAttribute="top" constant="86" id="kKH-Q1-8LJ"/>
+                            <constraint firstItem="i8Z-rm-AiN" firstAttribute="leading" secondItem="YHu-V8-zBu" secondAttribute="leading" constant="19" id="mC3-La-LXA"/>
+                            <constraint firstItem="Ah6-R4-4dJ" firstAttribute="leading" secondItem="YHu-V8-zBu" secondAttribute="leading" constant="20" id="pMa-Df-lbh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="FDO-As-CLV"/>
+                    <connections>
+                        <outlet property="fiveStar" destination="XKq-9L-ctZ" id="bAj-2Y-oeO"/>
+                        <outlet property="fourStar" destination="lLA-Tj-0AB" id="0pQ-qA-l9V"/>
+                        <outlet property="oneStar" destination="VHb-Sg-Pxy" id="Fqy-IA-C6r"/>
+                        <outlet property="submitButton" destination="hQ3-PT-7tm" id="tQU-QN-lb0"/>
+                        <outlet property="textDescriptionBox" destination="Ah6-R4-4dJ" id="xqs-2e-GxH"/>
+                        <outlet property="threeStar" destination="1q7-aC-Z1f" id="Vn0-S2-vav"/>
+                        <outlet property="twoStar" destination="ERx-wO-vLL" id="hN7-jf-DQh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UeK-HE-vy3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3748.5981308411215" y="2580.7775377969765"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="FRC-FJ-dGB"/>
         <segue reference="zza-ea-NkY"/>
+        <segue reference="k7c-LL-7Wz"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="button" width="108" height="108"/>

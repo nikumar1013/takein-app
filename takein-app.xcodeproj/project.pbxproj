@@ -18,6 +18,7 @@
 		381F486127E164FA0028CF12 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381F486027E164FA0028CF12 /* LoginPage.swift */; };
 		38A3875027E25A980073F56A /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A3874F27E25A980073F56A /* SettingsPage.swift */; };
 		51F6E7A03A179EF4A90F5EB9 /* Pods_takein_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 622372046F73FBE793B1B8C4 /* Pods_takein_app.framework */; };
+		BA6FFDA528160671003F2A77 /* CreateReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6FFDA428160671003F2A77 /* CreateReviewViewController.swift */; };
 		BAB0DE3127E8114F00C3C114 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB0DE3027E8114F00C3C114 /* EventDetailsViewController.swift */; };
 		EE664A2727FA5A9F00C026AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE664A2627FA5A9F00C026AC /* GoogleService-Info.plist */; };
 		EE664A2927FA621F00C026AC /* customRatingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE664A2827FA621F00C026AC /* customRatingImage.swift */; };
@@ -48,6 +49,7 @@
 		38A3874F27E25A980073F56A /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		52A94893505D484A935BDE84 /* Pods-takein-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-takein-app.debug.xcconfig"; path = "Target Support Files/Pods-takein-app/Pods-takein-app.debug.xcconfig"; sourceTree = "<group>"; };
 		622372046F73FBE793B1B8C4 /* Pods_takein_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_takein_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA6FFDA428160671003F2A77 /* CreateReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewViewController.swift; sourceTree = "<group>"; };
 		BAB0DE3027E8114F00C3C114 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		EE664A2627FA5A9F00C026AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE664A2827FA621F00C026AC /* customRatingImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customRatingImage.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				EE7A593727E3DC75007352B0 /* GuestListPage.swift */,
 				EE7A593927E3DC85007352B0 /* CreateEventPage.swift */,
 				381F484D27E158540028CF12 /* Main.storyboard */,
+				BA6FFDA428160671003F2A77 /* CreateReviewViewController.swift */,
 				F237AFBC280E38C0001F62E2 /* FilterViewController.swift */,
 				BAB0DE3027E8114F00C3C114 /* EventDetailsViewController.swift */,
 				EE90963627E406C6006805E8 /* CustomTabBarController.swift */,
@@ -266,6 +269,7 @@
 				BAB0DE3127E8114F00C3C114 /* EventDetailsViewController.swift in Sources */,
 				381F484C27E158540028CF12 /* HomePage.swift in Sources */,
 				381F485F27E1625A0028CF12 /* SignUpPage.swift in Sources */,
+				BA6FFDA528160671003F2A77 /* CreateReviewViewController.swift in Sources */,
 				EE90963927E40DEE006805E8 /* SuccessLoginSegue.swift in Sources */,
 				EE664A2927FA621F00C026AC /* customRatingImage.swift in Sources */,
 				381F484827E158540028CF12 /* AppDelegate.swift in Sources */,
