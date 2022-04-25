@@ -61,6 +61,7 @@ class LoginPage: UIViewController, UITextFieldDelegate {
                 }
                 self.statusLabel.text = "Sign In Failed"
             } else {
+                print("all good")
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let context = appDelegate.persistentContainer.viewContext
                 let curUserName = NSEntityDescription.insertNewObject(forEntityName: "CurrentUser", into: context)

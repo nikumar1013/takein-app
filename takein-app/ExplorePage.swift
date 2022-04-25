@@ -8,6 +8,8 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FirebaseStorage
+import Firebase
 
 class ExploreViewCell: UITableViewCell {
     @IBOutlet weak var event_name: UILabel!
@@ -22,11 +24,28 @@ protocol SearchRadiusAdjustment {
     func changeRadius(newRadius: Double)
 }
 
+class EventPin : NSObject, MKAnnotation {
+    var subtitle: String?
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+
+    init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String) {
+        self.coordinate = coordinate
+        self.title = title
+        self.subtitle = subtitle
+    }
+}
+
 class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate , MKMapViewDelegate, CLLocationManagerDelegate, SearchRadiusAdjustment {
     @IBOutlet weak var eventTable: UITableView!
     @IBOutlet weak var explorePageMap: MKMapView!
+    var eventList:[Event] = []
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     var currentRadius = 3_000.0
     var locationManager: CLLocationManager?
+    private let storage = Storage.storage().reference()
+    private let database = Database.database()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,7 +120,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
   
     } */
     
-    func setMapRegion(radius: Double) {
+    func setMapInfo(radius: Double) {
 //        explorePageMap.delegate = self
 //        explorePageMap.showsUserLocation = true
        /* let userLocation = explorePageMap.userLocation
@@ -118,6 +137,102 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         
         // commit the region
         explorePageMap.setRegion(region, animated: true) */
+        if let userLocation = self.locationManager?.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: currentRadius, longitudinalMeters: currentRadius)
+            explorePageMap.setRegion(viewRegion, animated: false)
+        }
+    }
+    
+    func populateEventTable() {
+        
+        //create a list of event objects     init(title: String, location: String, date: Date, startTime: String, endTime: String, totalCapacity: Int, photoURL: String)
+        print("GOT IN HERE")
+        self.eventList.removeAll()
+        let eventDetailsRef = self.database.reference(withPath: "eventDetails")
+        eventDetailsRef.observeSingleEvent(of: .value) { snapshot in
+            for case let child as DataSnapshot in snapshot.children {
+                guard let dict = child.value as? [String:Any] else {
+                    print("Error")
+                    return
+                }
+                let latitude = dict["location"] as Any
+                let longtitude = dict["entrees"] as Any
+                print(longtitude)
+                print(latitude)
+                self.parseEventData(dict: dict)
+            }
+        }
+        self.eventList.sort(by: sortEventsByDistance)
+        self.eventTable.reloadData()
+    }
+    
+    func sortEventsByDistance(eventOne: Event, eventTwo: Event) -> Bool {
+        if let userLocation = self.locationManager?.location?.coordinate {
+            guard
+                let distOne: Double = self.distance(lat1: userLocation.latitude, long1: userLocation.longitude, lat2: eventOne.lat!, long2: eventOne.long!),
+                let  distTwo: Double = self.distance(lat1: userLocation.latitude, long1: userLocation.longitude, lat2: eventTwo.lat!, long2: eventTwo.long!)
+            else {
+                return false
+            }
+            print("In sorter")
+            return distOne < distTwo
+        } else {
+            return false;
+        }
+    }
+    
+    func parseEventData(dict: [String:Any]) {
+        let eventName = dict["eventTitle"]
+        print(eventName)
+        let curEvent = Event(
+            title: dict["eventTitle"] as! String,
+            location: dict["location"] as! String ,
+            date: self.convertStringToDate(dateString: dict["date"] as! String),
+            startTime: dict["startTime"] as! String,
+            endTime: dict["endTime"] as! String,
+            totalCapacity: dict["capacity"] as! String,
+            photoURL: dict["pictureURL"] as! String,
+            host: dict["host"] as! String,
+            drinks: dict["drinks"] as! String,
+            appetizers: dict["appetizers"] as! String,
+            entrees: dict["entrees"] as! String,
+            desserts: dict["desserts"] as! String
+            
+        )
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(dict["location"] as! String) { (placemarks, error) in
+            guard
+                let placemarks = placemarks,
+                let loc = placemarks.first?.location
+            else {
+                print(error!)
+                return
+            }
+            curEvent.lat = loc.coordinate.latitude
+            curEvent.long = loc.coordinate.longitude
+            if(curEvent.long != nil && curEvent.lat != nil) {
+                self.eventList.append(curEvent)
+                print("This is the event list count")
+                print(self.eventList.count)
+            } else {
+                print("Lat or long of event \(eventName!) was nil")
+                return
+            }
+            let newPinLocation = CLLocationCoordinate2DMake(curEvent.lat!, curEvent.long!)
+            let newPin: EventPin = EventPin(coordinate: newPinLocation, title: curEvent.title, subtitle: curEvent.location)
+            self.explorePageMap.addAnnotation(newPin)
+            self.eventList.sort(by: self.sortEventsByDistance)
+            self.eventTable.reloadData()
+        }
+    }
+            
+    func convertStringToDate(dateString: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yy"
+        let date = dateFormatter.date(from: dateString)
+        print("HERE IS THE DATEEEEEEEEEEEEEEE\n\n")
+        print(date ?? "")
+        return date!
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,6 +244,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         }
         eventTable.backgroundColor =  UIColor(named: "tableViewColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+        populateEventTable()
        // explorePageMap.showsUserLocation = true
        // manager.startUpdatingLocation()
     }
@@ -140,8 +256,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
             explorePageMap.setRegion(viewRegion, animated: false)
         }
     }
-    
-    @IBOutlet weak var searchBar: UISearchBar!
+
     
     @IBAction func filterButtonPressed(_ sender: Any) {
         let controller = UIAlertController(
@@ -153,19 +268,107 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         present(controller, animated: true, completion: nil)
     }
     
-    func switchToDarkMode() {}
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        print("AHAHAHAHAHAHAHAH \(searchText)")
+    }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            print("cancel culture")
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if(searchBar.text == "") {
+            print("In this one for nil")
+            populateEventTable()
+            return
+        } else {
+            let filteredAnnotations = self.explorePageMap.annotations.filter { annotation in
+                if annotation is MKUserLocation { return false }          // don't remove MKUserLocation
+                guard let title = annotation.title else { return false }  // don't remove annotations without any title
+                return !title!.contains(searchBar.text!)
+                // remove those whose title does not match search string
+            }
+            self.explorePageMap.removeAnnotations(filteredAnnotations)
+            self.eventList = self.eventList.filter { event in
+                return event.title.contains(searchBar.text!)
+            }
+            
+            self.eventTable.reloadData()
+        }
+    }
+    
+    // Calls when user clicks return on the keyboard
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.resignFirstResponder()
+        return true
+    }
+    
+    // Called when the user clicks on the view outside of the UITextField
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 2
+        print("The event list count is \(eventList.count)")
+        return eventList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "exploreCell", for: indexPath) as! ExploreViewCell
-         cell.contentView.backgroundColor = UIColor(named: "tableViewColor")
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingCell", for: indexPath) as! upcomingEventCell
+        // for color scheme
+        cell.contentView.backgroundColor = UIColor(named: "tableViewColor")
+        let row = indexPath.row
+        let curEvent = eventList[row]
+        print("HERE IS THE EVENT IMAGES REFERENCE")
+        print(curEvent.photoURL)
+        print("GGGGGGGGG")
+        let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
+        folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
+            if(error != nil) {
+                print(error)
+                print("FAILURE")
+            } else {
+                let eventPic: UIImage = UIImage(data: data!)!
+                cell.event_picture.image = eventPic
+            }
+        }
+        
+        cell.event_name.text = curEvent.title
+        cell.host_name.text = curEvent.host
+        cell.event_description.text = ""
+        cell.event_timing.text = "\(curEvent.startTime) - \(curEvent.endTime)"
+        return cell
+    }
+    
+    func distance(lat1: Double, long1: Double, lat2: Double, long2: Double) -> Double? {
+        let radLat1 = toRadians(loc: lat1)
+        let radLong1 = toRadians(loc: long1)
+        let radLat2 = toRadians(loc: lat2)
+        let radLong2 = toRadians(loc: long2)
+        let dlong: Double = radLong2 - radLong1
+        let dlat: Double = radLat2 - radLat1
+        
+        //distance formula, lookup haversine formula
+        let calc: Double = pow(sin(dlat / 2), 2) + cos(lat1) * cos(lat2) * pow(sin(dlong / 2), 2)
+        var answer: Double = 2 * asin(sqrt(calc))
+        
+        //6371 is the radius of the earth in KM
+        answer = answer * 6371
+        
+        //convert from KM to M
+        answer = answer * 1000
+        return answer
+    }
+    
+    func toRadians(loc: Double) -> Double {
+        let ratio: Double = Double.pi / 180.0
+        return (ratio * loc)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

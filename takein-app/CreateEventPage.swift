@@ -9,6 +9,7 @@ import UIKit
 import FirebaseStorage
 import Firebase
 import CryptoKit
+import CoreLocation
 // method to get the correct color based on RBG value
 
 class Event {
@@ -29,7 +30,9 @@ class Event {
     var appetizers:String
     var entrees:String
     var desserts:String
-    var photoURL: String //??? is this clean
+    var photoURL: String
+    var lat: Double?
+    var long: Double?
     
 //    init(title: String, location: String, date: String, startTime: String, endTime: String, totalCapacity: Int, photoURL: String, host:String)
     
@@ -48,6 +51,7 @@ class Event {
         self.appetizers = appetizers
         self.entrees = entrees
         self.desserts = desserts
+        print("Entering init")
     }
 }
 
@@ -245,7 +249,27 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             present(controller, animated: true, completion: nil)
             return false
         }
-        return true
+        
+        var locationFormatError = false
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(locationField.text!) { (placemarks, error) in
+            guard
+                let placemarks = placemarks,
+                let location = placemarks.first?.location
+            else {
+                // handle no location found
+                let controller = UIAlertController(
+                    title: "Invalid Location",
+                    message: "Please ensure that the location is a complete address in the correct format",
+                    preferredStyle: .alert)
+                controller.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(controller, animated: true, completion: nil)
+                locationFormatError = true
+                return
+            }
+        }
+            // Use your location
+        return !locationFormatError
     }
     
     func createPicture(userText:String) -> String? {
