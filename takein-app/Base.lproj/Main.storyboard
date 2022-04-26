@@ -208,11 +208,11 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="0.97293174719999997" blue="0.84717030179999997" alpha="0.90449959899999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
+                                            <outlet property="eventPicture" destination="NhF-Rn-jSy" id="71s-AF-0SM"/>
                                             <outlet property="event_description" destination="CS2-iw-xIO" id="s4Y-bs-oaH"/>
                                             <outlet property="event_name" destination="EJN-FK-b0t" id="JKr-ew-NbJ"/>
                                             <outlet property="event_timing" destination="Mfg-k1-Hwl" id="cla-R0-1WI"/>
                                             <outlet property="guest_number" destination="Vzl-Wa-y6J" id="gxp-6P-ulx"/>
-                                            <segue destination="boQ-bt-Och" kind="show" id="dek-s6-VrF"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -231,6 +231,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="eventTableView" destination="pPn-oY-qgA" id="ULN-SW-rf3"/>
+                        <segue destination="boQ-bt-Och" kind="show" identifier="getEventDetails" id="bPH-Dq-G2j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLy-kZ-Pqa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1307,7 +1308,7 @@
                                                         <constraint firstAttribute="height" constant="102" id="xml-M2-42w"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gfb-be-AC8">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gfb-be-AC8">
                                                     <rect key="frame" x="128" y="16" width="220" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="7fz-vh-hKm"/>
@@ -1366,7 +1367,6 @@
                                             <outlet property="event_picture" destination="Qji-Hu-N1F" id="laO-Kk-AeW"/>
                                             <outlet property="event_timing" destination="kgs-pV-nmT" id="PXC-pM-oVf"/>
                                             <outlet property="host_name" destination="B6I-lR-2lq" id="QUL-Rw-UeZ"/>
-                                            <segue destination="boQ-bt-Och" kind="show" id="j86-zE-FEO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1423,6 +1423,7 @@
                         <outlet property="nameLabel" destination="143-ae-7ri" id="MYC-VR-afN"/>
                         <outlet property="profileImage" destination="saz-kI-tCh" id="AyX-r8-aWA"/>
                         <outlet property="upcomingEventsTableView" destination="fBe-SC-bec" id="dCp-BZ-Lld"/>
+                        <segue destination="boQ-bt-Och" kind="show" identifier="goToEventDetails" id="YFe-yN-Fbi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k26-BS-bZP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1738,9 +1739,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="1wu-Ir-ECx"/>
                     <connections>
+                        <outlet property="address" destination="afL-ii-wKD" id="y0S-1o-Jiv"/>
+                        <outlet property="date" destination="bbS-GG-MOd" id="gdp-r6-0AL"/>
                         <outlet property="descriptionBox" destination="9qE-9G-f3o" id="TZS-r1-KeT"/>
                         <outlet property="descriptionLabel" destination="hV6-fZ-mTq" id="jsG-0D-Ypa"/>
                         <outlet property="detailsBox" destination="Jw0-9H-XBg" id="Yip-Dv-5gY"/>
+                        <outlet property="eventPicture" destination="WEo-yG-Olk" id="ahb-LD-fpe"/>
                         <outlet property="eventTitle" destination="l2D-tZ-vlQ" id="yDr-pB-zT7"/>
                         <outlet property="hostBox" destination="TXK-jA-QIJ" id="lSV-Td-18g"/>
                         <outlet property="hostNameButton" destination="Tfm-wl-eaA" id="nFa-Kz-vI5"/>
@@ -1879,7 +1883,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="j86-zE-FEO"/>
+        <segue reference="bPH-Dq-G2j"/>
         <segue reference="zza-ea-NkY"/>
         <segue reference="AvO-kK-W0f"/>
     </inferredMetricsTieBreakers>

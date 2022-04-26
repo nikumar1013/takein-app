@@ -196,7 +196,8 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
             drinks: dict["drinks"] as! String,
             appetizers: dict["appetizers"] as! String,
             entrees: dict["entrees"] as! String,
-            desserts: dict["desserts"] as! String
+            desserts: dict["desserts"] as! String,
+            description: dict["description"] as! String
             
         )
         let geoCoder = CLGeocoder()

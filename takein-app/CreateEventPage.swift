@@ -22,6 +22,7 @@ class Event {
     var totalCapacity: Int
     var seatsLeft: Int
     var host: String
+    var description: String
 //    var drinks:[String]?
 //    var appetizers:[String]?
 //    var entrees:[String]?
@@ -36,7 +37,7 @@ class Event {
     
 //    init(title: String, location: String, date: String, startTime: String, endTime: String, totalCapacity: Int, photoURL: String, host:String)
     
-    init(title: String, location: String, date: Date, startTime: String, endTime: String, totalCapacity: String, photoURL: String, host:String,drinks:String,appetizers:String, entrees:String, desserts:String) {
+    init(title: String, location: String, date: Date, startTime: String, endTime: String, totalCapacity: String, photoURL: String, host:String,drinks:String,appetizers:String, entrees:String, desserts:String, description:String) {
         self.title = title
         self.location = location
 //        self.date = date
@@ -51,6 +52,7 @@ class Event {
         self.appetizers = appetizers
         self.entrees = entrees
         self.desserts = desserts
+        self.description = description
         print("Entering init")
     }
 }
@@ -424,7 +426,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             
             let refTwo = self.database.reference(withPath: "eventDetails")
             let eventRefChild = refTwo.child(eventID)
-            let eventFields = ["eventTitle": self.titleField.text, "location": self.locationField.text, "date": self.dateField.text, "startTime": self.startTimeField.text, "endTime": self.endTimeField.text, "capacity": self.capacityField.text, "drinks": self.drinksField.text,"appetizers": self.appetizersField.text, "entrees": self.entreeField.text, "desserts": self.dessertsField.text, "host": username, "pictureURL": pictureURL]
+            let eventFields = ["eventTitle": self.titleField.text, "location": self.locationField.text, "date": self.dateField.text, "startTime": self.startTimeField.text, "endTime": self.endTimeField.text, "capacity": self.capacityField.text, "drinks": self.drinksField.text,"appetizers": self.appetizersField.text, "entrees": self.entreeField.text, "desserts": self.dessertsField.text, "host": username, "pictureURL": pictureURL, "description": self.descriptionField.text]
             eventRefChild.setValue(eventFields)
         })
 
