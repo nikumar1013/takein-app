@@ -10,6 +10,8 @@ import UIKit
 class EventDetailsViewController: UIViewController {
 
 //    @IBOutlet weak var eventTableView: ContentSizedTableView!
+    @IBOutlet weak var hostNameButton: UIButton!
+    
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var descriptionBox: UIStackView!
     
@@ -20,6 +22,8 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var detailsBox: UIStackView!
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var hostBox: UIView!
+    
+    var hostUser = "testing123"
     
     let eventDescription = "Join us for an evening of Fall inspired pastries, tea, and cocktails.\nMy partner and I are new to the city, so we are throwing a small get together to hopefully get to know some other people!\nThere is no dress code, but something casual would be preferred. We own two dogs, so feel free to bring your pets! It’s gonna be a fun night, and if you want to bring anything to eat, please feel free.\nIf you are interested, please hit Claim Seat! We’d love to host you <3"
     
@@ -42,6 +46,9 @@ class EventDetailsViewController: UIViewController {
         
         hostBox.layer.cornerRadius = 25;
         hostBox.layer.masksToBounds = true;
+        
+        //should be the USERNAME, not email!
+        hostNameButton.setTitle(hostUser, for: .normal)
         
         eventTitle.text = "Outdoor Fall Bonfire"
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
@@ -72,6 +79,14 @@ class EventDetailsViewController: UIViewController {
             overrideUserInterfaceStyle = .light
         } else {
             overrideUserInterfaceStyle = .dark
+        }
+    }
+    
+    //pass in username to reviews page
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DetailsToReviewSegue",
+           let destination = segue.destination as? ReviewsPage {
+            destination.profileName = hostUser
         }
     }
     

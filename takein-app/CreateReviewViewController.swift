@@ -6,6 +6,21 @@
 //
 
 import UIKit
+import FirebaseStorage
+import Firebase
+import CryptoKit
+
+class Review {
+    var rating: Int
+    var description: String
+    var reviewer: String
+    
+    init(rating: String, description: String, reviewer: String) {
+        self.description = description
+        self.reviewer = reviewer
+        self.rating = Int(rating)!
+    }
+}
 
 class CreateReviewViewController: UIViewController {
 
@@ -19,6 +34,10 @@ class CreateReviewViewController: UIViewController {
     
     var star: [UIButton] = []
     var starsChosen = 0
+    var userName:String = "testing123"
+    
+    private let storage = Storage.storage().reference()
+    private let database = Database.database()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +92,37 @@ class CreateReviewViewController: UIViewController {
                 preferredStyle: .alert)
             controller.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             present(controller, animated: true, completion: nil)
+        } else {
+            //create event in db under the username of the person BEING REVIEWED
+            let ref = self.database.reference(withPath: "reviews")
+            // get username remember to ERROR CHECK
+//            let username = getUserName()
+            let refChild = ref.child(self.userName)
+            let reviewID =  UUID().uuidString
+            var reviewList = ""
+            let reviewIDRef = self.database.reference(withPath: "reviews").child("\(self.userName)")
+            reviewIDRef.observeSingleEvent(of: .value, with: { snapshot in
+                if snapshot.exists() {
+                    reviewList = snapshot.childSnapshot(forPath: "reviewID").value as! String
+                    print("\n\n fetching previous events")
+                    print(reviewList)
+                    print("this is the event list currently")
+                    let events =  reviewList + reviewID + ","
+                    print(events)
+                }
+                
+                let uniqueReview = ["reviewID": reviewList + reviewID + ","]
+                refChild.setValue(uniqueReview)
+                
+                let reviewer = getUserName()
+                
+                let refTwo = self.database.reference(withPath: "reviewDetails")
+                let reviewRefChild = refTwo.child(reviewID)
+                let reviewFields = ["rating": String(self.starsChosen), "description": self.textDescriptionBox.text!, "reviewer": reviewer!]
+                reviewRefChild.setValue(reviewFields)
+            })
+            
+            _ = navigationController?.popViewController(animated: true)
         }
     }
     /*

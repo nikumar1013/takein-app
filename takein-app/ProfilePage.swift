@@ -74,6 +74,14 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         
     }
     
+    //pass in username to reviews page
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProfileToReviewSegue",
+           let destination = segue.destination as? ReviewsPage {
+            destination.profileName = userName!
+        }
+    }
+    
     func retrieveUserdata() {
         setUserName()
         let profileImageRef = self.database.reference(withPath: "pictureIds").child("\(self.userName!)")
