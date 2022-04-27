@@ -44,7 +44,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
     @IBOutlet weak var searchBar: UISearchBar!
     var currentRadius = 3_000.0
     var locationManager: CLLocationManager?
-    private let storage = Storage.storage().reference()
+    //private let storage = Storage.storage().reference()
     private let database = Database.database()
     
     override func viewDidLoad() {
@@ -214,10 +214,10 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
             }
             curEvent.lat = loc.coordinate.latitude
             curEvent.long = loc.coordinate.longitude
-            if let userLocation = self.locationManager?.location?.coordinate {
+          /*  if let userLocation = self.locationManager?.location?.coordinate {
                 var dist = self.distance(lat1: userLocation.latitude, long1: userLocation.longitude, lat2: curEvent.lat!, long2: curEvent.long!)
                 curEvent.location = "\(dict["location"] as! String) (\(Int(dist!)) meters away)"
-            }
+            } */
             
             if(curEvent.long != nil && curEvent.lat != nil) {
                 self.eventList.append(curEvent)
@@ -334,7 +334,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         cell.contentView.backgroundColor = UIColor(named: "tableViewColor")
         let row = indexPath.row
         let curEvent = eventList[row]
-        let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
+      /*  let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
         folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
             if(error != nil) {
                 print(error)
@@ -343,8 +343,9 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
                 let eventPic: UIImage = UIImage(data: data!)!
                 cell.event_picture.image = eventPic
             }
-        }
-
+        } */
+        
+        cell.event_picture = UIImageView(image: UIImage(named:"seat"))
         cell.event_name.text = curEvent.title
         cell.event_description.text = curEvent.description
         let dateFormatter = DateFormatter()

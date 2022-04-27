@@ -31,7 +31,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
     var eventList:[Event] = []
     @IBOutlet weak var myEvents: UIButton!
-    private let storage = Storage.storage().reference()
+   // private let storage = Storage.storage().reference()
     private let database = Database.database()
     @IBOutlet weak var upcomingEventsTableView: UITableView!
     
@@ -93,7 +93,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         setUserName()
         let profileImageRef = self.database.reference(withPath: "pictureIds").child("\(self.userName!)")
         nameLabel.text = self.userName!
-        profileImageRef.observeSingleEvent(of: .value, with: { snapshot in
+       /* profileImageRef.observeSingleEvent(of: .value, with: { snapshot in
             let profPicId = snapshot.childSnapshot(forPath: "profilePictureId").value
             let folderReference = Storage.storage().reference(withPath: "profileImages/\(profPicId!)")
             folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
@@ -105,7 +105,8 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                     self.profileImage.image = profilePic
                 }
             }
-        })
+        }) */
+        self.profileImage.image = UIImage(named: "seat")
         populateEventTable()
     }
     
@@ -190,7 +191,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         cell.contentView.backgroundColor = UIColor(named: "tableViewColor")
         let row = indexPath.row
         let curEvent = eventList[row]
-        let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
+      /*  let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
         folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
             if(error != nil) {
                 print(error)
@@ -199,8 +200,8 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                 let eventPic: UIImage = UIImage(data: data!)!
                 cell.event_picture.image = eventPic
             }
-        }
-        
+        } */
+        cell.event_picture.image = UIImage(named: "seat")
         cell.event_name.text = curEvent.title
 //        cell.host_name.text = "Hosted by: " + curEvent.host
         cell.event_description.text = curEvent.description
