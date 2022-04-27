@@ -39,6 +39,13 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     var totalRatings:Int = 0
     @IBOutlet weak var averageRating: UILabel!
     
+    @IBOutlet weak var avgStarOne: UIImageView!
+    @IBOutlet weak var avgStarTwo: UIImageView!
+    @IBOutlet weak var avgStarThree: UIImageView!
+    @IBOutlet weak var avgStarFour: UIImageView!
+    @IBOutlet weak var avgStarFive: UIImageView!
+    var averageStarRatingList: [UIImageView]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.userName.text = self.profileName
@@ -55,6 +62,8 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         reviewsTableView.rowHeight = UITableView.automaticDimension
         reviewsTableView.estimatedRowHeight = 600
         reviewsTableView.layer.cornerRadius = 10
+        
+        self.averageStarRatingList =  [avgStarFour, avgStarFive, avgStarOne, avgStarTwo, avgStarThree]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,10 +121,12 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                             
                             self.reviewList.append(curEvent)
                             
+                            
                             let avg = (Double(self.totalRatings) / Double(self.totalStars)) * 5
                             print("running avg: ", avg)
                             self.averageRating.text = String(avg)// String(format: "%.2f", avg)
                             print("This is the event list count")
+                            self.setAverageStars(avg: avg)
                             print(self.reviewList.count)
                             self.reviewsTableView.reloadData()
                             
@@ -132,12 +143,27 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
 //        }
 //        let avg = Double(self.totalStars) / Double(self.totalRatings)
 //        averageRating.text = String(self.totalStars)// String(format: "%.2f", avg)
-        calculateAverageRating()
     }
     
-    func calculateAverageRating() {
-        for review in self.reviewList {
-            print("HERE IS THE RATING FOR THE REVIEWLIST: ", review.rating)
+    func setAverageStars(avg: Double) {
+        var halfRating = 1
+        var numFullStars = Int(floor(avg))
+        print("floor avg is: ")
+        if(floor(avg) == avg) {
+            halfRating = 0
+        }
+        var numEmptyStars = 5 - halfRating - numFullStars
+        for i in 0 ... numFullStars - 1 {
+            self.averageStarRatingList[i].image = UIImage(systemName: "star.fill")
+        }
+        if(halfRating == 1) {
+            self.averageStarRatingList[numFullStars].image = UIImage(systemName: "star.leadinghalf.filled")
+        }
+        let firstEmptyIndex = 5 - numEmptyStars
+        if(numFullStars + halfRating < 5) {
+            for i in firstEmptyIndex ... 4 {
+                self.averageStarRatingList[i].image = UIImage(systemName: "star")
+            }
         }
     }
 
