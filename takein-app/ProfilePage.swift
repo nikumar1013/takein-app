@@ -16,11 +16,12 @@ enum UserNameError: Error {
 
 class upcomingEventCell: UITableViewCell {
     
+
     @IBOutlet weak var event_name: UILabel!
-    @IBOutlet weak var host_name: UILabel!
-    @IBOutlet weak var event_description: UILabel!
-    @IBOutlet weak var event_timing: UILabel!
     
+    @IBOutlet weak var event_location: UILabel!
+    @IBOutlet weak var event_timing: UILabel!
+    @IBOutlet weak var event_description: UILabel!
     @IBOutlet weak var event_picture: UIImageView!
     
     func switchToDarkMode() {}
@@ -38,7 +39,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     @IBOutlet weak var profileImage: UIImageView!
     var userName: String?
     var emailName: String?
-    var curEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "")
+    var curEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "", eventID: "", guests: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,7 +138,9 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                                 appetizers: eventSnapshot.childSnapshot(forPath: "appetizers").value as! String,
                                 entrees: eventSnapshot.childSnapshot(forPath: "entrees").value as! String,
                                 desserts: eventSnapshot.childSnapshot(forPath: "desserts").value as! String,
-                                description: eventSnapshot.childSnapshot(forPath: "description").value as! String
+                                description: eventSnapshot.childSnapshot(forPath: "description").value as! String,
+                                eventID: eventId,
+                                guests:eventSnapshot.childSnapshot(forPath: "guestList").value as! String
                             )
                             
                             self.eventList.append(curEvent)
@@ -199,9 +202,12 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         }
         
         cell.event_name.text = curEvent.title
-        cell.host_name.text = "Hosted by: " + curEvent.host
-        cell.event_description.text = ""
-        cell.event_timing.text = "\(curEvent.startTime) - \(curEvent.endTime)"
+//        cell.host_name.text = "Hosted by: " + curEvent.host
+        cell.event_description.text = curEvent.description
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/YY"
+        cell.event_timing.text = dateFormatter.string(from: curEvent.date) + "    \(curEvent.startTime) - \(curEvent.endTime)"
+        cell.event_location.text = curEvent.location
         
         //        @IBOutlet weak var event_picture: UIImageView!
         return cell

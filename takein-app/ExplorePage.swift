@@ -54,7 +54,8 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         eventTable.delegate = self
         eventTable.dataSource = self
         eventTable.layer.cornerRadius = 10
-        eventTable.rowHeight = 125
+        eventTable.rowHeight = UITableView.automaticDimension
+        eventTable.estimatedRowHeight = 600
         
         // sets the switch to what the user settings currently are
         if isLight == nil{
@@ -197,7 +198,9 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
             appetizers: dict["appetizers"] as! String,
             entrees: dict["entrees"] as! String,
             desserts: dict["desserts"] as! String,
-            description: dict["description"] as! String
+            description: dict["description"] as! String,
+            eventID: "" ,// probably need to update this correctly
+            guests: dict["guestList"] as! String
             
         )
         let geoCoder = CLGeocoder()
@@ -331,9 +334,6 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         cell.contentView.backgroundColor = UIColor(named: "tableViewColor")
         let row = indexPath.row
         let curEvent = eventList[row]
-        print("HERE IS THE EVENT IMAGES REFERENCE")
-        print(curEvent.photoURL)
-        print("GGGGGGGGG")
         let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
         folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
             if(error != nil) {
@@ -344,11 +344,14 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
                 cell.event_picture.image = eventPic
             }
         }
-        
+
         cell.event_name.text = curEvent.title
-        cell.host_name.text = curEvent.host
-        cell.event_description.text = ""
-        cell.event_timing.text = "\(curEvent.startTime) - \(curEvent.endTime)"
+        cell.event_description.text = curEvent.description
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/YY"
+        cell.event_timing.text = dateFormatter.string(from: curEvent.date) + "    \(curEvent.startTime) - \(curEvent.endTime)"
+        cell.event_location.text = curEvent.location
+
         return cell
     }
     

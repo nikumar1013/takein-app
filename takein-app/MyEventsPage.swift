@@ -21,7 +21,7 @@ class EventsTableViewCell: UITableViewCell {
 class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let storage = Storage.storage().reference()
     private let database = Database.database()
-    var cEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "")
+    var cEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "", eventID: "", guests: "")
     
     var eventList:[Event] = []
     @IBOutlet weak var eventTableView: UITableView!
@@ -76,7 +76,9 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
                                 appetizers: eventSnapshot.childSnapshot(forPath: "appetizers").value as! String,
                                 entrees: eventSnapshot.childSnapshot(forPath: "entrees").value as! String,
                                 desserts: eventSnapshot.childSnapshot(forPath: "desserts").value as! String,
-                                description: eventSnapshot.childSnapshot(forPath: "description").value as! String
+                                description: eventSnapshot.childSnapshot(forPath: "description").value as! String,
+                                eventID: eventId,
+                                guests:eventSnapshot.childSnapshot(forPath: "guestList").value as! String
                             )
                             if getUserName() == curEvent.host{
                                 self.eventList.append(curEvent)
@@ -117,7 +119,7 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
         cell.event_name.text = curEvent.title
         cell.event_description.text = curEvent.description
         cell.event_timing.text = "\(curEvent.startTime) - \(curEvent.endTime)"
-        
+        cell.guest_number.text = curEvent.guests
         
         // load the event picture
         let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
@@ -144,7 +146,38 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
         if segue.identifier == "getEventDetails",
            let nextVC = segue.destination as? EventDetailsViewController {
             nextVC.curEvent = self.cEvent
+            
         }
+        if segue.identifier == "getToGuestList",
+           let nextVC = segue.destination as? GuestListPage {
+            print("got in here")
+            print(cEvent.guests)
+            nextVC.curEvent = self.cEvent
+            
+        }
+//
+        
     }
 
+    @IBAction func goToGuestList(_ sender: UIButton) {
+        //getToGuestList
+        var superview = sender.superview
+        while let view = superview, !(view is UITableViewCell) {
+            superview = view.superview
+        }
+        guard let cell = superview as? UITableViewCell else {
+            print("button is not contained in a table view cell")
+            return
+        }
+        guard let indexPath = eventTableView.indexPath(for: cell) else {
+            print("failed to get index path for cell containing button")
+            return
+        }
+        // We've got the index path for the cell that contains the button, now do something with it.
+        print("button is in row \(indexPath.row)")
+        cEvent = eventList[indexPath.row]
+        print(cEvent.guests)
+        performSegue(withIdentifier: "getToGuestList", sender: nil)
+        
+    }
 }
