@@ -71,20 +71,21 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     }
     
     func fetchReviews() {
-        let profileImageRef = self.database.reference(withPath: "pictureIds").child("\(self.profileName)")
-        profileImageRef.observeSingleEvent(of: .value, with: { snapshot in
-            let profPicId = snapshot.childSnapshot(forPath: "profilePictureId").value
-            let folderReference = Storage.storage().reference(withPath: "profileImages/\(profPicId!)")
-            folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
-                if(error != nil) {
-                    print(error)
-                    print("FAILURE")
-                } else {
-                    let profilePic: UIImage = UIImage(data: data!)!
-                    self.userPhoto.image = profilePic
-                }
-            }
-        })
+//        let profileImageRef = self.database.reference(withPath: "pictureIds").child("\(self.profileName)")
+//        profileImageRef.observeSingleEvent(of: .value, with: { snapshot in
+//            let profPicId = snapshot.childSnapshot(forPath: "profilePictureId").value
+//            let folderReference = Storage.storage().reference(withPath: "profileImages/\(profPicId!)")
+//            folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
+//                if(error != nil) {
+//                    print(error)
+//                    print("FAILURE")
+//                } else {
+//                    let profilePic: UIImage = UIImage(data: data!)!
+//                    self.userPhoto.image = profilePic
+//                }
+//            }
+//        })
+        self.userPhoto.image =  UIImage(named: "seat")
         populateTable()
     }
     
@@ -106,11 +107,14 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                                 description: reviewSnapshot.childSnapshot(forPath: "description").value as! String ,
                                 reviewer: reviewSnapshot.childSnapshot(forPath: "reviewer").value as! String
                             )
+                            self.totalRatings += Int(curEvent.rating)
+                            self.totalStars += 5
                             
-//                            self.totalStars += curEvent.rating
-//                            self.totalRatings += 5
-//
                             self.reviewList.append(curEvent)
+                            
+                            let avg = (Double(self.totalRatings) / Double(self.totalStars)) * 5
+                            print("running avg: ", avg)
+                            self.averageRating.text = String(avg)// String(format: "%.2f", avg)
                             print("This is the event list count")
                             print(self.reviewList.count)
                             self.reviewsTableView.reloadData()
@@ -121,9 +125,20 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                 }
             }
         })
-        
-//        let avg = Double(totalStars) / Double(totalRatings)
-//        averageRating.text = String(format: "%.2f", avg)
+//        for review in reviewList {
+//            print("THE RATING FOR THIS REVIEW IS ", review.rating)
+//            self.totalRatings += Int(review.rating)
+//            self.totalStars += 5
+//        }
+//        let avg = Double(self.totalStars) / Double(self.totalRatings)
+//        averageRating.text = String(self.totalStars)// String(format: "%.2f", avg)
+        calculateAverageRating()
+    }
+    
+    func calculateAverageRating() {
+        for review in self.reviewList {
+            print("HERE IS THE RATING FOR THE REVIEWLIST: ", review.rating)
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -147,20 +162,21 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         print("HERE IS THE EVENT IMAGES REFERENCE")
         print(currentUser.reviewer)
         print("GGGGGGGGG")
-        let profileImageRef = self.database.reference(withPath: "pictureIds").child("\(currentUser.reviewer)")
-        profileImageRef.observeSingleEvent(of: .value, with: { snapshot in
-            let profPicId = snapshot.childSnapshot(forPath: "profilePictureId").value
-            let folderReference = Storage.storage().reference(withPath: "profileImages/\(profPicId!)")
-            folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
-                if(error != nil) {
-                    print(error)
-                    print("FAILURE")
-                } else {
-                    let profilePic: UIImage = UIImage(data: data!)!
-                    cell.author_profile_picture.image = profilePic
-                }
-            }
-        })
+//        let profileImageRef = self.database.reference(withPath: "pictureIds").child("\(currentUser.reviewer)")
+//        profileImageRef.observeSingleEvent(of: .value, with: { snapshot in
+//            let profPicId = snapshot.childSnapshot(forPath: "profilePictureId").value
+//            let folderReference = Storage.storage().reference(withPath: "profileImages/\(profPicId!)")
+//            folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
+//                if(error != nil) {
+//                    print(error)
+//                    print("FAILURE")
+//                } else {
+//                    let profilePic: UIImage = UIImage(data: data!)!
+//                    cell.author_profile_picture.image = profilePic
+//                }
+//            }
+//        })
+        
         
         cell.reviewer.text = currentUser.reviewer
         cell.review_content.text = currentUser.description

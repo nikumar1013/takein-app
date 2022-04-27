@@ -48,9 +48,20 @@ class EventDetailsViewController: UIViewController {
         descriptionBox.layer.cornerRadius = 25;
         descriptionBox.layer.masksToBounds = true;
         
-        let menu = "Drinks:\n\t• \(curEvent.drinks)\nAppetizers:\n\t• \(curEvent.appetizers)\nEntree:\n\t• \(curEvent.entrees)\nDessert:\n\t• \(curEvent.desserts)"
-        
-        menuLabel.text = menu
+        var menuString = "Drinks:\n"
+        var foodList = curEvent.drinks.split(separator: ",")
+        menuString = buildMenuString(currentMenu: menuString, items: foodList)
+        menuString += "Appetizers:\n"
+        foodList = curEvent.appetizers.split(separator: ",")
+        menuString = buildMenuString(currentMenu: menuString, items: foodList)
+        menuString += "Entree:\n"
+        foodList = curEvent.entrees.split(separator: ",")
+        menuString = buildMenuString(currentMenu: menuString, items: foodList)
+        menuString += "Dessert:\n"
+        foodList = curEvent.desserts.split(separator: ",")
+        menuString = buildMenuString(currentMenu: menuString, items: foodList)
+    
+        menuLabel.text = menuString
         menuBox.layer.cornerRadius = 25;
         menuBox.layer.masksToBounds = true;
         
@@ -64,16 +75,17 @@ class EventDetailsViewController: UIViewController {
         hostNameButton.setTitle(hostUser, for: .normal)
         
         // load the event picture
-        let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
-        folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
-            if(error != nil) {
-                print(error)
-                print("FAILURE")
-            } else {
-                let eventPic: UIImage = UIImage(data: data!)!
-                self.eventPicture.image = eventPic
-            }
-        }
+//        let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
+//        folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
+//            if(error != nil) {
+//                print(error)
+//                print("FAILURE")
+//            } else {
+//                let eventPic: UIImage = UIImage(data: data!)!
+//                self.eventPicture.image = eventPic
+//            }
+//        }
+        self.eventPicture.image = UIImage(named: "seat")
         
         eventTitle.text = curEvent.title
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
@@ -108,6 +120,14 @@ class EventDetailsViewController: UIViewController {
         } else {
             overrideUserInterfaceStyle = .dark
         }
+    }
+    
+    func buildMenuString(currentMenu: String, items: [String.SubSequence]) -> String {
+        var menu = currentMenu
+        for item in items {
+            menu += "\t•\(item)\n"
+        }
+        return menu
     }
     
     //pass in username to reviews page
