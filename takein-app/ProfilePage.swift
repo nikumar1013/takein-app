@@ -129,7 +129,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                             let curEvent = Event(
                                 title: eventSnapshot.childSnapshot(forPath: "eventTitle").value as! String,
                                 location: eventSnapshot.childSnapshot(forPath: "location").value as! String ,
-                                date: self.convertStringToDate(dateString: eventSnapshot.childSnapshot(forPath: "date").value as! String),
+                                date: self.convertStringToDate(dateString: eventSnapshot.childSnapshot(forPath: "date").value as? String ?? "05/22/22"),
                                 startTime: eventSnapshot.childSnapshot(forPath: "startTime").value as! String,
                                 endTime: eventSnapshot.childSnapshot(forPath: "endTime").value as! String,
                                 totalCapacity: eventSnapshot.childSnapshot(forPath: "capacity").value as! String,

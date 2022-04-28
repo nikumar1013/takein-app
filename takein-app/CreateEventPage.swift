@@ -397,7 +397,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             }
 
             _ = navigationController?.popViewController(animated: true)
-        }
+        
         
         
         // create the event in the database
@@ -435,7 +435,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             eventRefChild.setValue(eventFields)
         })
 
-        
+        }
 
     }
     
