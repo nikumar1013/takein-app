@@ -74,17 +74,17 @@ class EventDetailsViewController: UIViewController {
         //should be the USERNAME, not email!
         hostNameButton.setTitle(hostUser, for: .normal)
         
-        // load the event picture
-//        let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
-//        folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
-//            if(error != nil) {
-//                print(error)
-//                print("FAILURE")
-//            } else {
-//                let eventPic: UIImage = UIImage(data: data!)!
-//                self.eventPicture.image = eventPic
-//            }
-//        }
+//         load the event picture
+        let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
+        folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
+            if(error != nil) {
+                print(error)
+                print("FAILURE")
+            } else {
+                let eventPic: UIImage = UIImage(data: data!)!
+                self.eventPicture.image = eventPic
+            }
+        }
         self.eventPicture.image = UIImage(named: "seat")
         
         eventTitle.text = curEvent.title

@@ -122,17 +122,17 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
         cell.guest_number.text = curEvent.guests
         
         // load the event picture
-//        let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
-//        folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
-//            if(error != nil) {
-//                print(error)
-//                print("FAILURE")
-//            } else {
-//                let eventPic: UIImage = UIImage(data: data!)!
-//                cell.eventPicture.image = eventPic
-//            }
-//        }
-        cell.eventPicture.image = UIImage(named: "seat")
+        let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
+        folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
+            if(error != nil) {
+                print(error)
+                print("FAILURE")
+            } else {
+                let eventPic: UIImage = UIImage(data: data!)!
+                cell.eventPicture.image = eventPic
+            }
+        }
+//        cell.eventPicture.image = UIImage(named: "seat")
             return cell
     }
     

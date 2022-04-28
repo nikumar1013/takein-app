@@ -33,7 +33,7 @@ class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegat
 
         guestTableView.backgroundColor =  UIColor(named: "tableViewColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
-        print("THis is the guest list in this view \(curEvent.guests) ")
+        print("This is the guest list in this view \(curEvent.guests) ")
         let guests = String(curEvent.guests.dropLast())
         print("these are the guests: \(guests)")
         guestList = guests.components(separatedBy: ",")

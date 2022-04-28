@@ -37,6 +37,8 @@ class EventPin : NSObject, MKAnnotation {
 }
 
 class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate , MKMapViewDelegate, CLLocationManagerDelegate, SearchRadiusAdjustment {
+    var curEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "",  eventID: "", guests: "")
+    
     @IBOutlet weak var eventTable: UITableView!
     @IBOutlet weak var explorePageMap: MKMapView!
     var eventList:[Event] = []
@@ -97,6 +99,14 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         }
         eventTable.backgroundColor =  UIColor(named: "tableViewColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
+    }
+    
+    // when a row is selected show that particular events page
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("The indexpath is \(indexPath.row)")
+            curEvent  = eventList[indexPath.row]
+//        exploreToEvents
+        performSegue(withIdentifier: "exploreToEvents", sender: nil)
     }
     
     
@@ -334,7 +344,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         cell.contentView.backgroundColor = UIColor(named: "tableViewColor")
         let row = indexPath.row
         let curEvent = eventList[row]
-      /*  let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
+      let folderReference = Storage.storage().reference(withPath: "eventImages/\(curEvent.photoURL)")
         folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
             if(error != nil) {
                 print(error)
@@ -343,9 +353,9 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
                 let eventPic: UIImage = UIImage(data: data!)!
                 cell.event_picture.image = eventPic
             }
-        } */
+        }
         
-        cell.event_picture = UIImageView(image: UIImage(named:"seat"))
+//        cell.event_picture = UIImageView(image: UIImage(named:"seat"))
         cell.event_name.text = curEvent.title
         cell.event_description.text = curEvent.description
         let dateFormatter = DateFormatter()
@@ -385,6 +395,10 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         if segue.identifier == "adjustRadiusSegue",
            let nextVC = segue.destination as? FilterViewController {
             nextVC.delegate = self
+        }
+        if segue.identifier == "exploreToEvents",
+           let nextVC = segue.destination as? EventDetailsViewController {
+            nextVC.curEvent = self.curEvent
         }
     }
 
