@@ -401,7 +401,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         
         
         // create the event in the database
-        
+        print("got into event creation \n\n\n\n")
         
         let ref = self.database.reference(withPath: "events")
         // get username remember to ERROR CHECK
@@ -410,18 +410,20 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         let refChild = ref.child(username!)
         let eventID =  UUID().uuidString
         var eventList = ""
-        let eventIDRef = self.database.reference(withPath: "events").child("\(username)")
+        print(username)
+        let eventIDRef = self.database.reference(withPath: "events").child("\(username!)")
         eventIDRef.observeSingleEvent(of: .value, with: { snapshot in
             if snapshot.exists() {
                 eventList = snapshot.childSnapshot(forPath: "eventID").value as! String
                 print("\n\n fetching previous events")
                 print(eventList)
-                print("this is the event list currently")
-                eventList =  eventList + eventID + ","
-                //print(events)
+//                print("this is the event list currently")
+//                eventList =  eventList + eventID + ","
+//                print(eventList)
             }
-            
-            let userNameFields = ["eventID": eventList + eventID + ","]
+            eventList =  eventList + eventID + ","
+            print(eventList)
+            let userNameFields = ["eventID": eventList + ","]
             refChild.setValue(userNameFields)
         
             
