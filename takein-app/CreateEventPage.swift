@@ -423,7 +423,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             }
             eventList =  eventList + eventID + ","
             print(eventList)
-            let userNameFields = ["eventID": eventList + ","]
+            let userNameFields = ["eventID": eventList]
             refChild.setValue(userNameFields)
         
             
