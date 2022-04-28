@@ -417,8 +417,8 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
                 print("\n\n fetching previous events")
                 print(eventList)
                 print("this is the event list currently")
-                let events =  eventList + eventID + ","
-                print(events)
+                eventList =  eventList + eventID + ","
+                //print(events)
             }
             
             let userNameFields = ["eventID": eventList + eventID + ","]

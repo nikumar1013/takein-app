@@ -124,8 +124,9 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                     let eventRef = self.database.reference(withPath: "eventDetails").child("\(eventId)")
                     eventRef.observeSingleEvent(of: .value, with: { eventSnapshot in
                         if eventSnapshot.exists() {
+                            print("In the loop for the profile page")
                             let eventName = eventSnapshot.childSnapshot(forPath: "eventTitle").value
-                            print(eventName)
+                            print(eventName!)
                             let curEvent = Event(
                                 title: eventSnapshot.childSnapshot(forPath: "eventTitle").value as! String,
                                 location: eventSnapshot.childSnapshot(forPath: "location").value as! String ,
@@ -133,7 +134,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                                 startTime: eventSnapshot.childSnapshot(forPath: "startTime").value as! String,
                                 endTime: eventSnapshot.childSnapshot(forPath: "endTime").value as! String,
                                 totalCapacity: eventSnapshot.childSnapshot(forPath: "capacity").value as! String,
-                                photoURL: eventSnapshot.childSnapshot(forPath: "pictureURL").value as! String,
+                                photoURL: eventSnapshot.childSnapshot(forPath: "pictureURL").value as? String ?? "No Picture",
                                 host: eventSnapshot.childSnapshot(forPath: "host").value as! String,
                                 drinks: eventSnapshot.childSnapshot(forPath: "drinks").value as! String,
                                 appetizers: eventSnapshot.childSnapshot(forPath: "appetizers").value as! String,
@@ -143,7 +144,8 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                                 eventID: eventId,
                                 guests:eventSnapshot.childSnapshot(forPath: "guestList").value as! String
                             )
-                            
+                            print("\n\nEvent created")
+                            print(curEvent.title)
                             self.eventList.append(curEvent)
                             print("This is the event list count")
                             print(self.eventList.count)
