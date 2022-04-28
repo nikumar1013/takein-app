@@ -132,12 +132,13 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                                let userRef = ref.child("\(userText)")
                                userRef.setValue(newEmailItem)
                                emailRef.setValue(newUserNameItem)
-                               let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                               let context = appDelegate.persistentContainer.viewContext
-                              
-                               let curUserName = NSEntityDescription.insertNewObject(forEntityName: "CurrentUser", into: context)
-                               
-                               curUserName.setValue(userText, forKey: "userName")
+//                               let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//                               let context = appDelegate.persistentContainer.viewContext
+//
+//                               let curUserName = NSEntityDescription.insertNewObject(forEntityName: "CurrentUser", into: context)
+//
+//                               curUserName.setValue(userText, forKey: "userName")
+                               signedInUser = userText
                                print("got in here")
                                self.performSegue(withIdentifier: "segueIdentifier", sender: nil)
                            } else {

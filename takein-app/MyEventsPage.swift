@@ -51,7 +51,7 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         //create a list of event objects     init(title: String, location: String, date: Date, startTime: String, endTime: String, totalCapacity: Int, photoURL: String)
         print("GOT IN HERE")
-        let eventIDRef = self.database.reference(withPath: "events").child("\(getUserName()!)")
+        let eventIDRef = self.database.reference(withPath: "events").child("\(getUserName())")
         eventIDRef.observeSingleEvent(of: .value, with: { snapshot in
             if snapshot.exists() {
                 var eventIds = snapshot.childSnapshot(forPath: "eventID").value as! String

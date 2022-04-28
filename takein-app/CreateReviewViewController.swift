@@ -118,7 +118,7 @@ class CreateReviewViewController: UIViewController {
                 
                 let refTwo = self.database.reference(withPath: "reviewDetails")
                 let reviewRefChild = refTwo.child(reviewID)
-                let reviewFields = ["rating": String(self.starsChosen), "description": self.textDescriptionBox.text!, "reviewer": reviewer!]
+                let reviewFields = ["rating": String(self.starsChosen), "description": self.textDescriptionBox.text!, "reviewer": reviewer]
                 reviewRefChild.setValue(reviewFields)
             })
             

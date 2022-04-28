@@ -410,7 +410,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         let refChild = ref.child(username!)
         let eventID =  UUID().uuidString
         var eventList = ""
-        let eventIDRef = self.database.reference(withPath: "events").child("\(username!)")
+        let eventIDRef = self.database.reference(withPath: "events").child("\(username)")
         eventIDRef.observeSingleEvent(of: .value, with: { snapshot in
             if snapshot.exists() {
                 eventList = snapshot.childSnapshot(forPath: "eventID").value as! String

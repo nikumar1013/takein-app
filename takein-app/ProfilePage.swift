@@ -167,16 +167,17 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     }
     
     func setUserName() {
-        print("in set username")
-        let fetchedResults: [NSManagedObject] = retrieveUserName()
-        if(fetchedResults.count < 1) {
-            print("Issue fetching username")
-            return
-        }
-        if let fetchedUserName = fetchedResults[fetchedResults.count-1].value(forKey: "userName") as? String {
-            print("No failure casting result username to string")
-            self.userName = fetchedUserName
-        }
+//        print("in set username")
+//        let fetchedResults: [NSManagedObject] = retrieveUserName()
+//        if(fetchedResults.count < 1) {
+//            print("Issue fetching username")
+//            return
+//        }
+//        if let fetchedUserName = fetchedResults[fetchedResults.count-1].value(forKey: "userName") as? String {
+//            print("No failure casting result username to string")
+//            self.userName = fetchedUserName
+//        }
+        self.userName = signedInUser
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

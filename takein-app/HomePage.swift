@@ -8,39 +8,39 @@
 import UIKit
 import CoreData
 
-
-func retrieveUserName() -> [NSManagedObject] {
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    let context = appDelegate.persistentContainer.viewContext
-    
-    let request = NSFetchRequest<NSFetchRequestResult>(entityName:"CurrentUser")
-    var fetchedResults:[NSManagedObject]? = nil
-    
-    do {
-        try fetchedResults = context.fetch(request) as? [NSManagedObject]
-    } catch {
-        // If an error occurs
-        let nserror = error as NSError
-        NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-        abort()
-    }
-    return(fetchedResults)!
-}
+var signedInUser: String = ""
 
 func getUserName() -> String? {
-    print("in set username")
-    let fetchedResults: [NSManagedObject] = retrieveUserName()
-    if(fetchedResults.count < 1) {
-        print("Issue fetching username")
-        return nil
-    }
-    if let fetchedUserName = fetchedResults[fetchedResults.count-1].value(forKey: "userName") as? String {
-        print("No failure casting result username to string")
-        return fetchedUserName
-    }
-    return nil
+//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//    let context = appDelegate.persistentContainer.viewContext
+//
+//    let request = NSFetchRequest<NSFetchRequestResult>(entityName:"CurrentUser")
+//    var fetchedResults:[NSManagedObject]? = nil
+//
+//    do {
+//        try fetchedResults = context.fetch(request) as? [NSManagedObject]
+//    } catch {
+//        // If an error occurs
+//        let nserror = error as NSError
+//        NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+//        abort()
+//    }
+    return signedInUser
 }
 
+//func getUserName() -> String? {
+//    print("in set username")
+//    let fetchedResults: [NSManagedObject] = retrieveUserName()
+//    if(fetchedResults.count < 1) {
+//        print("Issue fetching username")
+//        return nil
+//    }
+//    if let fetchedUserName = fetchedResults[fetchedResults.count-1].value(forKey: "userName") as? String {
+//        print("No failure casting result username to string")
+//        return fetchedUserName
+//    }
+//    return nil
+//}
 
 class HomePage: UIViewController {
 

@@ -62,9 +62,10 @@ class LoginPage: UIViewController, UITextFieldDelegate {
                 self.statusLabel.text = "Sign In Failed"
             } else {
                 print("all good")
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                let context = appDelegate.persistentContainer.viewContext
-                let curUserName = NSEntityDescription.insertNewObject(forEntityName: "CurrentUser", into: context)
+//                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//                let context = appDelegate.persistentContainer.viewContext
+//                let curUserName = NSEntityDescription.insertNewObject(forEntityName: "CurrentUser", into: context)
+                
                 let parsedEmail = self.usernameField.text!.split(separator: ".")
                 let emailRef = self.database.reference(withPath: "emails").child(String(parsedEmail[0]))
                 var usernameVal:String = ""
@@ -73,7 +74,8 @@ class LoginPage: UIViewController, UITextFieldDelegate {
                 emailRef.observeSingleEvent(of: .value, with: { snapshot in
                     let tempUserName = snapshot.childSnapshot(forPath: "userName").value
                     usernameVal = tempUserName as! String
-                    curUserName.setValue(usernameVal, forKey: "userName")
+                    signedInUser = usernameVal
+//                    curUserName.setValue(usernameVal, forKey: "userName")
                     self.performSegue(withIdentifier: "loginSegue", sender: nil)
                 })
             }

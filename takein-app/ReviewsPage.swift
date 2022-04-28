@@ -43,7 +43,7 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         super.viewDidLoad()
         self.userName.text = self.profileName
         //someone shouldn't be able to review themselves
-        if(profileName == getUserName()!) {
+        if(profileName == getUserName()) {
             addReviewButton.isHidden = true
         }
         reviewsTableView.backgroundColor =  UIColor(named: "tableViewColor")

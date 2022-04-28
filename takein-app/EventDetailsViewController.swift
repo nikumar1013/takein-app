@@ -154,14 +154,14 @@ class EventDetailsViewController: UIViewController {
     func addAttendee() {
         print(curEvent.eventID)
                 var event = self.database.reference(withPath: "eventDetails").child("\(curEvent.eventID)")
-        let username = getUserName()!
+        let username = getUserName()
         var guestList = ""
         event.observeSingleEvent(of: .value, with: { [self] eventSnapshot in
                      //update guestlist
                      if eventSnapshot.exists(){
 //                         print(eventSnapshot.childSnapshot(forPath: "eventTitle").value as! String)
                          guestList = eventSnapshot.childSnapshot(forPath: "guestList").value as! String
-                         guestList =  guestList + username + ","
+                         guestList =  guestList + username! + ","
                          print("this is the guest list")
                          print(guestList)
                          let dateFormatter = DateFormatter()
