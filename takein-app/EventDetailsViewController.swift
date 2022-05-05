@@ -14,6 +14,7 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var hostNameButton: UIButton!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var capacityLabel: UILabel!
+    @IBOutlet weak var reserveButton: UIButton!
     
     @IBOutlet weak var eventPicture: UIImageView!
     @IBOutlet weak var address: UILabel!
@@ -43,6 +44,9 @@ class EventDetailsViewController: UIViewController {
         descriptionLabel.text = curEvent.description
         address.text = curEvent.location
         hostUser = curEvent.host
+        if hostUser == getUserName() {
+            reserveButton.isHidden = true
+        }
         let dateFormatter = DateFormatter()
         
         date.text = dateFormatter.string(from:curEvent.date) + "\t\(curEvent.startTime) - \(curEvent.endTime)"
@@ -141,7 +145,6 @@ class EventDetailsViewController: UIViewController {
     }
     
     @IBAction func reserveButtonPressed(_ sender: Any) {
-        print("JUST HIT RESERVE")
         let controller = UIAlertController(
             title: "Confirm Reservation",
             message: "Do you want to reserve your seat for \(eventTitle.text!)?",
@@ -165,8 +168,16 @@ class EventDetailsViewController: UIViewController {
                      if eventSnapshot.exists(){
 //                         print(eventSnapshot.childSnapshot(forPath: "eventTitle").value as! String)
                          guestList = eventSnapshot.childSnapshot(forPath: "guestList").value as! String
-                         print("HERE IS CURRENT GUEST LIST    ", guestList)
                          var canAddToDB = true
+                         if curEvent.seatsLeft == 0 {
+                             canAddToDB = false
+                             let controller = UIAlertController(
+                                 title: "Could not RSVP",
+                                 message: "All seats have been taken.",
+                                 preferredStyle: .alert)
+                             controller.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                             present(controller, animated: true, completion: nil)
+                         }
                          let array_guests = guestList.split(separator: ",")
                          for guest in array_guests {
                              if guest == username! {
