@@ -13,6 +13,7 @@ class EventDetailsViewController: UIViewController {
 //    @IBOutlet weak var eventTableView: ContentSizedTableView!
     @IBOutlet weak var hostNameButton: UIButton!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var capacityLabel: UILabel!
     
     @IBOutlet weak var eventPicture: UIImageView!
     @IBOutlet weak var address: UILabel!
@@ -26,7 +27,7 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var detailsBox: UIStackView!
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var hostBox: UIView!
-    var curEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "",  eventID: "", guests: "")
+    var curEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "0", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "",  eventID: "", guests: "", seatsLeft: "0")
     var hostUser = ""
     
     private let storage = Storage.storage().reference()
@@ -85,9 +86,10 @@ class EventDetailsViewController: UIViewController {
                 self.eventPicture.image = eventPic
             }
         }
-        self.eventPicture.image = UIImage(named: "seat")
+//        self.eventPicture.image = UIImage(named: "seat")
         
         eventTitle.text = curEvent.title
+        capacityLabel.text = "\(curEvent.seatsLeft) out of \(curEvent.totalCapacity) seats left"
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         
         // sets the color mode to what the user settings currently are
@@ -139,6 +141,7 @@ class EventDetailsViewController: UIViewController {
     }
     
     @IBAction func reserveButtonPressed(_ sender: Any) {
+        print("JUST HIT RESERVE")
         let controller = UIAlertController(
             title: "Confirm Reservation",
             message: "Do you want to reserve your seat for \(eventTitle.text!)?",
@@ -152,7 +155,8 @@ class EventDetailsViewController: UIViewController {
     }
     
     func addAttendee() {
-        print(curEvent.eventID)
+        print("MADE IT TO THE ADD ATT FUNCTION \t", curEvent.eventID)
+        
                 var event = self.database.reference(withPath: "eventDetails").child("\(curEvent.eventID)")
         let username = getUserName()
         var guestList = ""
@@ -161,18 +165,36 @@ class EventDetailsViewController: UIViewController {
                      if eventSnapshot.exists(){
 //                         print(eventSnapshot.childSnapshot(forPath: "eventTitle").value as! String)
                          guestList = eventSnapshot.childSnapshot(forPath: "guestList").value as! String
-                         guestList =  guestList + username! + ","
-                         print("this is the guest list")
-                         print(guestList)
-                         let dateFormatter = DateFormatter()
-                         dateFormatter.dateFormat = "MM/dd/YY"
-                        let stringDate = dateFormatter.string(from: curEvent.date)
-                         
-                         let refTwo = self.database.reference(withPath: "eventDetails")
-                         let eventRefChild = refTwo.child(curEvent.eventID)
-                         
-                         let eventFields = ["eventTitle": curEvent.title, "location": curEvent.location, "date": stringDate, "startTime": curEvent.startTime , "endTime": curEvent.endTime, "capacity": String(curEvent.totalCapacity), "drinks": curEvent.drinks,"appetizers":  curEvent.appetizers , "entrees": curEvent.entrees, "desserts": curEvent.desserts, "host": username, "pictureURL": curEvent.photoURL, "description": curEvent.description, "guestList": guestList] as [String : Any]
-                         eventRefChild.setValue(eventFields)
+                         print("HERE IS CURRENT GUEST LIST    ", guestList)
+                         var canAddToDB = true
+                         let array_guests = guestList.split(separator: ",")
+                         for guest in array_guests {
+                             if guest == username! {
+                                 canAddToDB = false
+                                 let controller = UIAlertController(
+                                     title: "Oops",
+                                     message: "You have already claimed your seat for this event.",
+                                     preferredStyle: .alert)
+                                 controller.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                                 present(controller, animated: true, completion: nil)
+                             }
+                         }
+                         if canAddToDB {
+                         let updatedSeatsLeft = String(curEvent.seatsLeft - 1)
+                            print("UPDATED SEATS LEFT ", updatedSeatsLeft)
+                             guestList =  guestList + username! + ","
+                             print("this is the guest list")
+                             print(guestList)
+                             let dateFormatter = DateFormatter()
+                             dateFormatter.dateFormat = "MM/dd/YY"
+                            let stringDate = dateFormatter.string(from: curEvent.date)
+                             
+                             let refTwo = self.database.reference(withPath: "eventDetails")
+                             let eventRefChild = refTwo.child(curEvent.eventID)
+                             
+                         let eventFields = ["eventTitle": curEvent.title, "location": curEvent.location, "date": stringDate, "startTime": curEvent.startTime , "endTime": curEvent.endTime, "capacity": String(curEvent.totalCapacity), "seatsLeft": String(updatedSeatsLeft), "drinks": curEvent.drinks,"appetizers":  curEvent.appetizers , "entrees": curEvent.entrees, "desserts": curEvent.desserts, "host": username, "pictureURL": curEvent.photoURL, "description": curEvent.description, "guestList": guestList] as [String : Any]
+                             eventRefChild.setValue(eventFields)
+                         }
                      }
                  })
     

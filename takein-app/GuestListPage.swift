@@ -21,7 +21,7 @@ class GuestListViewCell: UITableViewCell {
 class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var guestTableView: UITableView!
-    var curEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "",  eventID: "", guests: "")
+    var curEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "0", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "",  eventID: "", guests: "", seatsLeft: "0")
     var guestList:[String] = []
     override func viewDidLoad() {
         super.viewDidLoad()

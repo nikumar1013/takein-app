@@ -39,15 +39,15 @@ class Event {
     
 //    init(title: String, location: String, date: String, startTime: String, endTime: String, totalCapacity: Int, photoURL: String, host:String)
     
-    init(title: String, location: String, date: Date, startTime: String, endTime: String, totalCapacity: String, photoURL: String, host:String,drinks:String,appetizers:String, entrees:String, desserts:String, description:String,eventID: String, guests: String) {
+    init(title: String, location: String, date: Date, startTime: String, endTime: String, totalCapacity: String, photoURL: String, host:String,drinks:String,appetizers:String, entrees:String, desserts:String, description:String,eventID: String, guests: String, seatsLeft: String) {
         self.title = title
         self.location = location
 
         self.date = date
         self.startTime = startTime
         self.endTime = endTime
-        self.totalCapacity = 0 // Int(totalCapacity)!
-        self.seatsLeft = 0 // Int(totalCapacity)!
+        self.totalCapacity = Int(totalCapacity)!
+        self.seatsLeft = Int(seatsLeft)!
         self.photoURL = photoURL
         self.host = host
         self.drinks = drinks
@@ -403,10 +403,10 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             //retrieve exisiting data and update array
             var emptyString: String?
             emptyString = ""
-            
+
             let refTwo = self.database.reference(withPath: "eventDetails")
             let eventRefChild = refTwo.child(eventID)
-            let eventFields = ["eventTitle": self.titleField.text, "location": self.locationField.text, "date": self.dateField.text, "startTime": self.startTimeField.text, "endTime": self.endTimeField.text, "capacity": self.capacityField.text, "drinks": self.drinksField.text,"appetizers": self.appetizersField.text, "entrees": self.entreeField.text, "desserts": self.dessertsField.text, "host": username, "pictureURL": pictureURL, "description": self.descriptionField.text, "guestList": emptyString]
+            let eventFields = ["eventTitle": self.titleField.text, "location": self.locationField.text, "date": self.dateField.text, "startTime": self.startTimeField.text, "endTime": self.endTimeField.text, "capacity": self.capacityField.text, "seatsLeft": self.capacityField.text, "drinks": self.drinksField.text,"appetizers": self.appetizersField.text, "entrees": self.entreeField.text, "desserts": self.dessertsField.text, "host": username, "pictureURL": pictureURL, "description": self.descriptionField.text, "guestList": emptyString]
             eventRefChild.setValue(eventFields)
         })
 

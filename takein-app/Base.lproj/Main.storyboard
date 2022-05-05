@@ -1474,11 +1474,11 @@
             <objects>
                 <viewController id="boQ-bt-Och" customClass="EventDetailsViewController" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xwP-3r-Qln">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGK-Pw-QOL">
-                                <rect key="frame" x="0.0" y="88" width="428" height="706"/>
+                                <rect key="frame" x="0.0" y="56" width="428" height="787"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="428" placeholderIntrinsicHeight="995" translatesAutoresizingMaskIntoConstraints="NO" id="msU-xC-c9Y">
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="1163"/>
@@ -1637,7 +1637,7 @@
                                                 <rect key="frame" x="20" y="430" width="388" height="52"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfm-wl-eaA">
-                                                        <rect key="frame" x="146" y="10.666666666666629" width="96" height="31"/>
+                                                        <rect key="frame" x="146" y="10.666666666666686" width="96" height="31"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Host Name"/>
                                                         <connections>
@@ -1731,6 +1731,7 @@
                     <navigationItem key="navigationItem" id="1wu-Ir-ECx"/>
                     <connections>
                         <outlet property="address" destination="afL-ii-wKD" id="y0S-1o-Jiv"/>
+                        <outlet property="capacityLabel" destination="VZC-xi-cXP" id="3q1-43-0cJ"/>
                         <outlet property="date" destination="bbS-GG-MOd" id="gdp-r6-0AL"/>
                         <outlet property="descriptionBox" destination="9qE-9G-f3o" id="TZS-r1-KeT"/>
                         <outlet property="descriptionLabel" destination="hV6-fZ-mTq" id="jsG-0D-Ypa"/>
@@ -1874,9 +1875,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zAg-cu-N8j"/>
+        <segue reference="YFe-yN-Fbi"/>
         <segue reference="zza-ea-NkY"/>
-        <segue reference="k7c-LL-7Wz"/>
+        <segue reference="AvO-kK-W0f"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="button" width="108" height="108"/>

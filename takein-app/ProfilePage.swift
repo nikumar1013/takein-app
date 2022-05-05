@@ -39,7 +39,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     @IBOutlet weak var profileImage: UIImageView!
     var userName: String?
     var emailName: String?
-    var curEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "", eventID: "", guests: "")
+    var curEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "0", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "", eventID: "", guests: "", seatsLeft: "0")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,7 +142,7 @@ class ProfilePage: UIViewController, UITableViewDataSource, UITableViewDelegate 
                                 desserts: eventSnapshot.childSnapshot(forPath: "desserts").value as! String,
                                 description: eventSnapshot.childSnapshot(forPath: "description").value as! String,
                                 eventID: eventId,
-                                guests:eventSnapshot.childSnapshot(forPath: "guestList").value as! String
+                                guests:eventSnapshot.childSnapshot(forPath: "guestList").value as! String, seatsLeft: eventSnapshot.childSnapshot(forPath: "seatsLeft").value as! String
                             )
                             print("\n\nEvent created")
                             print(curEvent.title)

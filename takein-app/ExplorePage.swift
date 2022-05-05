@@ -37,7 +37,7 @@ class EventPin : NSObject, MKAnnotation {
 }
 
 class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate , MKMapViewDelegate, CLLocationManagerDelegate, SearchRadiusAdjustment {
-    var curEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "",  eventID: "", guests: "")
+    var curEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "0", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "",  eventID: "", guests: "", seatsLeft: "0")
     
     @IBOutlet weak var eventTable: UITableView!
     @IBOutlet weak var explorePageMap: MKMapView!
@@ -169,7 +169,6 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
                 let latitude = dict["location"] as Any
                 let longtitude = dict["entrees"] as Any
                 print(longtitude)
-                print(latitude)
                 self.parseEventData(dict: dict)
             }
         }
@@ -210,7 +209,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
             desserts: dict["desserts"] as! String,
             description: dict["description"] as! String,
             eventID: "" ,// probably need to update this correctly
-            guests: dict["guestList"] as! String
+            guests: dict["guestList"] as! String, seatsLeft: dict["seatsLeft"] as! String
             
         )
         let geoCoder = CLGeocoder()

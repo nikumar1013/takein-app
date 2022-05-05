@@ -21,7 +21,7 @@ class EventsTableViewCell: UITableViewCell {
 class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let storage = Storage.storage().reference()
     private let database = Database.database()
-    var cEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "", eventID: "", guests: "")
+    var cEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "0", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "", eventID: "", guests: "", seatsLeft: "0")
     
     var eventList:[Event] = []
     @IBOutlet weak var eventTableView: UITableView!
@@ -78,7 +78,7 @@ class MyEventsPage: UIViewController, UITableViewDataSource, UITableViewDelegate
                                 desserts: eventSnapshot.childSnapshot(forPath: "desserts").value as! String,
                                 description: eventSnapshot.childSnapshot(forPath: "description").value as! String,
                                 eventID: eventId,
-                                guests:eventSnapshot.childSnapshot(forPath: "guestList").value as! String
+                                guests:eventSnapshot.childSnapshot(forPath: "guestList").value as! String, seatsLeft: eventSnapshot.childSnapshot(forPath: "seatsLeft").value as! String
                             )
                             if getUserName() == curEvent.host{
                                 self.eventList.append(curEvent)
