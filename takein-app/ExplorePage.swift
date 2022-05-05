@@ -43,8 +43,9 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
     @IBOutlet weak var explorePageMap: MKMapView!
     var eventList:[Event] = []
     
+    @IBOutlet weak var radiusControlSegment: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
-    var currentRadius = 3_000.0
+    var currentRadius = 1000.0
     var locationManager: CLLocationManager?
     //private let storage = Storage.storage().reference()
     private let database = Database.database()
@@ -109,6 +110,18 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         performSegue(withIdentifier: "exploreToEvents", sender: nil)
     }
     
+    @IBAction func newSegmentSelected(_ sender: Any) {
+        let index = radiusControlSegment.selectedSegmentIndex
+        if(index == 0 && currentRadius != 1000.0) {
+            changeRadius(newRadius: 1000.0)
+        } else if(index == 1 && currentRadius != 3000.0) {
+            changeRadius(newRadius: 3000.0)
+        } else if(index == 2 && currentRadius != 5000.0) {
+            changeRadius(newRadius: 5000.0)
+        } else if(index == 3 && currentRadius != 10000.0) {
+            changeRadius(newRadius: 10000.0)
+        }
+    }
     
    /* func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
   

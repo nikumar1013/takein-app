@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -332,7 +332,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xW5-fX-Avp">
-                                <rect key="frame" x="20" y="166" width="388" height="379"/>
+                                <rect key="frame" x="20" y="166" width="388" height="339"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1Cf-mk-x1C">
@@ -417,25 +417,30 @@
                                 <color key="barTintColor" red="1" green="0.91789587500000003" blue="0.66118920530000003" alpha="0.90449959899999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                             </searchBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="y7R-bd-BCM">
+                                <rect key="frame" x="20" y="521" width="388" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="1000m"/>
+                                    <segment title="3000m"/>
+                                    <segment title="5000m"/>
+                                    <segment title="10000m"/>
+                                </segments>
+                                <connections>
+                                    <action selector="newSegmentSelected:" destination="Pg3-Nt-dYI" eventType="valueChanged" id="2kZ-re-FJE"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="E89-cp-onx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Explore" id="oPk-Pv-WRt">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="line.3.horizontal.decrease" catalog="system" id="GYh-v6-zKe">
-                            <connections>
-                                <action selector="filterButtonPressed:" destination="Pg3-Nt-dYI" id="Bzg-ED-FoJ"/>
-                                <segue destination="rvv-8m-eI0" kind="popoverPresentation" identifier="adjustRadiusSegue" popoverAnchorBarButtonItem="GYh-v6-zKe" id="f6U-HV-G3z">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Explore" id="oPk-Pv-WRt"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="eventTable" destination="1Cf-mk-x1C" id="5CB-tA-LRZ"/>
                         <outlet property="explorePageMap" destination="xW5-fX-Avp" id="M8A-xd-hf1"/>
+                        <outlet property="radiusControlSegment" destination="y7R-bd-BCM" id="Y0G-Sa-sP4"/>
                         <outlet property="searchBar" destination="BtL-2o-AVj" id="rvg-o0-Fpc"/>
                         <segue destination="boQ-bt-Och" kind="show" identifier="exploreToEvents" id="zAg-cu-N8j"/>
                     </connections>
@@ -443,52 +448,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FSx-oJ-2l3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6363.0841121495323" y="213.82289416846655"/>
-        </scene>
-        <!--Filter View Controller-->
-        <scene sceneID="yOg-3i-GL1">
-            <objects>
-                <viewController id="rvv-8m-eI0" customClass="FilterViewController" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="N1X-c5-iY5">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search Radius Distance (Meters)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lB-iB-kmu">
-                                <rect key="frame" x="96" y="55" width="250" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="beU-GM-ntN">
-                                <rect key="frame" x="166" y="123" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tJ-Eh-eGO">
-                                <rect key="frame" x="96" y="209" width="237" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" name="ButtonColor"/>
-                                <color key="tintColor" name="ButtonColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="set">
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="buttonPressed:" destination="rvv-8m-eI0" eventType="touchUpInside" id="5j0-Tq-Tiq"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="8Qz-7i-d0A"/>
-                        <color key="backgroundColor" name="BackgroundColor"/>
-                    </view>
-                    <connections>
-                        <outlet property="distance" destination="beU-GM-ntN" id="ayb-Tw-qse"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zSM-pX-WDw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7247.663551401869" y="213.82289416846655"/>
         </scene>
         <!--Create Event Page-->
         <scene sceneID="5pL-Qx-lWH">
@@ -1885,7 +1844,6 @@
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="food" width="565" height="305"/>
         <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="line.3.horizontal.decrease" catalog="system" width="128" height="73"/>
         <image name="location" width="14" height="19"/>
         <image name="pencil.circle" catalog="system" width="128" height="121"/>
         <image name="person" catalog="system" width="128" height="117"/>
@@ -1896,9 +1854,6 @@
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="venue" width="428" height="347"/>
-        <namedColor name="BackgroundColor">
-            <color red="1" green="0.98400002717971802" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="ButtonColor">
             <color red="1" green="0.46700000762939453" blue="0.2199999988079071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
