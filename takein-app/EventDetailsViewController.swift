@@ -192,7 +192,7 @@ class EventDetailsViewController: UIViewController {
                              let refTwo = self.database.reference(withPath: "eventDetails")
                              let eventRefChild = refTwo.child(curEvent.eventID)
                              
-                         let eventFields = ["eventTitle": curEvent.title, "location": curEvent.location, "date": stringDate, "startTime": curEvent.startTime , "endTime": curEvent.endTime, "capacity": String(curEvent.totalCapacity), "seatsLeft": String(updatedSeatsLeft), "drinks": curEvent.drinks,"appetizers":  curEvent.appetizers , "entrees": curEvent.entrees, "desserts": curEvent.desserts, "host": username, "pictureURL": curEvent.photoURL, "description": curEvent.description, "guestList": guestList] as [String : Any]
+                             let eventFields = ["eventTitle": curEvent.title, "location": curEvent.location, "date": stringDate, "startTime": curEvent.startTime , "endTime": curEvent.endTime, "capacity": String(curEvent.totalCapacity), "seatsLeft": String(updatedSeatsLeft), "drinks": curEvent.drinks,"appetizers":  curEvent.appetizers , "entrees": curEvent.entrees, "desserts": curEvent.desserts, "host": curEvent.host, "pictureURL": curEvent.photoURL, "description": curEvent.description, "guestList": guestList] as [String : Any]
                              eventRefChild.setValue(eventFields)
                          }
                      }

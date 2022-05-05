@@ -162,6 +162,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         let eventDetailsRef = self.database.reference(withPath: "eventDetails")
         eventDetailsRef.observeSingleEvent(of: .value) { snapshot in
             for case let child as DataSnapshot in snapshot.children {
+//                print("KEY OF CHILD:", child.key, "END")
                 guard let dict = child.value as? [String:Any] else {
                     print("Error")
                     return
@@ -169,7 +170,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
                 let latitude = dict["location"] as Any
                 let longtitude = dict["entrees"] as Any
                 print(longtitude)
-                self.parseEventData(dict: dict)
+                self.parseEventData(dict: dict, eventID: child.key)
             }
         }
         self.eventList.sort(by: sortEventsByDistance)
@@ -191,7 +192,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
         }
     }
     
-    func parseEventData(dict: [String:Any]) {
+    func parseEventData(dict: [String:Any], eventID: String) {
         let eventName = dict["eventTitle"]
         print(eventName)
         let curEvent = Event(
@@ -208,7 +209,7 @@ class ExplorePage: UIViewController, UISearchBarDelegate, UITableViewDataSource,
             entrees: dict["entrees"] as! String,
             desserts: dict["desserts"] as! String,
             description: dict["description"] as! String,
-            eventID: "" ,// probably need to update this correctly
+            eventID: eventID ,// probably need to update this correctly
             guests: dict["guestList"] as! String, seatsLeft: dict["seatsLeft"] as! String
             
         )
