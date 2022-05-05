@@ -34,7 +34,7 @@ class CreateReviewViewController: UIViewController {
     
     var star: [UIButton] = []
     var starsChosen = 0
-    var userName:String = "testing123"
+    var userName:String?
     
     private let storage = Storage.storage().reference()
     private let database = Database.database()
@@ -97,10 +97,10 @@ class CreateReviewViewController: UIViewController {
             let ref = self.database.reference(withPath: "reviews")
             // get username remember to ERROR CHECK
 //            let username = getUserName()
-            let refChild = ref.child(self.userName)
+            let refChild = ref.child(self.userName!)
             let reviewID =  UUID().uuidString
             var reviewList = ""
-            let reviewIDRef = self.database.reference(withPath: "reviews").child("\(self.userName)")
+            let reviewIDRef = self.database.reference(withPath: "reviews").child("\(self.userName!)")
             reviewIDRef.observeSingleEvent(of: .value, with: { snapshot in
                 if snapshot.exists() {
                     reviewList = snapshot.childSnapshot(forPath: "reviewID").value as! String

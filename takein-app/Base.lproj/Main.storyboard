@@ -1014,7 +1014,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="+"/>
                                 <connections>
-                                    <segue destination="9KW-Jn-EpJ" kind="show" id="htJ-rv-E2g"/>
+                                    <segue destination="9KW-Jn-EpJ" kind="show" identifier="CreateReviewSegue" id="htJ-rv-E2g"/>
                                 </connections>
                             </button>
                         </barButtonItem>

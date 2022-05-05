@@ -80,21 +80,20 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     }
     
     func fetchReviews() {
-//        let profileImageRef = self.database.reference(withPath: "pictureIds").child("\(self.profileName)")
-//        profileImageRef.observeSingleEvent(of: .value, with: { snapshot in
-//            let profPicId = snapshot.childSnapshot(forPath: "profilePictureId").value
-//            let folderReference = Storage.storage().reference(withPath: "profileImages/\(profPicId!)")
-//            folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
-//                if(error != nil) {
-//                    print(error)
-//                    print("FAILURE")
-//                } else {
-//                    let profilePic: UIImage = UIImage(data: data!)!
-//                    self.userPhoto.image = profilePic
-//                }
-//            }
-//        })
-        self.userPhoto.image =  UIImage(named: "seat")
+        let profileImageRef = self.database.reference(withPath: "pictureIds").child("\(self.profileName)")
+        profileImageRef.observeSingleEvent(of: .value, with: { snapshot in
+            let profPicId = snapshot.childSnapshot(forPath: "profilePictureId").value
+            let folderReference = Storage.storage().reference(withPath: "profileImages/\(profPicId!)")
+            folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
+                if(error != nil) {
+                    print(error)
+                    print("FAILURE")
+                } else {
+                    let profilePic: UIImage = UIImage(data: data!)!
+                    self.userPhoto.image = profilePic
+                }
+            }
+        })
         populateTable()
     }
     
@@ -166,6 +165,14 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
             }
         }
     }
+    
+    //pass in username to reviews page
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CreateReviewSegue",
+           let destination = segue.destination as? CreateReviewViewController {
+            destination.userName = self.profileName
+        }
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return reviewList.count
@@ -188,20 +195,20 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
         print("HERE IS THE EVENT IMAGES REFERENCE")
         print(currentUser.reviewer)
         print("GGGGGGGGG")
-//        let profileImageRef = self.database.reference(withPath: "pictureIds").child("\(currentUser.reviewer)")
-//        profileImageRef.observeSingleEvent(of: .value, with: { snapshot in
-//            let profPicId = snapshot.childSnapshot(forPath: "profilePictureId").value
-//            let folderReference = Storage.storage().reference(withPath: "profileImages/\(profPicId!)")
-//            folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
-//                if(error != nil) {
-//                    print(error)
-//                    print("FAILURE")
-//                } else {
-//                    let profilePic: UIImage = UIImage(data: data!)!
-//                    cell.author_profile_picture.image = profilePic
-//                }
-//            }
-//        })
+        let profileImageRef = self.database.reference(withPath: "pictureIds").child("\(currentUser.reviewer)")
+        profileImageRef.observeSingleEvent(of: .value, with: { snapshot in
+            let profPicId = snapshot.childSnapshot(forPath: "profilePictureId").value
+            let folderReference = Storage.storage().reference(withPath: "profileImages/\(profPicId!)")
+            folderReference.getData(maxSize: 10 * 1024 * 1024) { data, error in
+                if(error != nil) {
+                    print(error)
+                    print("FAILURE")
+                } else {
+                    let profilePic: UIImage = UIImage(data: data!)!
+                    cell.author_profile_picture.image = profilePic
+                }
+            }
+        })
         
         
         cell.reviewer.text = currentUser.reviewer
