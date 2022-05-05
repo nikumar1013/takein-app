@@ -256,6 +256,16 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             return false
         }
         
+        if(self.imagePicked == nil) {
+            let controller = UIAlertController(
+                title: "Missing Details",
+                message: "Please select an image to attach",
+                preferredStyle: .alert)
+            controller.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            present(controller, animated: true, completion: nil)
+            return false
+        }
+        
         var locationFormatError = false
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(locationField.text!) { (placemarks, error) in
