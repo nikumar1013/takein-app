@@ -123,8 +123,10 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                                    password: passText)
                                self.performImageUpload(userText: userText, emailText: emailText)
                                let ref = self.database.reference(withPath: "users")
+//                               let eventRefChild = refTwo.child(eventID)
+                               
                                let eRef = self.database.reference(withPath: "emails")
-                               let newEmailItem = ["email" : emailText]
+                               let newEmailItem = ["email" : emailText, "notification": "false"]
                                let newUserNameItem = ["userName" : userText]
                                //print(userRef)
                                let parsedEmail = emailText.split(separator: ".")

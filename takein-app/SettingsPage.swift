@@ -7,9 +7,11 @@
 
 import UIKit
 import CoreData
-
+import UserNotifications
+import Firebase
 
 var isLight: Bool?
+var isNotification: Bool!
 
 class SettingsPage: UIViewController {
 
@@ -22,8 +24,14 @@ class SettingsPage: UIViewController {
     @IBOutlet weak var notificationLabel: UILabel!
     @IBOutlet weak var notificationSwitch: UISwitch!
     
+    
+    private let storage = Storage.storage().reference()
+    private let database = Database.database()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("This is the notification value")
+        print(isNotification)
 
         // sets the switch to what the user settings currently are
         if self.traitCollection.userInterfaceStyle == .dark {
@@ -34,9 +42,37 @@ class SettingsPage: UIViewController {
             isLight = true
         }
         
-        // want this enabled to false first
-        notificationSwitch.setOn(false, animated:true)
+        if isNotification == nil {
+            let username = getUserName()
+            let notificationRef = self.database.reference(withPath: "users").child("\(username!)")
+            notificationRef.observeSingleEvent(of: .value, with: { snapshot in
+                if snapshot.exists() {
+                    let notif = snapshot.childSnapshot(forPath: "notification").value as! String
+                    if (notif == "false") {
+                        self.notificationSwitch.setOn(false, animated:true)
+                        isNotification = false
+                    }else{
+                        self.notificationSwitch.setOn(true, animated:true)
+                        isNotification = true
+                    }
+                }
+                print("This is the user notification")
+                print(isNotification)
+            })
+        }else{
+            if (isNotification == true){
+                self.notificationSwitch.setOn(true, animated:true)
+            } else {
+                self.notificationSwitch.setOn(false, animated:true)
+            }
+        }
         
+        // need to get notification preference from database
+
+        
+
+
+
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
     }
     
@@ -68,6 +104,47 @@ class SettingsPage: UIViewController {
     }
     
     @IBAction func notificationSwitch(_ sender: Any) {
+        //get the email
+        
+        let username = getUserName()
+        var emailString = ""
+        let notificationRef = self.database.reference(withPath: "users").child("\(username!)")
+        notificationRef.observeSingleEvent(of: .value, with: { snapshot in
+            if snapshot.exists() {
+                let emailString = snapshot.childSnapshot(forPath: "email").value as! String
+            }
+            print("This is the user notification")
+            print(isNotification)
+        })
+        if (notificationSwitch.isOn)
+        {
+            isNotification = true
+            self.notificationSwitch.setOn(true, animated:true)
+            // need to get notification preference from database
+            let username = getUserName()
+            let ref = self.database.reference(withPath: "users")
+            let notifRef = ref.child("\(username!)")
+            
+            let newNotificationItem = ["email" : emailString, "notification": "true"]
+            notifRef.setValue(newNotificationItem)
+            
+        }
+        else
+        {
+            isNotification = false
+            self.notificationSwitch.setOn(false, animated:true)
+            // need to get notification preference from database
+            let username = getUserName()
+            let ref = self.database.reference(withPath: "users")
+            let notifRef = ref.child("\(username!)")
+            
+            let newNotificationItem = ["email" : emailString, "notification": "false"]
+            notifRef.setValue(newNotificationItem)
+        }
+        
+
     }
+    
+    
 
 }

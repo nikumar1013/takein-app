@@ -852,7 +852,7 @@
             <objects>
                 <viewController id="Dvr-Tq-eop" customClass="ReviewsPage" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cQ0-AU-IwV">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QGC-fY-3aE">
@@ -1009,7 +1009,7 @@
                     <navigationItem key="navigationItem" id="cvm-iK-eVm">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="khO-l7-fLz">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="mln-1a-fVF">
-                                <rect key="frame" x="341" y="5" width="67" height="34.333333333333336"/>
+                                <rect key="frame" x="341" y="11" width="67" height="34.333333333333336"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="+"/>
@@ -1753,11 +1753,11 @@
             <objects>
                 <viewController id="9KW-Jn-EpJ" customClass="CreateReviewViewController" customModule="takein_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="icA-Ne-bji">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="r11-Wb-S76">
-                                <rect key="frame" x="20" y="199" width="387" height="30.666666666666657"/>
+                                <rect key="frame" x="20" y="167" width="387" height="30.666666666666657"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHb-Sg-Pxy">
                                         <rect key="frame" x="0.0" y="0.0" width="75" height="30.666666666666668"/>
@@ -1802,20 +1802,20 @@
                                 </subviews>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ah6-R4-4dJ">
-                                <rect key="frame" x="20" y="351" width="388" height="39"/>
+                                <rect key="frame" x="20" y="319" width="388" height="120"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8Z-rm-AiN">
-                                <rect key="frame" x="19" y="326" width="388" height="17"/>
+                                <rect key="frame" x="19" y="294" width="388" height="17"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" red="0.1671859282" green="0.71100136449999995" blue="0.68016980719999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Star Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-CJ-5pP">
-                                <rect key="frame" x="20" y="174" width="388" height="17"/>
+                                <rect key="frame" x="20" y="142" width="388" height="17"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" red="0.1671859282" green="0.71100136449999995" blue="0.68016980719999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1876,7 +1876,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="zAg-cu-N8j"/>
         <segue reference="zza-ea-NkY"/>
-        <segue reference="AvO-kK-W0f"/>
+        <segue reference="k7c-LL-7Wz"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="button" width="108" height="108"/>

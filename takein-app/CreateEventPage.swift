@@ -46,8 +46,8 @@ class Event {
         self.date = date
         self.startTime = startTime
         self.endTime = endTime
-        self.totalCapacity = 0//Int(totalCapacity)!
-        self.seatsLeft = 0//Int(totalCapacity)!
+        self.totalCapacity = 0 // Int(totalCapacity)!
+        self.seatsLeft = 0 // Int(totalCapacity)!
         self.photoURL = photoURL
         self.host = host
         self.drinks = drinks
@@ -315,37 +315,6 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         //error checking
         if checkNecessaryFields() {
         
-            //pack everything into an object, template code is here, we are still working on the DB structure in storing an event, so it will be ready by the final.
-            
-            //upload to db
-    //        if(self.imagePicked != nil) {
-    //            let hashName = SHA256.hash(data: self.imagePicked!)
-    //            var hashString = hashName.compactMap { String(format: "%02x", $0) }.joined()
-    //            hashString = hashString + "\(Date().hashValue)"
-    //            storage.child("eventImages/\(hashString)").putData(self.imagePicked!, metadata: nil, completion: {_, error in
-    //                guard error == nil else {
-    //                    print("Upload failure")
-    //                    return
-    //                }
-    //
-    //                let ref = self.database.reference(withPath: "pictureIds")
-    //                //let emailRef = ref.child("\(emailText)")
-    //                let userRef = ref.child("\(userText)")
-    //                let pictureNameItem = ["profilePictureId" : "\(hashString)"]
-    //                //emailRef.setValue(pictureNameItem)
-    //                userRef.setValue(pictureNameItem)
-    //
-    //                self.storage.child("profileImages/\(hashString)").downloadURL(completion: {_, error in
-    //                    guard error == nil else {
-    //                        print(" Download URL Failed")
-    //                        return
-    //                    }
-    //                    print("Download URL Success")
-    //                })
-    //            })
-    //        }
-            // upon success, add to an [] of this user's current event urls or something (would this be to the db)
-            
             // set notification to get notice an hour before you host the event.
             
             let eventTitle = titleField.text!
@@ -373,29 +342,33 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             timeFormatter.dateFormat = "m"
             let minute = Int(timeFormatter.string(from: notificationTime))
             
-            // set up the notification trigger
-            var notificationDateSetup = DateComponents()
-            notificationDateSetup.calendar = Calendar.current
-            notificationDateSetup.hour = hour!
-            notificationDateSetup.minute = minute!
-            notificationDateSetup.day = day!
-            notificationDateSetup.month = month!
-            notificationDateSetup.year = year!
-            
-            let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: notificationDateSetup, repeats: false)
-            let notificationIdentifier = UUID().uuidString
-            
-            let request = UNNotificationRequest(
-                identifier:  notificationIdentifier,
-                content: notification,
-                trigger: calendarTrigger)
+            if (isNotification == true) {
+                print("TRIGGERING NOTIFICATION")
+                // set up the notification trigger
+                var notificationDateSetup = DateComponents()
+                notificationDateSetup.calendar = Calendar.current
+                notificationDateSetup.hour = hour!
+                notificationDateSetup.minute = minute!
+                notificationDateSetup.day = day!
+                notificationDateSetup.month = month!
+                notificationDateSetup.year = year!
+                
+                let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: notificationDateSetup, repeats: false)
+                let notificationIdentifier = UUID().uuidString
+                
+                let request = UNNotificationRequest(
+                    identifier:  notificationIdentifier,
+                    content: notification,
+                    trigger: calendarTrigger)
 
-            // submit the request to iOS
-            UNUserNotificationCenter.current().add(request) {
-                (error) in
-                print("Request error: ", error as Any)
+                // submit the request to iOS
+                UNUserNotificationCenter.current().add(request) {
+                    (error) in
+                    print("Request error: ", error as Any)
+                }
+
+                
             }
-
             _ = navigationController?.popViewController(animated: true)
         
         
