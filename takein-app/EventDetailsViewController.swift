@@ -48,7 +48,7 @@ class EventDetailsViewController: UIViewController {
             reserveButton.isHidden = true
         }
         let dateFormatter = DateFormatter()
-        
+        dateFormatter.dateFormat = "MM/dd/YY"
         date.text = dateFormatter.string(from:curEvent.date) + "\t\(curEvent.startTime) - \(curEvent.endTime)"
         descriptionBox.layer.cornerRadius = 25;
         descriptionBox.layer.masksToBounds = true;

@@ -42,6 +42,24 @@ class CreateReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.star = [oneStar, twoStar, threeStar, fourStar, fiveStar]
+        
+        // sets the switch to what the user settings currently are
+        if isLight == nil{
+            if self.traitCollection.userInterfaceStyle == .dark {
+                overrideUserInterfaceStyle = .dark
+                isLight = false
+            } else {
+                overrideUserInterfaceStyle = .light
+                isLight = true
+            }
+        }else{
+            if (isLight == true) {
+                overrideUserInterfaceStyle = .light
+            } else {
+                overrideUserInterfaceStyle = .dark
+            }
+        }
+        
         self.textDescriptionBox.layer.borderWidth = 1
         self.textDescriptionBox.layer.borderColor = UIColor.lightGray.cgColor
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )

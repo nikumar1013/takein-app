@@ -47,6 +47,23 @@ class ReviewsPage: UIViewController, UITableViewDataSource, UITableViewDelegate 
     var averageStarRatingList: [UIImageView]!
     
     override func viewDidLoad() {
+        // sets the switch to what the user settings currently are
+        if isLight == nil{
+            if self.traitCollection.userInterfaceStyle == .dark {
+                overrideUserInterfaceStyle = .dark
+                isLight = false
+            } else {
+                overrideUserInterfaceStyle = .light
+                isLight = true
+            }
+        }else{
+            if (isLight == true) {
+                overrideUserInterfaceStyle = .light
+            } else {
+                overrideUserInterfaceStyle = .dark
+            }
+        }
+        
         super.viewDidLoad()
         self.userName.text = self.profileName
         //someone shouldn't be able to review themselves
