@@ -165,7 +165,7 @@ class EventDetailsViewController: UIViewController {
         var guestList = ""
         event.observeSingleEvent(of: .value, with: { [self] eventSnapshot in
                      //update guestlist
-                     if eventSnapshot.exists(){
+                     if eventSnapshot.exists() {
 //                         print(eventSnapshot.childSnapshot(forPath: "eventTitle").value as! String)
                          guestList = eventSnapshot.childSnapshot(forPath: "guestList").value as! String
                          var canAddToDB = true
@@ -205,6 +205,7 @@ class EventDetailsViewController: UIViewController {
                              
                              let eventFields = ["eventTitle": curEvent.title, "location": curEvent.location, "date": stringDate, "startTime": curEvent.startTime , "endTime": curEvent.endTime, "capacity": String(curEvent.totalCapacity), "seatsLeft": String(updatedSeatsLeft), "drinks": curEvent.drinks,"appetizers":  curEvent.appetizers , "entrees": curEvent.entrees, "desserts": curEvent.desserts, "host": curEvent.host, "pictureURL": curEvent.photoURL, "description": curEvent.description, "guestList": guestList] as [String : Any]
                              eventRefChild.setValue(eventFields)
+                             self.capacityLabel.text = "\(updatedSeatsLeft) out of \(curEvent.totalCapacity) seats left"
                          }
                      }
                  })
