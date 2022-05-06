@@ -39,9 +39,12 @@ class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegat
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         print("This is the guest list in this view \(curEvent.guests) ")
         let guests = String(curEvent.guests.dropLast())
-        print("these are the guests: \(guests)")
-        guestList = guests.components(separatedBy: ",")
-        print("this is the guest list: \(guestList)")
+        if guests != ""{
+            print("these are the guests: \(guests)")
+            guestList = guests.components(separatedBy: ",")
+            print("this is the guest list: \(guestList)")
+        }
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
@@ -49,7 +52,12 @@ class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegat
         guestTableView.backgroundColor =  UIColor(named: "tableViewColor")
         self.view.backgroundColor = UIColor(named: "BackgroundColor" )
         let guests = String(curEvent.guests.dropLast())
-        guestList = guests.components(separatedBy: ",")
+        if guests != ""{
+            guestList = guests.components(separatedBy: ",")
+        }else{
+            guestList = []
+        }
+       
     }
     
     func switchToDarkMode() {}
@@ -85,6 +93,50 @@ class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegat
         print("TRYING TO REMOVE GUEST LIST")
         print("This is cur guest list: \(guestList)")
         let curGuest = guestList[indexPath.row]
+        
+        let ref = self.database.reference(withPath: "events")
+        // get username remember to ERROR CHECK
+        let guest_username = curGuest
+        print("THIS IS THE GUEST NAME \(guest_username)")
+        let refChild = ref.child(guest_username)
+        let eventID =  curEvent.eventID
+        var eventList = ""
+        var newEventList = ""
+        let eventIDRef = self.database.reference(withPath: "events").child("\(guest_username)")
+        eventIDRef.observeSingleEvent(of: .value, with: { snapshot in
+            if snapshot.exists() {
+                eventList = snapshot.childSnapshot(forPath: "eventID").value as! String
+                print("\n\n fetching previous events")
+                print(eventList)
+
+                let eventListArray =  eventList.components(separatedBy: ",").dropLast()
+                for event in eventListArray{
+                    if event != self.curEvent.eventID && event != "" {
+                        newEventList += event + ","
+                    }
+                }
+//                print("this is the event list currently")
+//                eventList =  eventList + eventID + ","
+//                print(eventList)
+                //asdasd,dasd,
+            }
+            print("NEW EVENT LIST: ", newEventList)
+            let userNameFields = ["eventID": newEventList]
+            if newEventList == ""{
+                refChild.removeValue()
+            }else{
+                refChild.setValue(userNameFields)
+            }
+            
+        })
+        
+        
+        
+        
+        
+        
+        
+        
         guestList.remove(at: indexPath.row)
         print("This is the final guest list \(guestList)")
         var guestListString = ""

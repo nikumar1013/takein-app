@@ -191,6 +191,28 @@ class EventDetailsViewController: UIViewController {
                              }
                          }
                          if canAddToDB {
+                             let ref = self.database.reference(withPath: "events")
+                             // get username remember to ERROR CHECK
+                             let username = getUserName()
+                             let refChild = ref.child(username!)
+                             let eventID =  curEvent.eventID
+                             var eventList = ""
+                             print(username)
+                             let eventIDRef = self.database.reference(withPath: "events").child("\(username!)")
+                             eventIDRef.observeSingleEvent(of: .value, with: { snapshot in
+                                 if snapshot.exists() {
+                                     eventList = snapshot.childSnapshot(forPath: "eventID").value as! String
+                                     print("\n\n fetching previous events")
+                                     print(eventList)
+                     //                print("this is the event list currently")
+                     //                eventList =  eventList + eventID + ","
+                     //                print(eventList)
+                                 }
+                                 eventList =  eventList + eventID + ","
+                                 print(eventList)
+                                 let userNameFields = ["eventID": eventList]
+                                 refChild.setValue(userNameFields)
+                             })
                          let updatedSeatsLeft = String(curEvent.seatsLeft - 1)
                             print("UPDATED SEATS LEFT ", updatedSeatsLeft)
                              guestList =  guestList + username! + ","

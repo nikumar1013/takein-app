@@ -101,13 +101,15 @@ class SignUpPage: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     @IBAction func createAccountButton(_ sender: Any) {
-        if(!userNameField.hasText || !emailTextField.hasText ||  !passwordTextField.hasText) {
+        if(!userNameField.hasText || !emailTextField.hasText ||  !passwordTextField.hasText || self.imagePicked == nil) {
             if (!userNameField.hasText){
                 userNameField.shake()
             } else if (!emailTextField.hasText){
                 emailTextField.shake()
-            }else {
+            }else if(!passwordTextField.hasText){
                 passwordTextField.shake()
+            } else {
+                imageLabel.shake()
             }
         }else {
             let userText = userNameField.text!

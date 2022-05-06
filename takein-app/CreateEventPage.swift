@@ -266,7 +266,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             return false
         }
         
-        var locationFormatError = false
+      /*  var locationFormatError = true
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(locationField.text!) { (placemarks, error) in
             guard
@@ -280,12 +280,12 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
                     preferredStyle: .alert)
                 controller.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 self.present(controller, animated: true, completion: nil)
-                locationFormatError = true
+                locationFormatError = false
                 return
             }
-        }
+        } */
             // Use your location
-        return !locationFormatError
+        return true
     }
     
     func createPicture(userText:String) -> String? {
@@ -323,11 +323,29 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     @IBAction func createEvent(_ sender: Any) {
         //error checking
-        if checkNecessaryFields() {
+        print("This is the boolean ")
+        var locationFormatError = true
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(locationField.text!) { (placemarks, error) in
+            guard
+                let placemarks = placemarks,
+                let location = placemarks.first?.location
+            else {
+                // handle no location found
+                let controller = UIAlertController(
+                    title: "Invalid Location",
+                    message: "Please ensure that the location is a complete address in the correct format",
+                    preferredStyle: .alert)
+                controller.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(controller, animated: true, completion: nil)
+                locationFormatError = false
+                return
+            }
+            if (self.checkNecessaryFields() == true && location != nil)  {
         
             // set notification to get notice an hour before you host the event.
             
-            let eventTitle = titleField.text!
+            let eventTitle = self.titleField.text!
             
             let notification = UNMutableNotificationContent()
             notification.title = "Upcoming Hosting Event"
@@ -335,7 +353,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             notification.body = "Your event, \(eventTitle), will begin shortly."
             
             //parse date, year, month, time, and  from the respective fields
-            let notificationDate = datePicker.date
+            let notificationDate = self.datePicker.date
             let calendar = Calendar.current
             var components = calendar.dateComponents([.year], from: notificationDate)
             let year = components.year
@@ -344,7 +362,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             components = calendar.dateComponents([.day], from: notificationDate)
             let day = components.day
             
-            let notificationTime = startTimePicker.date
+            let notificationTime = self.startTimePicker.date
             var timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "H"
             let hour = Int(timeFormatter.string(from: notificationTime))
@@ -376,10 +394,10 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
                     (error) in
                     print("Request error: ", error as Any)
                 }
-
+                //return
                 
             }
-            _ = navigationController?.popViewController(animated: true)
+                _ = self.navigationController?.popViewController(animated: true)
         
         
         
@@ -389,7 +407,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         let ref = self.database.reference(withPath: "events")
         // get username remember to ERROR CHECK
         let username = getUserName()
-        let pictureURL = createPicture(userText: username!)
+        let pictureURL = self.createPicture(userText: username!)
         let refChild = ref.child(username!)
         let eventID =  UUID().uuidString
         var eventList = ""
@@ -420,7 +438,7 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
         })
 
         }
-
+        }
     }
     
     
