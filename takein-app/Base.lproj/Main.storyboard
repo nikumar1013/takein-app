@@ -283,6 +283,9 @@
                                                     <buttonConfiguration key="configuration" style="plain" title="Remove">
                                                         <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="remove_clicked:" destination="SQ3-bc-1En" eventType="touchUpInside" id="5tq-88-cNy"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

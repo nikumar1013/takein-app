@@ -409,7 +409,6 @@ class CreateEventPage: UIViewController, UIImagePickerControllerDelegate, UINavi
             let userNameFields = ["eventID": eventList]
             refChild.setValue(userNameFields)
         
-            
             //retrieve exisiting data and update array
             var emptyString: String?
             emptyString = ""

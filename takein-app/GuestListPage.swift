@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class GuestListViewCell: UITableViewCell {
  
@@ -19,6 +20,9 @@ class GuestListViewCell: UITableViewCell {
 }
 
 class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    private let storage = Storage.storage().reference()
+    private let database = Database.database()
 
     @IBOutlet weak var guestTableView: UITableView!
     var curEvent = Event(title: "", location: "", date: Date(), startTime: "", endTime: "", totalCapacity: "0", photoURL: "", host: "", drinks: "", appetizers: "", entrees: "", desserts: "", description: "",  eventID: "", guests: "", seatsLeft: "0")
@@ -61,5 +65,45 @@ class GuestListPage: UIViewController, UITableViewDataSource, UITableViewDelegat
         let row = indexPath.row
         cell.guest_name.setTitle(guestList[row], for: .normal)
             return cell
+    }
+    
+    @IBAction func remove_clicked(_ sender: UIButton) {
+        var superview = sender.superview
+        while let view = superview, !(view is UITableViewCell) {
+            superview = view.superview
+        }
+        guard let cell = superview as? UITableViewCell else {
+            print("button is not contained in a table view cell")
+            return
+        }
+        guard let indexPath = guestTableView.indexPath(for: cell) else {
+            print("failed to get index path for cell containing button")
+            return
+        }
+        // We've got the index path for the cell that contains the button, now do something with it.
+        print("button is in row \(indexPath.row)")
+        print("TRYING TO REMOVE GUEST LIST")
+        print("This is cur guest list: \(guestList)")
+        let curGuest = guestList[indexPath.row]
+        guestList.remove(at: indexPath.row)
+        print("This is the final guest list \(guestList)")
+        var guestListString = ""
+        for guest in guestList {
+            guestListString += guest + ","
+        }
+        print("this is the guestlist string:::")
+        print(guestListString)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/YY"
+       let stringDate = dateFormatter.string(from: curEvent.date)
+        
+        let refTwo = self.database.reference(withPath: "eventDetails")
+        let eventRefChild = refTwo.child(curEvent.eventID)
+        let eventFields = ["eventTitle": curEvent.title, "location": curEvent.location, "date": stringDate, "startTime": curEvent.startTime, "endTime": curEvent.endTime, "capacity": String(curEvent.totalCapacity), "seatsLeft": String(curEvent.seatsLeft + 1), "drinks": curEvent.drinks,"appetizers": curEvent.appetizers, "entrees": curEvent.entrees, "desserts": curEvent.desserts, "host": curEvent.host, "pictureURL": curEvent.photoURL, "description": curEvent.description, "guestList": guestListString] as [String : Any]
+        eventRefChild.setValue(eventFields)
+        self.guestTableView.reloadData()
+        //now rewrite the event into the database
+//        performSegue(withIdentifier: "getToGuestList", sender: nil)
+        
     }
 }
